@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Board">
+    <Position X="14" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFAAEAEAAAAAACAAIAAAAEABIAAAAIAAAAAABAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simulation">
+    <Position X="13.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAABDMIAAAAAAUQAAgAAAAAAAgBAAAAFIgQCMQogEAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Act">
+    <Position X="10.5" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="simulation.Act.actionTaken" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Carnivore.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAAEAAAAGAAAAAAAAAAABAAAQAAAACAgAAAAAGAAAAA=</HashCode>
+      <FileName>Carnivore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Animal">
+    <Position X="3" Y="10" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAQAEICAcDAAAAQAAQAgAAAAAAgAAAAAEAAAAkA=</HashCode>
+      <FileName>Animal.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="simulation.Carnivore">
+    <Position X="1" Y="15" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAEAAAEACAIAAAAAAAAAEAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Carnivore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.distanceHelper">
+    <Position X="12.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.gifmaker">
+    <Position X="15.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAABAAAAAAACBAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>gifmaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.gifMerger">
+    <Position X="1.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>gifMerger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.helper">
+    <Position X="17.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Herbivore">
+    <Position X="5.75" Y="14.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAEAAAEACAIAAAAAAAAAEAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>herbivore.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="simulation.Lake">
+    <Position X="10.25" Y="11" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lake.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Mountain">
+    <Position X="10.25" Y="7.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mountian.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.MyExtensions">
+    <Position X="7" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Node">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>organism.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.ObjectOnMap">
+    <Position X="7.25" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAYAAAAAAAAAAAAAACAAYABgAAAAAAA=</HashCode>
+      <FileName>ObjectOnMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Organism">
+    <Position X="3" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkAAAAEAAAABAIAIAAAAAAAAAAIBA=</HashCode>
+      <FileName>organism.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Plant">
+    <Position X="6.75" Y="11" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.pngmaker">
+    <Position X="8.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>pngmaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="simulation.Reproducable">
+    <Position X="3.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>organism.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
