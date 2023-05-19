@@ -323,7 +323,7 @@ public class Simulation
         spawningOfFood();
         updateClassBoards();
         movingOfCreatures();
-        multiplicationOfCreatures();
+        //multiplicationOfCreatures();
 
     }
 
