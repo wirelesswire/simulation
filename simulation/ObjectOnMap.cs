@@ -6,43 +6,68 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
-    public class ObjectOnMap
+
+
+    public abstract class ObjectOnMap
     {
-        protected int x;
-        protected int y;
+        public coords coords;
+        protected Board board;
+
+        public static List<ObjectOnMap> objectInstances;
         
-        public ObjectOnMap(int x, int y)
+        public ObjectOnMap(int x, int y,Board b )
         {
-            this.x = x;
-            this.y = y;
+
+            this.coords = new coords(x,y);
+            this.board  = b;
+            //addToInstances();
         }
+        public ObjectOnMap(coords a , Board b)
+        {
+
+            this.coords = a;
+            this.board = b;
+            //addToInstances();
+        }
+
         public ObjectOnMap()
         {
-            
-        }    
+            //addToInstances();
+
+        }
+        //public abstract void addToInstances();
         public void SetX(int x )
         {
-            this.x = x;
+            coords.x = x;
 
         }
         public void SetY(int y )
         {
-            this.y= y;
+            coords.y = y;
 
+        }
+        public void SetBoard(Board b )
+        {
+            board = b;
         }
         public void SetXY(int x , int y )
         {
-            this.x = x;
-            this.y = y;
+            if (coords == null) { // setT
+                coords = new coords(x, y);
+                return; 
+            }
+
+            coords.x = x;
+            coords.y=y;
         }
         public int GetX()
         {
-            return x;
+            return coords.x;
         }
 
         public int GetY()
         {
-            return y;
+            return coords.y;
         }
         public virtual string toString()
         {

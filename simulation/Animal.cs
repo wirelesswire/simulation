@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
+
     public abstract class Animal : Organism, Reproducable
     {
+
         int REPRODUCTION_FOOD_LEVEL = 5;
 
         public int age = 0;
@@ -25,18 +27,23 @@ namespace simulation
         public int actionsLeft = 1;
         protected List<Node> pathToFood;
 
-        public List<Node> FindPath(bool[,] grid, int startX, int startY, int endX, int endY)
+        public List<Node> FindPath(bool[,] grid, coords start, coords end)
         {
+
+            int startX = start.x;
+            int startY = start.y;
+            int endX = end.x;
+            int endY = end.y;
             int rows = grid.GetLength(0);
             int cols = grid.GetLength(1);
 
             // Sprawdzenie czy punkt końcowy jest na planszy i jest możliwy do osiągnięcia
-            if (endX < 0 || endX >= rows || endY < 0 || endY >= cols )
+            if (endX < 0 || endX >= rows || endY < 0 || endY >= cols)
             {
                 //Console.Write("niemożliwy do  osiagniecia " + endX + " " + endY + "\n");
                 return null;
             }
-            if(!grid[endX, endY])
+            if (!grid[endX, endY])
             {
                 Console.Write("niemożliwy do  stąpniecia  " + endX + " " + endY + "\n");
                 return null;
@@ -88,85 +95,183 @@ namespace simulation
         {
             actions = actionsLeft;
         }
-
-        public abstract void Eat(Organism o);
-        public abstract Act MoveSpecific(List<Organism> herbivores, int size, Board b);
-
-
-        public Animal(int x, int y) : base(x, y) { }
-        public Animal() : base() { pathToFood = null; }
-
-        public bool CanReproduce(Board b )
+        public abstract bool doIEatIt(Organism o);
+        public abstract bool doIEatIt(ObjectOnMap o);
+        public virtual void Eat(Organism o)
         {
-            if(!( helper.Next(10) < (chanceTOMultiply * 10)))
+
+            o.Die();
+        }
+        public abstract Act MoveSpecific(List<Organism> herbivores);
+
+
+
+
+        public Animal(int x, int y, Board b) : base(x, y, b) { }
+        public Animal() : base() { pathToFood = null; }
+        public Animal(coords c, Board b) : base(c, b) { pathToFood = null; }
+
+        public bool CanReproduce()
+        {
+            if (!(helper.Next(10) < (chanceTOMultiply * 10)))
             {
-                return false ;
+                return false;
             }
 
-            if(possibleReproducableCells(b) == null) return false;
+            if (possibleReproducableCells() == null) return false;
 
-            return hunger > REPRODUCTION_FOOD_LEVEL ;
+            return hunger > REPRODUCTION_FOOD_LEVEL;
         }
-        public List<int[]> possibleReproducableCells(Board board,bool asDelta = false )
+
+        /// <summary>
+        /// zwraca potencjalne  koordynaty  w prostokącie w obszarze  x na y  z każdej strony     
+        /// </summary>
+        /// <param name="rangeX"></param>
+        /// <param name="rangeY"></param>
+        /// <returns> bez tych które nie  miszczą sie w ramach planszy  </returns>
+
+
+        public List<coords> cellsAroundRectangle(coords range)
         {
-            List<int[]> emptyCells = new List<int[]>();
-            for (int dx = -1; dx <= 1; dx++)
+            List<coords> cellsAround = new List<coords>();
+            for (int dx = -range.x; dx <= range.x; dx++)
             {
-                for (int dy = -1; dy <= 1; dy++)
+                for (int dy = -range.y; dy <= range.y; dy++)
                 {
-                    if (dx == 0 && dy == 0) continue;  // Skip center cell
+                    if (dx == 0 && dy == 0) continue;  // pomija pole na którym stoi 
 
-                    int x = this.GetX() + dx;
-                    int y = this.GetY() + dy;
-                    if (x >= 0 && x < board.GetSize() && y >= 0 && y < board.GetSize() && board.IsEmpty(x, y))
+                    coords tmp = coords.add(new coords(dx, dy));
+
+                    if (tmp.isInBounds(board.GetSize(), board.GetSize()))// czy nie wychodzi poza mapę 
                     {
-                        if (asDelta) // zwraca różnicę 
-                        {
-                            emptyCells.Add(new int[] { dx, dy });
-                        }
-                        else// zwraca pole 
-                        {
-                            emptyCells.Add(new int[] { x, y });
+                        cellsAround.Add(tmp);
 
-                        }
+                    }
+                }
+
+
+            }
+            if (cellsAround.Count == 0) return null;
+            return cellsAround;
+
+        }
+        /// <summary>
+        /// zwraca puste pola w prostokącie 
+        /// </summary>
+        /// <param name="rangeX"></param>
+        /// <param name="rangeY"></param>
+        /// <returns> bez tych które są zapełnione   </returns>
+        public List<coords> emptyCellsAroundRectangle(coords range)
+        {
+            List<coords> a = cellsAroundRectangle(range);
+            List<coords> ret = new List<coords>();
+            if (a == null) return null;
+            for (int i = 0; i < a.Count; i++)
+            {
+                if (board.IsEmpty(a[i]))
+                {
+                    ret.Add(a[i]);
+                }
+            }
+
+            if (ret.Count == 0) return null;
+
+            return ret;
+        }
+
+        /// <summary>
+        /// zwraca pola na które może zająć potomstwo 
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="asDelta"></param>
+        /// <returns> bez tych które się nie mieszczą , tych które są zapełnione i tych dalszych niż 1 na 1 w kazdą strone (dopuszcza ukosy )</returns>
+
+        public List<coords> possibleReproducableCells()
+        {
+            List<coords> emptyCells = emptyCellsAroundRectangle(new coords(1, 1));
+            if (emptyCells == null) return null;
+            if (emptyCells.Count == 0) return null;
+            return emptyCells;
+        }
+
+        /// <summary>
+        ///  zwraca wszystkie komórki obok na których jest coś co mogę zjeść 
+        /// </summary>
+        /// <returns></returns>
+        public List<coords> possibleEdibleCells()
+        {
+            List<coords> a = cellsAroundRectangle(new coords(1, 1));
+            List<coords> ret = new List<coords>();
+
+            if (a == null) return null;
+            for (int i = 0; i < a.Count; i++)
+            {
+                if (doIEatIt(board.GetObjectOnMap(a[i])) && !(a[i].absXeqY()))
+                { // jeżeli nie jem wyrzucam 
+                    ret.Add(a[i]);
+                }
+            }
+            if (ret.Count == 0) return null;
+            return a;
+        }
+        /// <summary>
+        /// zwraca pola na które możesz  sie ruszyć // jeżeli jest puste  to możesz się tam  poruszyć ale bez chodzenia po ukosie  
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="asDelta"></param>
+        /// <returns>bez tych które się nie mieszczą , tych które są zapełnione czymś na czego nie mogę zjeść  lub 
+        /// przeszkodą naturalną i tych dalszych niż 1 na 1 w kazdą strone (nie dopuszcza ukosów )</returns>
+        public List<coords> possibleStepableCells()
+        {
+            List<coords> a = new List<coords>();
+
+            if (emptyCellsAroundRectangle(new coords(1, 1)) != null)
+            {
+                a.AddRange(emptyCellsAroundRectangle(new coords(1, 1)));
+            }
+            if (possibleEdibleCells() != null)
+            {
+                foreach (var item in possibleEdibleCells())
+                {
+                    if (!a.Contains(item))
+                    {
+                        a.Add(item);
                     }
                 }
             }
+            //else
+            //{
+            //    //foreach (var item in tmp)
+            //    //{
+            //        if (!board.IsEmpty(item) )
+            //        {
+            //            throw new Exception(" o tu jest błąd ");
+            //        }
+            //}
+            //List<coords> tmp2 = possibleEdibleCells();
+            //if (tmp2 != null) tmp.AddRange(tmp2);// niemożesz wstawić nulla więc nullcheck 
+            ////}
+            //if (tmp == null) return null;
 
-            if (emptyCells.Count == 0)
+
+            List<coords> ret = new List<coords>();
+            foreach (var item in a)
             {
-                // No available adjacent cells to reproduce into
-                return null;
-            }
-            return emptyCells;
-        }
-        public List<int[]> possibleStepableCells(Board board, bool asDelta = false)
-        {
-            List<int[]> tmp = possibleReproducableCells(board, asDelta);
-            if(tmp == null)
-            {
-                return null;
-            }
-            List<int[]> ret = new List<int[]>();
-            foreach (var item in tmp)
-            {
-                if (!( Math.Abs( item[0]) == Math.Abs(item[1]) ) ){
+                if (!(item.asDelta(coords).absXeqY()))// nie jest ukos
+                {
+
                     ret.Add(item);
                 }
             }
-            if (ret.Count == 0)
-            {
-                // No available adjacent cells to reproduce into
-                return null;
-            }
+            if (ret.Count == 0) return null;
             return ret;
 
         }
 
-        public Organism Reproduce(Organism parent, Board board)
+        public Organism Reproduce(Organism parent, bool asDelta = false)
         {
 
-            List<int[]> emptyCells = possibleReproducableCells(board);
+            List<coords> emptyCells = possibleReproducableCells();
             if (emptyCells.Count == 0)
             {
                 throw new Exception("nie może być tu zero ");
@@ -174,16 +279,16 @@ namespace simulation
 
 
             // Randomly select an empty adjacent cell to reproduce into
-            int[] newCell = emptyCells[helper.Next(emptyCells.Count)];
+            coords newCell = emptyCells[helper.Next(emptyCells.Count)];
 
             // Create and return a new organism at the selected cell
             if (parent is Herbivore)
             {
-                return new Herbivore(newCell[0], newCell[1]);
+                return new Herbivore(newCell, board);
             }
             else if (parent is Carnivore)
             {
-                return new Carnivore(newCell[0], newCell[1]);
+                return new Carnivore(newCell, board);
             }
             else
             {
@@ -191,16 +296,16 @@ namespace simulation
             }
         }
 
-        protected Organism GetNearestFood(List<Organism> herbivores)
+        protected Organism GetNearestFood(List<Organism> organisms)
         {
             // Inicjujemy odległość i najbliższą roślinę jako null
             double minDistance = double.MaxValue;
             Organism nearestFood = null;
 
             // Dla każdej rośliny na planszy sprawdzamy odległość od mięsożercy
-            foreach (Organism herbivore in herbivores)
+            foreach (Organism herbivore in organisms)
             {
-                double distance = distanceHelper.getDistance(x, y, herbivore.GetX(), herbivore.GetY());
+                double distance = this.coords.absDistanceOnBoard(herbivore.coords);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
@@ -210,7 +315,7 @@ namespace simulation
 
             if (nearestFood != null)
             {
-                if (distanceHelper.getSightDistance(x, y, nearestFood.GetX(), nearestFood.GetY()) > sight)
+                if (coords.absDistance(nearestFood.coords) > sight)
                 {
                     nearestFood = null;
                 }
@@ -219,52 +324,39 @@ namespace simulation
             return nearestFood;
         }
 
-     
-        protected Act moveRandomly(int size, Board b)
-        {
-            
-            List<int[]> possibleMoves = possibleStepableCells(b,true);// tutaj dostaje tylko deltę 
-            if(possibleMoves == null)
-            {
-                return new Act(0, 0, Act.actionTaken.nothing, 0);
-            }
-            int[] a = possibleMoves[helper.Next(possibleMoves.Count)];
 
-            return new Act(a[0], a[1], actionsLeft);
+        protected Act moveRandomly()
+        {
+
+            //List<coords> possibleMoves = possibleStepableCells();// tutaj dostaje tylko deltę 
+            List<coords> possibleMoves = emptyCellsAroundRectangle(new coords(1,1));// tutaj dostaje tylko deltę 
+
+            if (possibleMoves == null)
+            {
+                throw new Exception("tu nie wchodzi  nie powinno przynajmniej ");
+                return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing); // nic nie robisz  i nigdy nie powinno tu wejść 
+            }
+            coords a = possibleMoves[helper.Next(possibleMoves.Count)];
+
+            return new Act(this, coords, a, Act.actionTaken.move, actionsLeft);//normalny ruch 
 
         }
 
-        public Act Move(List<Organism> herbivores, int size, Board b)
+        public Act Move(List<Organism> orgs)
         {
-            Act act = MoveSpecific(herbivores, size, b);
-            if (x + act.getdX() >= 0 && x + act.getdX() < size && y + act.getdY() >= 0 && y + act.getdY() < size)
+            Act act = MoveSpecific(orgs);
+            if (!act.to.isInBounds(board.GetSize()))
             {
-
+                throw new Exception("wyszło poza ");
+            }
+            else if ((!board.IsEmpty(act.to) && act.GetAction() == Act.actionTaken.move))
+            {
+                throw new Exception("problem z pustostanem ");
             }
             else
             {
-                if (! (x + act.getdX() >= 0))
-                {
-                    throw new Exception("x0  ");
-                }
-                if (! (x + act.getdX() < size))
-                {
-                    throw new Exception("xs  ");
-                }
-                if (! (y + act.getdY() >= 0))
-                {
-                    throw new Exception("y0  ");
-                }
-                if (! (y + act.getdY() < size))
-                {
-                    throw new Exception("ys  ");
-                }
 
-                throw new Exception("reszta czyli chyba nic   ");
             }
-
-
-
             actionsLeft--;
             return act;
         }

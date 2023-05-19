@@ -1,5 +1,5 @@
 ﻿
-using ImageMagick;
+//using ImageMagick;
 using simulation;
 
 
@@ -11,7 +11,7 @@ int startRoślino = 20;
 int startMieso = 1;
 int startGory = 20;
 int startJeziora = 100;
-int FrameDelayMs = 250;
+int FrameDelayMs = 50;
 int actionDelayMs = 4;
 
 Simulation simulation = new Simulation(sizeOfSimulaton, startRoślino, startMieso, startGory, startJeziora, actionDelayMs);
@@ -29,21 +29,21 @@ Rgba32 lakeColor = Rgba32.ParseHex("0000ff");
 int iter = 0;
 int smallGIFiter = 0;
 int fullGIFiter = 0;
-string gifDirectioryName = "gif";
+string videofDirectioryName = "mp4";
 string pngDirectoryName = "png";
 string gifName = "anim";
 string longGifName = "final";
 int smallGIFLength = 10;
 int numberOfshortGifsMergedIntoLongOne = 5;
 Directory.CreateDirectory(pngDirectoryName);
-Directory.CreateDirectory(gifDirectioryName);
+Directory.CreateDirectory(videofDirectioryName);
 Directory.CreateDirectory("finals");
-MagickReadSettings gifSettings = new MagickReadSettings
-{
-    Format = MagickFormat.Png,
-    Height = resolutionOfImage,
-    Width = resolutionOfImage
-};
+//MagickReadSettings gifSettings = new MagickReadSettings
+//{
+//    Format = MagickFormat.Png,
+//    Height = resolutionOfImage,
+//    Width = resolutionOfImage
+//};
 pngmaker pngmaker = new pngmaker(resolutionOfImage / sizeOfSimulaton);
 void makePNG()
 {
@@ -67,28 +67,28 @@ void makegif()
     }
     Console.WriteLine("From : " + (iter - smallGIFLength) + " to " + iter);
 
-    gifmaker a = new gifmaker(pngDirectoryName + "/", gifDirectioryName + "/" + gifName + smallGIFiter + ".gif", list.ToArray(), gifSettings);
+    movieMaker a = new movieMaker( pngDirectoryName + "/", videofDirectioryName + "/" + gifName + smallGIFiter + ".mp4",  list.ToArray());
     a.makeGIF();
     smallGIFiter++;
     if (smallGIFiter % numberOfshortGifsMergedIntoLongOne == 0)
     {
-        mergeGif();
+        //mergeGif();
     }
 
 }
-void mergeGif()
-{
-    gifMerger merger = new gifMerger();
-    List<string> shortGifNames = new List<string>();
-    for (int i = 0; i < smallGIFiter; i++)
-    {
-        Console.WriteLine("From : " + 0 + " to " + (iter / (smallGIFLength * numberOfshortGifsMergedIntoLongOne)));
-        shortGifNames.Add(gifDirectioryName + "/" + gifName + i + ".gif");
-    }
+//void mergeGif()
+//{
+//    movieMerger merger = new movieMerger();
+//    List<string> shortGifNames = new List<string>();
+//    for (int i = 0; i < smallGIFiter; i++)
+//    {
+//        Console.WriteLine("From : " + 0 + " to " + (iter / (smallGIFLength * numberOfshortGifsMergedIntoLongOne)));
+//        shortGifNames.Add(videofDirectioryName + "/" + gifName + i + ".mp4");
+//    }
 
-    merger.Merge(shortGifNames.ToArray(), "finals/" + longGifName + fullGIFiter + ".gif");
-    fullGIFiter++;
-}
+//    merger.Merge(shortGifNames.ToArray(), "finals/" + longGifName + fullGIFiter + ".mp4");
+//    fullGIFiter++;
+//}
 
 //sekcja tworzenia gifów//
 
@@ -97,7 +97,7 @@ void mergeGif()
 // sekcja symulacji // 
 while (true)
 {
-    Console.Clear();
+    //Console.Clear();
     simulation.RunStep();
 
 
@@ -105,116 +105,16 @@ while (true)
     Thread.Sleep(FrameDelayMs);
     //makePNG();
     iter++;
+    Console.Clear();
 
 }
 // sekcja symulacji // 
 
 
 
-
-public class Board
-{
-    private ObjectOnMap[,] organisms;
-    private int size;
-
-
-    public Board(int size)
-    {
-        this.size = size;
-        organisms = new ObjectOnMap[size, size];
-    }
-
-    public void AddObject(ObjectOnMap organism)
-    {
-        organisms[organism.GetX(), organism.GetY()] = organism;
-    }
-    public int countOFTypeinRange<T>(int squareRange, int x, int y)
-    {
-        int xRangeMin = (x - squareRange >= 0 ? x - squareRange : 0);
-        int xRangeMax = (x + squareRange < size ? x + squareRange : size);
-        int yRangeMin = (y - squareRange >= 0 ? y - squareRange : 0);
-        int yRangeMax = (y + squareRange < size ? y + squareRange : size);
-        int count = 0;
-        for (int i = xRangeMin; i < xRangeMax; i++)
-        {
-            for (int j = yRangeMin; j < yRangeMax; j++)
-            {
-
-
-                if (GetObjectOnMap(i, j) is T) { count++; }
-            }
-        }
-        return count;
-
-    }
-
-
-
-    public void RemoveObject(ObjectOnMap organism)
-    {
-        organisms[organism.GetX(), organism.GetY()] = null;
-
-    }
-
-    public ObjectOnMap GetObjectOnMap(int x, int y)
-    {
-        return organisms[x, y];
-    }
-    public ObjectOnMap[,] getAllOrganisms()
-    {
-        return organisms;
-    }
-
-    public void MoveOrganism(Organism organism, int newX, int newY)
-    {
-        organisms[newX, newY] = organism;
-        organisms[organism.GetX(), organism.GetY()] = null;
-        organism.MoveTo(newX, newY);
-    }
-    public bool IsEmpty(int x, int y)
-    {
-        return organisms[x, y] == null;
-    }
-    public bool IsEmpty(int[] a)
-    {
-        return organisms[a[0], a[1]] == null;
-    }
-
-    public int GetSize()
-    {
-        return size;
-    }
-    public void PrintBoard()
-    {
-        for (int i = 0; i < size; i++)
-        {
-            for (int j = 0; j < size; j++)
-            {
-                ObjectOnMap organism = organisms[i, j];
-                if (organism == null)
-                {
-                    Console.Write("- ");
-                }
-                else
-                {
-                    Console.Write(organism.toString());
-                }
-
-            }
-            Console.WriteLine();
-        }
-    }
-}
-
-
 public class Simulation
 {
     private Board board;
-    private List<Plant> plants;
-    private List<Herbivore> herbivores;
-    private List<Carnivore> carnivores;
-    private List<Mountain> mountains;
-    private List<Lake> lakes;
     public static Random random = new Random();
     private int startingHerbivores = 1;
     private int startingCarnivores = 1;
@@ -233,12 +133,6 @@ public class Simulation
     public Simulation(int size, int startingHerbivores, int startingCarnivores, int startingMountains, int startingLakes, int timeBetweenmovesofcreature)
     {
         board = new Board(size);
-        plants = new List<Plant>();
-        herbivores = new List<Herbivore>();
-        carnivores = new List<Carnivore>();
-        mountains = new List<Mountain>();
-        lakes = new List<Lake>();
-
         this.startingCarnivores = startingCarnivores;
         this.startingHerbivores = startingHerbivores;
         this.startingMountains = startingMountains;
@@ -249,55 +143,24 @@ public class Simulation
     }
 
     private void Initialize(int size)
-    {
+    {   
 
 
         Carnivore.resizeMap(size, size);
         Herbivore.resizeMap(size, size);
 
         //initializeRandomly();
-        InitializeSpecially();
+        InitializeSpecially(true );
 
 
         updateClassBoards();
 
     }
-    public void removeObjectFromMap(ObjectOnMap org)
-    {
-        if (org == null)
-        {
-            throw new Exception("null jest czemus nie wiem czemu ");
-        }
-        board.RemoveObject(org);
 
-        if (org is Carnivore carnivore)
-        {
-            carnivores.Remove(carnivore);
-        }
-        if (org is Herbivore herbivore)
-        {
-            herbivores.Remove(herbivore);
-        }
-        if (org is Plant plant)
-        {
-            plants.Remove(plant);
-        }
-        if (org is Mountain mountain)
-        {
-            mountains.Remove(mountain);
-        }
-        if (org is Lake lake)
-        {
-            lakes.Remove(lake);
-        }
-    }
+    
     public void InitializeSpecially()
     {
-        plants = new List<Plant>();
-        herbivores = new List<Herbivore>();
-        carnivores = new List<Carnivore>();
-        mountains = new List<Mountain>();
-        lakes = new List<Lake>();
+      
         for (int i = 0; i < board.GetSize(); i++)
         {
 
@@ -317,34 +180,36 @@ public class Simulation
 
         makeTAtCoords<Carnivore>(19, 10);
     }
+    public void InitializeSpecially(bool a  = false )
+    {
+        for (int i = 0; i < board.GetSize(); i++)
+        {
+            //makeTAtCoords<Herbivore>(0, i);
+            for (int j = 0; j < board.GetSize(); j++)
+            {
+                makeTAtCoords<Herbivore>(i, j);
+            }
+        }
+        //makeTAtCoords<Herbivore>(1, 1);
+        //makeTAtCoords<Herbivore>(2, 1);
+        //makeTAtCoords<Herbivore>(3, 1);
+        //makeTAtCoords<Carnivore>(19, 19);
+        //makeTAtCoords<Carnivore>(19, 19);
+
+        //board.removeAt(10, 10);
+        board.removeAt(new coords(10,10));
+        makeTAtCoords<Carnivore>(10, 10);
+
+    }
+
     public T makeTAtCoords<T>(int x, int y) where T : ObjectOnMap, new()
     {
         if (board.IsEmpty(x, y))
         {
             T a = new T();
             a.SetXY(x, y);
+            a.SetBoard(board);
             board.AddObject(a);
-
-            if (a is Carnivore carnivore)
-            {
-                carnivores.Add(carnivore);//// xd że to tak działa xdddddd
-            }
-            if (a is Herbivore herbivore)
-            {
-                herbivores.Add(herbivore);
-            }
-            if (a is Plant plant)
-            {
-                plants.Add(plant);
-            }
-            if (a is Mountain mountain)
-            {
-                mountains.Add(mountain);
-            }
-            if (a is Lake lake)
-            {
-                lakes.Add(lake);
-            }
             return a;
         }
         return null;
@@ -407,9 +272,9 @@ public class Simulation
 
     public void PrintDebug()
     {
-        Console.WriteLine("mięsożerców " + carnivores.Count);
-        Console.WriteLine("roślinożerców " + herbivores.Count);
-        Console.WriteLine("roślin" + plants.Count);
+        Console.WriteLine("mięsożerców " + board.carnivores.Count);
+        Console.WriteLine("roślinożerców " + board.herbivores.Count);
+        Console.WriteLine("roślin" + board.plants.Count);
         Console.WriteLine("użycie randoma od ostatniego razy " + (helper.nextCount - helper.lastShown));
 
         Console.WriteLine("uzycie randoma " +  helper.getNextCount());
@@ -424,11 +289,11 @@ public class Simulation
     public void checkerIfOkOnBoard()
     {
         List<ObjectOnMap> allObjects = new List<ObjectOnMap>();
-        allObjects.AddRange(carnivores);
-        allObjects.AddRange(herbivores);
-        allObjects.AddRange(plants);
-        allObjects.AddRange(mountains);
-        allObjects.AddRange(lakes);
+        allObjects.AddRange(board.carnivores);
+        allObjects.AddRange(board.herbivores);
+        allObjects.AddRange(board.plants);
+        allObjects.AddRange(board.mountains);
+        allObjects.AddRange(board.lakes);
 
         foreach (var item in allObjects)
         {
@@ -438,6 +303,14 @@ public class Simulation
             }
             else
             {
+                if (item is Organism o)
+                {
+                    if (o.IsDead())
+                    {
+                        throw new Exception("jest martwy ale na mapie ");
+                    }
+                    throw new Exception("to organizm ");
+                }
                 Console.WriteLine("o tui nie działa ");
                 throw new Exception("asdasd");
             }
@@ -459,37 +332,25 @@ public class Simulation
     {
 
         List<Animal> animals = new List<Animal>();
-        animals.AddRange(carnivores);
-        animals.AddRange(herbivores);
+        animals.AddRange(board.carnivores);
+        animals.AddRange(board.herbivores);
         animals.Shuffle();
 
         for (int i = 0; i < animals.Count; i++)
         {
             Animal ani = animals[i];
-            if (ani != null && carnivores.Contains(ani) || herbivores.Contains(ani))// gdyby zostało zjedzone nie powinno móc się ruszyć 
+            if (ani != null && board.carnivores.Contains(ani) || board.herbivores.Contains(ani))// gdyby zostało zjedzone nie powinno móc się ruszyć 
             {
                 //trochę do while wyszedł ale niech bedzie 
-                Act a = ani.Move((ani is Carnivore) ? herbivores.Cast<Organism>().ToList() : plants.Cast<Organism>().ToList(), board.GetSize(), board);
+                Act a = ani.Move((ani is Carnivore) ? board.herbivores.Cast<Organism>().ToList() : board.plants.Cast<Organism>().ToList());
 
                 while (true)
                 {
-                    if (a.moves())
-                    {
-                        board.MoveOrganism(ani, ani.GetX() + a.getdX(), ani.GetY() + a.getdY());
-                    }
-                    else if (a.eats())
-                    {
-                        //zjedz 
-                        Organism org = (Organism)board.GetObjectOnMap(ani.GetX() + a.getdX(), ani.GetY() + a.getdY());
-                        ani.Eat(org);
-                        removeObjectFromMap(org);
-
-                        // porusz sie 
-                        board.MoveOrganism(ani, ani.GetX() + a.getdX(), ani.GetY() + a.getdY());
-                    }
+                    board.makeActHappen(a);
+                    
                     if (a.gotMoreMoves())
                     {
-                        a = ani.Move((ani is Carnivore) ? herbivores.Cast<Organism>().ToList() : plants.Cast<Organism>().ToList(), board.GetSize(), board);
+                        a = ani.Move((ani is Carnivore) ? board.herbivores.Cast<Organism>().ToList() : board.plants.Cast<Organism>().ToList());
                     }
                     else
                     {
@@ -526,25 +387,25 @@ public class Simulation
     public void multiplicationOfCreatures()
     {
         List<Animal> animals = new List<Animal>();
-        animals.AddRange(carnivores);
-        animals.AddRange(herbivores);
+        animals.AddRange(board.carnivores);
+        animals.AddRange(board.herbivores);
         animals.Shuffle();
         foreach (Animal item in animals)
         {
-            if (item.CanReproduce(board)) // losowe rozmnażanie z 20% szansą
+            if (item.CanReproduce()) // losowe rozmnażanie z 20% szansą
             {
                 if (item is Herbivore)
                 {
-                    Herbivore child = (Herbivore)item.Reproduce(item, board);
+                    Herbivore child = (Herbivore)item.Reproduce(item);
                     board.AddObject(child);
-                    herbivores.Add(child);
+                    board.herbivores.Add(child);
                     continue;
                 }
                 if (item is Carnivore)
                 {
-                    Carnivore child = (Carnivore)item.Reproduce(item, board);
+                    Carnivore child = (Carnivore)item.Reproduce(item);
                     board.AddObject(child);
-                    carnivores.Add(child);
+                    board.carnivores.Add(child);
                     continue;
                 }
 
@@ -557,11 +418,11 @@ public class Simulation
         Herbivore.resetMap();
         Carnivore.resetMap();
         List<ObjectOnMap> allObjects = new List<ObjectOnMap>();
-        allObjects.AddRange(carnivores);
-        allObjects.AddRange(herbivores);
-        allObjects.AddRange(plants);
-        allObjects.AddRange(mountains);
-        allObjects.AddRange(lakes);
+        allObjects.AddRange(board.carnivores);
+        allObjects.AddRange(board.herbivores);
+        allObjects.AddRange(board.plants);
+        allObjects.AddRange(board.mountains);
+        allObjects.AddRange(board.lakes);
         foreach (var item in allObjects)
         {
             if (item is Carnivore)// nikt nie je mięsożerców 

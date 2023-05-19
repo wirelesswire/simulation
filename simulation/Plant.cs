@@ -9,13 +9,24 @@ namespace simulation
 
     public class Plant : Organism
     {
+        //public static List<ObjectOnMap> objectInstances = new List<ObjectOnMap>();
+
         int nutritiousness = 0;
         int maxNutritiousness = 100;
-        public Plant(int x, int y) : base(x, y) { }
+        public Plant(int x, int y,Board b ) : base(x, y,b) { }
         public Plant() : base() {
        
         }
-
+        public Plant(coords c, Board b) : base(c, b) { }
+        //public override void addToInstances()
+        //{   
+        //    if (Plant.objectInstances is null)
+        //    {
+        //        Plant.objectInstances = new List<ObjectOnMap>();
+        //    }
+        //    //throw new NotImplementedException();
+        //    Plant.objectInstances.Add(this);
+        //}
 
         public void iteration()
         {

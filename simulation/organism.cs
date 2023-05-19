@@ -16,6 +16,10 @@ namespace simulation
         {
             return new int[] { x, y };
         }
+        public coords toCoords()
+        {
+            return new coords(x, y);
+        }
         public Node(int x, int y)
         {
             this.x = x;
@@ -23,58 +27,57 @@ namespace simulation
         }
     }
 
-
-    public  class Organism : ObjectOnMap
+    public interface IDieable
     {
-        //protected int x;
-        //protected int y;
-        //protected int hunger;
+        public bool IsDead();
+    }
+    public  class Organism : ObjectOnMap,IDieable
+    {
+
         protected bool isDead = false;
-        public bool wasEaten = false;
 
-        public Organism(int x, int y) : base(x, y)
-        {
 
-            //this.x = x;
-            //this.y = y;
-            //this.hunger = 100;
-            //pathToFood = null;
+        //public override void addToInstances()
+        //{
+        //    if (Organism.objectInstances is null)
+        //    {
+        //        Organism.objectInstances = new List<ObjectOnMap>();
+        //    }
+        //    Organism.objectInstances.Add(this);
+        //}
 
-        }
+
+        public Organism(int x, int y, Board b) : base(x, y, b) { }
+        public Organism(coords c , Board b) : base(c, b) { }
+
         public Organism() : base() { }
         protected void DecreaseHunger()
         {
-            //hunger--;
-            //if (hunger <= 0)
-            //{
-            //    Die();
-            //}
         }
         public bool IsDead()
         {
             return isDead;
         }
-        protected void Die()
+        public  void Die()
         {
-            //grid.RemoveOrganism(x, y);
             isDead = true;
         }
         public void MoveTo(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            this.coords.x = x;
+            this.coords.y = y;
         }
         public void MoveBy(int a , int b)
         {
-            this.x += a;
-            this.y += b;
+            this.coords.x += a;
+            this.coords.y += b;
         }
       
     }
     public interface Reproducable
     {
-        Organism Reproduce(Organism parent, Board board);
-        bool CanReproduce(Board b );
+        Organism Reproduce(Organism parent,bool asdelta);
+        bool CanReproduce( );
     }
 
 

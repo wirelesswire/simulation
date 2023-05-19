@@ -9,8 +9,9 @@ namespace simulation
 
     public class Herbivore : Animal, Reproducable
     {
+
         static bool[,] map = new bool[10, 10];
-        
+
         public static void resizeMap(int x, int y)
         {
             map = new bool[x, y];
@@ -29,8 +30,7 @@ namespace simulation
                 }
             }
         }
-        //public int sight = 10;
-        public Herbivore(int x, int y) : base(x, y) { 
+        public Herbivore(int x, int y,Board b ) : base(x, y,  b) { 
             chanceTOMultiply = 0.3f;
             sight = 10;
         }
@@ -38,25 +38,38 @@ namespace simulation
             chanceTOMultiply = 0.3f;
             sight = 10;
         }
+        public Herbivore(coords c, Board b) : base(c, b) {
+            chanceTOMultiply = 0.3f;
+            sight = 10;
+        }
+        public override bool doIEatIt(Organism o)
+        {
+            return o is Plant;
+        }
+        public override bool doIEatIt(ObjectOnMap o)
+        {
+            return o is Plant;
 
+        }
 
 
 
         public override void Eat(Organism o)
         {
+            base.Eat(o);
             if (o == null)
             {
                 throw new Exception("no nie może być null ");
             }
-
-            // logika jedzenia mięsożercy
+            o.Die();
         }
 
 
 
-        private void getPathToNearestFood(int endX, int endY)
+        private void getPathToNearestFood(Organism endCoordsOrganism)
         {
-            pathToFood = FindPath(map, x, y, endX, endY);
+
+            pathToFood = FindPath(map, coords, endCoordsOrganism.coords);
             if (pathToFood != null)
             {
                 if (pathToFood[0].x == GetX() && pathToFood[0].y == GetY())
@@ -66,30 +79,30 @@ namespace simulation
             }
         }
 
-        public override Act MoveSpecific(List<Organism> plants, int size, Board b)
+        public override Act MoveSpecific(List<Organism> plants)
         {
 
 
             Organism nearestFood = GetNearestFood(plants);
-            if (possibleStepableCells(b/*tu delta nie ma znaczenia */) == null)
+            if (nearestFood == null)// jeżeli nie ma jedzenia wokół-> poruszanie losowe 
             {
-                return new Act(0, 0, Act.actionTaken.nothing, 0);
-            }
-            else if (nearestFood == null)
-            {
-                // if there is no food nearby, move randomly
-                Act a = moveRandomly(size, b);
-                a.setAction(Act.actionTaken.move);
-                return a;
-                //return;
+                if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
+                {
+                    return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                }
+                return moveRandomly();
             }
             else
             {
 
-                getPathToNearestFood(nearestFood.GetX(), nearestFood.GetY());
+                getPathToNearestFood(nearestFood);
                 if (pathToFood == null)
                 {
-                    return moveRandomly(size, b);
+                    if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
+                    {
+                        return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                    }
+                    return moveRandomly();
                 }
                 if (pathToFood.Count == 0)
                 {
@@ -98,23 +111,17 @@ namespace simulation
                 if (pathToFood.Count == 1)
                 {
 
-                    int[] poleDocelowe = new int[] { pathToFood[0].x - GetX(), pathToFood[0].y - GetY() };
-
-                    return new Act(poleDocelowe[0], poleDocelowe[1], Act.actionTaken.eat, actionsLeft);
+                    coords poleDocelowe = new coords(pathToFood[0]);
+                    return new Act(this,board.GetObjectOnMap(poleDocelowe), coords,poleDocelowe, Act.actionTaken.eat, actionsLeft);
                 }
 
-                if (b.IsEmpty(pathToFood[0].toarr()))
+                if (board.IsEmpty(pathToFood[0].toCoords()))
                 {
-                    Node tmp = pathToFood[0];
-                    pathToFood.RemoveAt(0);
-                    int[] poleDocelowe = new int[] { tmp.x - GetX(), tmp.y - GetY() };
-                    return new Act(poleDocelowe[0], poleDocelowe[1], Act.actionTaken.move, actionsLeft);
+                    return new Act(this,coords, pathToFood[0].toCoords(), Act.actionTaken.move, actionsLeft);
                 }
                 else
                 {
                     throw new Exception("nimożność");
-                    // UPDATE CLASS BOARDS tutaj jeszcze dopisać
-                    return MoveSpecific(plants, size, b);
                 }
 
 

@@ -7,10 +7,12 @@ using System.Drawing;
 using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using System.Drawing;
 namespace simulation
 {
     public  class pngmaker
     {
+        
          int scale = 20;
         public pngmaker(int scale)
         {

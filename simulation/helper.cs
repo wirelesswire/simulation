@@ -22,9 +22,15 @@ namespace simulation
             }
         }
 
-        public static List<Organism> OnlyAlive(this List<Organism> list)
+        //public static List<Organism> OnlyAlive(this List<Organism> list)
+        //{
+        //    return list.FindAll((Organism o) =>  { return !o.IsDead(); }  );
+
+
+        //}
+        public static List<IDieable> OnlyAlive(this List<IDieable> list)
         {
-            return list.FindAll((Organism o) =>  { return !o.IsDead(); }  );
+            return list.FindAll((IDieable o) => { return !o.IsDead(); });
 
 
         }

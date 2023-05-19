@@ -9,13 +9,13 @@ namespace simulation
 
     public class Lake : ObjectOnMap
     {
-        public Lake(int x, int y) : base(x, y) { }
+        public Lake(int x, int y, Board b) : base(x, y,b) { }
         public Lake() : base() { }
+        public Lake(coords c , Board b) : base(c, b) { }
         public override string toString()
         {
             return "#" + base.toString();
         }
-
 
     }
 

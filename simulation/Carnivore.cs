@@ -9,6 +9,7 @@ namespace simulation
 
     public class Carnivore : Animal
     {
+    
         static bool[,] map = new bool[10, 10];
         public static void resizeMap(int x, int y)
         {
@@ -28,8 +29,10 @@ namespace simulation
                 }
             }
         }
-        public Carnivore(int x, int y) : base(x, y)
+       
+        public Carnivore(int x, int y, Board b) : base(x, y, b)
         {
+            
             chanceTOMultiply = 0.1f;
             sight = 5;
         }
@@ -38,24 +41,38 @@ namespace simulation
             chanceTOMultiply = 0.1f;
             sight = 5;
         }
+        public Carnivore(coords c, Board b) : base(c, b) {
+            
+            chanceTOMultiply = 0.1f;
+            sight = 5;
+        }
+
+
+        public override   bool doIEatIt(Organism o)
+        {
+            return o is Herbivore;
+        }
+        public override bool doIEatIt(ObjectOnMap o)
+        {
+            return o is Herbivore;
+
+        }
+
 
         public override void Eat(Organism o)
         {
+            base.Eat(o);
             if (o == null)
             {
                 throw new Exception("no nie może być null ");
             }
-            o.wasEaten = true;
+            o.Die();
+            //o.wasEaten = true;
         }
 
-        private void getPathToNearestFood(int endX, int endY, Board b)
+        private void getPathToNearestFood(Organism endCoordsOrganism)
         {
-            //if(possibleStepableCells(b).Count == 0) // tutaj delta nie ma znaczenia 
-            //{
-            //    pathToFood =  null;
-            //    return;
-            //}
-            pathToFood = FindPath(map, x, y, endX, endY);
+            pathToFood = FindPath(map, coords , endCoordsOrganism.coords);
             if (pathToFood != null)
             {
                 if (pathToFood[0].x == GetX() && pathToFood[0].y == GetY())
@@ -65,60 +82,55 @@ namespace simulation
             }
         }
 
-        public override Act MoveSpecific(List<Organism> organisms, int size, Board b)
+        public override Act MoveSpecific(List<Organism> herbivores)
         {
 
 
-            Organism nearestFood = GetNearestFood(organisms);
+            Organism nearestFood = GetNearestFood(herbivores);//patrzy czy w okolicy jest jedzenie i wybiera najbliższe
 
 
-            if (possibleStepableCells(b/*tu delta nie ma znaczenia */) == null)
+            
+            if (nearestFood == null)// jeżeli nie ma jedzenia wokół-> poruszanie losowe 
             {
-                return new Act(0, 0, Act.actionTaken.nothing, 0);
-            }
-            else if (nearestFood == null)
-            {
-                // if there is no food nearby, move randomly
-                Act a = moveRandomly(size, b);
-                a.setAction(Act.actionTaken.move);
-                return a;
-                //return;
-            }
-            else
-            {
-
-                getPathToNearestFood(nearestFood.GetX(), nearestFood.GetY(), b);
-
-                if (pathToFood == null)
+                if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
                 {
-                    return moveRandomly(size, b);
+                    return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
                 }
-                if (pathToFood.Count == 0)
+                return moveRandomly();
+            }            
+            else//jeżeli jest 
+            {
+
+                getPathToNearestFood(nearestFood);// szukaj drogi do niego 
+
+                if (pathToFood == null)// jeżeli nie istnieje -> poruszanie losowe 
+                {
+                    if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
+                    {
+                        return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                    }
+                    return moveRandomly();
+                }
+                if (pathToFood.Count == 0)//musiałbyś stać na jedzeniu (niemożliwe)
                 {
                     throw new Exception("niemożliwość");
                 }
+                if (pathToFood.Count == 1)//jesteś krok od jedzenia i wystarczy zjeść 
+                {                    
+                    coords poleDocelowe = new coords (  pathToFood[0]);
 
-                if (pathToFood.Count == 1)
-                {
-
-                    int[] poleDocelowe = new int[] { pathToFood[0].x - GetX(), pathToFood[0].y - GetY() };
-
-
-                    return new Act(poleDocelowe[0], poleDocelowe[1], Act.actionTaken.eat, actionsLeft);
+                    return new Act(this,board.GetObjectOnMap(poleDocelowe),coords, poleDocelowe, Act.actionTaken.eat, actionsLeft);
                 }
 
-                if (b.IsEmpty(pathToFood[0].toarr()))
+                if (board.IsEmpty(pathToFood[0].toCoords()))//jeżeli na pewno możesz stanąć na polu kierującym cie w stronę najbliższego jedzenia -> stań tam 
                 {
                     Node tmp = pathToFood[0];
-                    pathToFood.RemoveAt(0);
-                    int[] poleDocelowe = new int[] { tmp.x - GetX(), tmp.y - GetY() };
-                    return new Act(poleDocelowe[0], poleDocelowe[1], Act.actionTaken.move, actionsLeft);
+                    coords  poleDocelowe = new coords(tmp);
+                    return new Act(this, coords, poleDocelowe, Act.actionTaken.move, actionsLeft);
                 }
                 else
                 {
                     throw new Exception("nimożność");
-
-                    return MoveSpecific(organisms, size, b);
                 }
 
 
@@ -136,65 +148,5 @@ namespace simulation
 
 
     }
-    public class Act
-    {
-        int xFrom;
-        int yFrom;
-        int xTo;   
-        int yTo;
-
-
-        int xcoorddelta;
-        int ycoorddelta;
-        actionTaken acted;
-        bool moreActions;
-        public int getdX()
-        {
-            return xcoorddelta;
-
-        }
-        public int getdY()
-        {
-            return ycoorddelta;
-        }
-        public void setAction(actionTaken action)
-        {
-            this.acted = action;
-        }
-
-        public Act(int dx, int dy, actionTaken act, int actionsLeft)
-        {
-            xcoorddelta = dx;
-            ycoorddelta = dy;
-            acted = act;
-            moreActions = actionsLeft > 0;
-        }
-        public Act(int dx, int dy, int actionsLeft)
-        {
-            xcoorddelta = dx;
-            ycoorddelta = dy;
-            moreActions = actionsLeft > 0;
-            acted = actionTaken.move;
-        }
-        public bool gotMoreMoves()
-        {
-            return moreActions;
-        }
-        public enum actionTaken
-        {
-            move,// przesuwa sie na podane pole 
-            eat,// przesuwa sie na podane pole i zjada to co sie na nim znajduje 
-            nothing // jest przyblokowany albo z innego powodu sie nie porusza 
-
-        }
-        public bool eats()
-        {
-            return acted == actionTaken.eat ? true : false;
-        }
-        public bool moves()
-        {
-            return acted == actionTaken.move ? true : false;
-        }
-
-    }
+   
 }
