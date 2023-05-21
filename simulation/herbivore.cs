@@ -30,17 +30,23 @@ namespace simulation
                 }
             }
         }
-        public Herbivore(int x, int y,Board b ) : base(x, y,  b) { 
-            chanceTOMultiply = 0.3f;
+        public Herbivore(int x, int y,Board b ,stats s ) : base(x, y,  b,s) { 
+            chanceTOMultiply = 0.01f;
             sight = 10;
+            stats.chanceTOMultiply = chanceTOMultiply;
+            stats.sight = sight;
         }
         public Herbivore() : base() { 
-            chanceTOMultiply = 0.3f;
+            chanceTOMultiply = 0.01f;
             sight = 10;
+            stats.chanceTOMultiply = chanceTOMultiply;
+            stats.sight = sight;
         }
-        public Herbivore(coords c, Board b) : base(c, b) {
-            chanceTOMultiply = 0.3f;
+        public Herbivore(coords c, Board b,stats s) : base(c, b,s) {
+            chanceTOMultiply = 0.01f;
             sight = 10;
+            stats.chanceTOMultiply = chanceTOMultiply;
+            stats.sight = sight;
         }
         public override bool doIEatIt(Organism o)
         {

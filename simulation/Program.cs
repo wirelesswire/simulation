@@ -6,12 +6,12 @@ using simulation;
 //sekcja inicjalizacji//
 
 int resolutionOfImage = 1000;
-int sizeOfSimulaton = 20;
+int sizeOfSimulaton = 40;
 int startRoślino = 20;
 int startMieso = 1;
-int startGory = 20;
-int startJeziora = 100;
-int FrameDelayMs = 50;
+int startGory = 10;
+int startJeziora =50;
+int FrameDelayMs = 2000;
 int actionDelayMs = 4;
 
 Simulation simulation = new Simulation(sizeOfSimulaton, startRoślino, startMieso, startGory, startJeziora, actionDelayMs);
@@ -97,7 +97,7 @@ void makegif()
 // sekcja symulacji // 
 while (true)
 {
-    //Console.Clear();
+    Console.Clear();
     simulation.RunStep();
 
 
@@ -105,7 +105,7 @@ while (true)
     Thread.Sleep(FrameDelayMs);
     //makePNG();
     iter++;
-    Console.Clear();
+    //Console.Clear();
 
 }
 // sekcja symulacji // 
@@ -149,8 +149,8 @@ public class Simulation
         Carnivore.resizeMap(size, size);
         Herbivore.resizeMap(size, size);
 
-        //initializeRandomly();
-        InitializeSpecially(true );
+        initializeRandomly();
+        //InitializeSpecially( );
 
 
         updateClassBoards();
@@ -278,6 +278,9 @@ public class Simulation
         Console.WriteLine("użycie randoma od ostatniego razy " + (helper.nextCount - helper.lastShown));
 
         Console.WriteLine("uzycie randoma " +  helper.getNextCount());
+
+        Console.Write(helper.avgStatsAsString(board.carnivores.Cast<Animal>().ToList(), "mięsożercy "));
+        Console.Write(helper.avgStatsAsString(board.herbivores.Cast<Animal>().ToList(), "roślinożercy "));
     }
     public void PrintBoard()
     {
@@ -323,7 +326,7 @@ public class Simulation
         spawningOfFood();
         updateClassBoards();
         movingOfCreatures();
-        //multiplicationOfCreatures();
+        multiplicationOfCreatures();
 
     }
 
@@ -394,18 +397,29 @@ public class Simulation
         {
             if (item.CanReproduce()) // losowe rozmnażanie z 20% szansą
             {
+                //makeTAtCoords<typeof(item.GetType())>();
+
+
                 if (item is Herbivore)
                 {
-                    Herbivore child = (Herbivore)item.Reproduce(item);
-                    board.AddObject(child);
-                    board.herbivores.Add(child);
+                    stats c =   item.Reproduce( out coords a);
+
+                    makeTAtCoords<Herbivore>(a.x,a.y).setStats(c);
+                    //Herbivore child = (Herbivore)item.Reproduce(item);
+                    //board.AddObject(child);
+                    //board.herbivores.Add(child);
                     continue;
                 }
                 if (item is Carnivore)
                 {
-                    Carnivore child = (Carnivore)item.Reproduce(item);
-                    board.AddObject(child);
-                    board.carnivores.Add(child);
+                    stats c = item.Reproduce(out coords a);
+
+                    makeTAtCoords<Carnivore>(a.x, a.y).setStats(c);
+
+
+                    //Carnivore child = (Carnivore)item.Reproduce(item);
+                    ////board.AddObject(child);
+                    //board.carnivores.Add(child);
                     continue;
                 }
 

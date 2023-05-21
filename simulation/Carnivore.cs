@@ -30,22 +30,32 @@ namespace simulation
             }
         }
        
-        public Carnivore(int x, int y, Board b) : base(x, y, b)
+        public Carnivore(int x, int y, Board b,stats s ) : base(x, y, b,s)
         {
             
-            chanceTOMultiply = 0.1f;
+
+
+            chanceTOMultiply = 0.01f;
             sight = 5;
+            stats.chanceTOMultiply = chanceTOMultiply;
+            stats.sight = sight;
+
         }
         public Carnivore() : base()
         {
-            chanceTOMultiply = 0.1f;
-            sight = 5;
+            chanceTOMultiply = 0.01f;
+            sight = 2;
+            stats.chanceTOMultiply = chanceTOMultiply;
+            stats.sight = sight;
         }
-        public Carnivore(coords c, Board b) : base(c, b) {
+        public Carnivore(coords c, Board b,stats s ) : base(c, b, s) {
             
-            chanceTOMultiply = 0.1f;
-            sight = 5;
+            chanceTOMultiply = 0.01f;
+            sight = 2;
+            stats.chanceTOMultiply = chanceTOMultiply;
+            stats.sight = sight;
         }
+
 
 
         public override   bool doIEatIt(Organism o)
@@ -67,7 +77,6 @@ namespace simulation
                 throw new Exception("no nie może być null ");
             }
             o.Die();
-            //o.wasEaten = true;
         }
 
         private void getPathToNearestFood(Organism endCoordsOrganism)

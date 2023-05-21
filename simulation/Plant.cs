@@ -11,7 +11,7 @@ namespace simulation
     {
         //public static List<ObjectOnMap> objectInstances = new List<ObjectOnMap>();
 
-        int nutritiousness = 0;
+        //nutritiousness = 0;
         int maxNutritiousness = 100;
         public Plant(int x, int y,Board b ) : base(x, y,b) { }
         public Plant() : base() {
@@ -27,7 +27,18 @@ namespace simulation
         //    //throw new NotImplementedException();
         //    Plant.objectInstances.Add(this);
         //}
-
+        public void epochPass()
+        {
+            nutritiousness++;
+            if (nutritiousness > maxNutritiousness)
+            {
+                nutritiousness = maxNutritiousness;
+            }
+        }
+        public override double getNutritionalValue()
+        {
+            return nutritiousness;
+        }
         public void iteration()
         {
             nutritiousness++;

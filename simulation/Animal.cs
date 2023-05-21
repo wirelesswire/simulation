@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +14,16 @@ namespace simulation
         int REPRODUCTION_FOOD_LEVEL = 5;
 
         public int age = 0;
-        public int hunger = 500;
+        public double hunger = 500;
+        public double hungerperaction = 2;
+        public double eatingEfficency = 0.5f;
+        public double chanceForNextAction = 0.1f;
+        public double chanceTOMultiply = 0.2f;
 
-        public float hungerperaction = 2;
-        public float eatingEfficency = 0.5f;
-        public float chanceForNextAction = 0.1f;
-        public float chanceTOMultiply = 0.2f;
 
 
+
+        public stats stats;
 
         public int sight = 10;
         public int actions = 1;
@@ -91,26 +94,66 @@ namespace simulation
             // Nie znaleziono ścieżki
             return null;
         }
+        public void setStats(stats a)
+        {
+            this.stats = a;
+        }
         public void resetActions()
         {
             actions = actionsLeft;
         }
         public abstract bool doIEatIt(Organism o);
         public abstract bool doIEatIt(ObjectOnMap o);
+        public override double getNutritionalValue()
+        {
+            return nutritiousness;
+        }
         public virtual void Eat(Organism o)
         {
-
+            this.hunger += o.getNutritionalValue() * eatingEfficency;
             o.Die();
+            if (this.hunger > nutritiousness)
+            {
+                nutritiousness = (int)this.hunger;
+            }
         }
         public abstract Act MoveSpecific(List<Organism> herbivores);
 
 
 
 
-        public Animal(int x, int y, Board b) : base(x, y, b) { }
-        public Animal() : base() { pathToFood = null; }
-        public Animal(coords c, Board b) : base(c, b) { pathToFood = null; }
+        public Animal(int x, int y, Board b, stats s) : base(x, y, b) { this.stats = s; applyStats(); }
+        public Animal() : base() { pathToFood = null; stats = new stats(); applyStats(); }
+        public Animal(coords c, Board b, stats s) : base(c, b) { this.stats = s; pathToFood = null; applyStats(); }
 
+        public void applyStats()
+        {
+            if (stats == null)
+            {
+                throw new Exception("nie może być tu null ");
+            }
+           
+
+            this.hunger = stats.startingHunger;
+            this.hungerperaction = hungerperaction;
+            this.eatingEfficency = eatingEfficency;
+            this.chanceForNextAction = stats.chanceForNextAction;
+            this.chanceTOMultiply = stats.chanceTOMultiply;
+            this.nutritiousness = (int)this.hunger;
+
+        }
+        public int getNutritiousness()
+        {
+            return this.nutritiousness; 
+        }
+        public Corpse toCorpse()
+        {
+            return new Corpse(this);
+        }
+        public Act Corpseify()
+        {
+            return new Act(this,toCorpse(),this.coords,this.coords,actionsLeft, Act.actionTaken.die);
+        }
         public bool CanReproduce()
         {
             if (!(helper.Next(10) < (chanceTOMultiply * 10)))
@@ -239,20 +282,6 @@ namespace simulation
                     }
                 }
             }
-            //else
-            //{
-            //    //foreach (var item in tmp)
-            //    //{
-            //        if (!board.IsEmpty(item) )
-            //        {
-            //            throw new Exception(" o tu jest błąd ");
-            //        }
-            //}
-            //List<coords> tmp2 = possibleEdibleCells();
-            //if (tmp2 != null) tmp.AddRange(tmp2);// niemożesz wstawić nulla więc nullcheck 
-            ////}
-            //if (tmp == null) return null;
-
 
             List<coords> ret = new List<coords>();
             foreach (var item in a)
@@ -268,7 +297,7 @@ namespace simulation
 
         }
 
-        public Organism Reproduce(Organism parent, bool asDelta = false)
+        public stats Reproduce(out coords childFutureCoords, bool asDelta = false)
         {
 
             List<coords> emptyCells = possibleReproducableCells();
@@ -281,19 +310,11 @@ namespace simulation
             // Randomly select an empty adjacent cell to reproduce into
             coords newCell = emptyCells[helper.Next(emptyCells.Count)];
 
-            // Create and return a new organism at the selected cell
-            if (parent is Herbivore)
-            {
-                return new Herbivore(newCell, board);
-            }
-            else if (parent is Carnivore)
-            {
-                return new Carnivore(newCell, board);
-            }
-            else
-            {
-                throw new ArgumentException("Parent organism must be Herbivore or Carnivore.");
-            }
+
+            childFutureCoords = newCell;
+            return this.stats.getRandomForChild();
+
+
         }
 
         protected Organism GetNearestFood(List<Organism> organisms)
@@ -315,7 +336,7 @@ namespace simulation
 
             if (nearestFood != null)
             {
-                if (coords.absDistance(nearestFood.coords) > sight)
+                if (coords.absDistance(nearestFood.coords) > stats.sight)
                 {
                     nearestFood = null;
                 }
@@ -329,7 +350,7 @@ namespace simulation
         {
 
             //List<coords> possibleMoves = possibleStepableCells();// tutaj dostaje tylko deltę 
-            List<coords> possibleMoves = emptyCellsAroundRectangle(new coords(1,1));// tutaj dostaje tylko deltę 
+            List<coords> possibleMoves = emptyCellsAroundRectangle(new coords(1, 1));// tutaj dostaje tylko deltę 
 
             if (possibleMoves == null)
             {
@@ -344,6 +365,10 @@ namespace simulation
 
         public Act Move(List<Organism> orgs)
         {
+            if (hunger <= 0)
+            {
+                return Corpseify();
+            }
             Act act = MoveSpecific(orgs);
             if (!act.to.isInBounds(board.GetSize()))
             {
@@ -358,6 +383,7 @@ namespace simulation
 
             }
             actionsLeft--;
+            hunger -= hungerperaction;
             return act;
         }
 

@@ -33,18 +33,13 @@ namespace simulation
     }
     public  class Organism : ObjectOnMap,IDieable
     {
+        public virtual double getNutritionalValue() { return 1; }
 
         protected bool isDead = false;
+        protected   int nutritiousness = 0; // jest to maxymalna ilość głodu jaką dane zwierze zebrało przez całą symulację  lub roślina której wartość tego się zwiększa co epokę lub ciało gdzie zmienjsza sie co epokę 
 
 
-        //public override void addToInstances()
-        //{
-        //    if (Organism.objectInstances is null)
-        //    {
-        //        Organism.objectInstances = new List<ObjectOnMap>();
-        //    }
-        //    Organism.objectInstances.Add(this);
-        //}
+
 
 
         public Organism(int x, int y, Board b) : base(x, y, b) { }
@@ -76,7 +71,7 @@ namespace simulation
     }
     public interface Reproducable
     {
-        Organism Reproduce(Organism parent,bool asdelta);
+        stats Reproduce(out coords a ,bool asdelta);
         bool CanReproduce( );
     }
 

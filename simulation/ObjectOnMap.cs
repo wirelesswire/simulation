@@ -50,6 +50,10 @@ namespace simulation
         {
             board = b;
         }
+        public Board getBoard()
+        {
+            return board;
+        }
         public void SetXY(int x , int y )
         {
             if (coords == null) { // setT

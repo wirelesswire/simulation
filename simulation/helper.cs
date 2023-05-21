@@ -41,6 +41,56 @@ namespace simulation
         public static int nextCount = 0;
         public static int lastShown = 0;
 
+        public static List<double> getAvgStats(List<Animal> animals )
+        {
+            List<double> avg = new List<double>();
+            for (int i = 0; i < stats.ileJestWlasciwosci; i++)
+            {
+                avg.Add(0);
+            }
+
+            foreach (var item in animals)//liczy sume tych wartości
+            {
+                List<double> a = item.stats.wartosci();
+                for (int i = 0; i < stats.ileJestWlasciwosci; i++)
+                {
+                    avg[i]+= a[i];
+
+
+                }
+            }
+            for (int i = 0; i < avg.Count; i++) // liczy wartość średnią 
+            {
+                avg[i] = avg[i] / animals.Count;
+            }
+
+            return avg;
+
+
+
+
+        }
+        public static string avgStatsAsString(List<Animal> animals, string nazwaGrupy)
+        {
+            List<double> avg = getAvgStats(animals);
+            string[] nazwyCech = stats.getNazwyWlasciwosci();
+            if(avg.Count != nazwyCech.Length)
+            {
+                throw new Exception("nie zgadzają się ilości");
+            }
+            string ret = "";
+            ret += nazwaGrupy + " : \n";
+            for (int i = 0; i < avg.Count; i++)
+            {
+                ret += nazwyCech[i] +" : "  +  avg[i] +"\n";
+
+
+            }
+            return ret;
+
+
+        }
+
         public static int getNextCount()
         {
             lastShown = nextCount;
@@ -55,6 +105,11 @@ namespace simulation
         {
             nextCount++;
             return r.Next(a,b);
+        }
+        public static double NextDouble()
+        {
+            nextCount++;
+            return r.NextDouble();
         }
     }
     public static class  distanceHelper{
