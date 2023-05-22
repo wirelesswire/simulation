@@ -13,8 +13,8 @@ namespace simulation
         public coords coords;
         protected Board board;
 
-        public static List<ObjectOnMap> objectInstances;
-        
+        //public static List<ObjectOnMap> objectInstances;
+        public abstract void epochPass();
         public ObjectOnMap(int x, int y,Board b )
         {
 

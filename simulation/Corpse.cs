@@ -9,9 +9,9 @@ namespace simulation
     public  class Corpse:Organism
     {
         
-        public void epochPass()
+        public override void epochPass()
         {
-            this.nutritiousness--;
+            this.nutritiousness-=1;
         }
 
         public override double getNutritionalValue()
@@ -24,6 +24,9 @@ namespace simulation
             this.nutritiousness = a.getNutritiousness();
         }
 
-
+        public override string toString()
+        {
+            return "X"+ base.toString();
+        }
     }
 }

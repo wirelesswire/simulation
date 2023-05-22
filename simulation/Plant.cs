@@ -27,7 +27,7 @@ namespace simulation
         //    //throw new NotImplementedException();
         //    Plant.objectInstances.Add(this);
         //}
-        public void epochPass()
+        public override  void epochPass()
         {
             nutritiousness++;
             if (nutritiousness > maxNutritiousness)

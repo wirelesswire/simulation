@@ -42,11 +42,13 @@ namespace simulation
         public  List<Carnivore> carnivores;
         public  List<Mountain> mountains;
         public  List<Lake> lakes;
+        public  List<Corpse> corpses;
+
 
 
         private ObjectOnMap[,] organisms;
         private int size;
-        private HelperDictionry<ObjectOnMap> a = new HelperDictionry<ObjectOnMap>(new Dictionary<ObjectOnMap,List<ObjectOnMap>>()  );
+        //private HelperDictionry<ObjectOnMap> a = new HelperDictionry<ObjectOnMap>(new Dictionary<ObjectOnMap,List<ObjectOnMap>>()  );
 
 
         public Board(int size)
@@ -56,6 +58,7 @@ namespace simulation
             carnivores = new List<Carnivore>();
             mountains = new List<Mountain>();
             lakes = new List<Lake>();
+            corpses = new List<Corpse>();
             this.size = size;
             organisms = new ObjectOnMap[size, size];
         }
@@ -82,6 +85,10 @@ namespace simulation
             if (obj is Lake lake)
             {
                 lakes.Add(lake);
+            }
+            if (obj is Corpse corpse)
+            {
+                corpses.Add(corpse);
             }
 
         }
@@ -144,6 +151,33 @@ namespace simulation
                 if (GetObjectOnMap(a.from) == null && a.GetAction() !=  Act.actionTaken.nothing ){
                     throw new Exception("tam skąd przyszedł powinien być   null ");
                 }
+                
+
+            }
+            else if (a.dies())
+            {
+                if (!(GetObjectOnMap(a.from) == a.who))
+                {
+                    throw new Exception("no musi stać tu dokąd umiera ");
+                }
+                if(a.from == null)
+                {
+                    throw new Exception();  
+                }
+                //kod 
+                removeAt(a.from);
+
+                AddObject(a.eaten);
+
+
+                //if (!(GetObjectOnMap(a.to) == a.who))
+                //{
+                //    throw new Exception(" nie może  go przenieść ");
+                //}
+                if ( GetObjectOnMap(a.from) is not  Corpse && a.GetAction() == Act.actionTaken.die)
+                {
+                    throw new Exception("musi się zamienić w ciało  ");
+                }
             }
             else if (a.eats())
             {
@@ -155,11 +189,23 @@ namespace simulation
                 // porusz sie 
                 MoveOrganism(a);
             }
+            else if (a.selfdestructs())
+            {
+                if(a.eaten == null)
+                {
+                    throw new Exception();  
+                }
+                if(GetObjectOnMap(a.from ) == null )
+                {
+                    throw new Exception() ;
+                }
+                removeAt(a.to);
+            }
         }
 
         public void removeAt(coords a)
         {
-            Object obj  =  organisms[a.x, a.y] ;
+            ObjectOnMap obj  =  organisms[a.x, a.y] ;
             if(obj == null)
             {
                 throw new Exception("tu już nie powinno być takich błędów ");
@@ -183,6 +229,10 @@ namespace simulation
             if (obj is Lake lake)
             {
                 lakes.Remove(lake);
+            }
+            if(obj is Corpse corpse)
+            {
+                corpses.Remove(corpse); 
             }
 
             organisms[a.x, a.y] = null;

@@ -16,7 +16,10 @@ namespace simulation
         {
             return "#" + base.toString();
         }
-
+        public override void epochPass()
+        {
+            //throw new NotImplementedException();
+        }
     }
 
 

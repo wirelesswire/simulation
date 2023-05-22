@@ -36,7 +36,8 @@ namespace simulation
             stats.chanceTOMultiply = chanceTOMultiply;
             stats.sight = sight;
         }
-        public Herbivore() : base() { 
+        public Herbivore() : base() {
+            hungerperaction = 100;
             chanceTOMultiply = 0.01f;
             sight = 10;
             stats.chanceTOMultiply = chanceTOMultiply;

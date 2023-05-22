@@ -9,7 +9,7 @@ namespace simulation
     public class stats
     {
         public double startingHunger = 500;//1
-        public double hungerperaction = 2;//2
+        public double hungerperaction = 10;//2
         public double eatingEfficency = 0.5f;//3
         public double chanceForNextAction = 0.1f;//4
         public double actionsPerturn = 2; //5 możesz się ruszyć 2 razy na ture i póżniej masz 10 % szans za każdym razem na kolejne , jeżwli to jest np 1.9 to jest 1 ruch i 90% na kolejny(ale tylko raz ) i póżniej 10 % tak długo jak się ruszasz (teoretycznie może być nieskończone )

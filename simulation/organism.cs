@@ -40,7 +40,10 @@ namespace simulation
 
 
 
+        public override void epochPass()
+        {
 
+        }
 
         public Organism(int x, int y, Board b) : base(x, y, b) { }
         public Organism(coords c , Board b) : base(c, b) { }

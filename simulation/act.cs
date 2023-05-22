@@ -21,7 +21,8 @@ namespace simulation
             move,// przesuwa sie na podane pole 
             eat,// przesuwa sie na podane pole i zjada to co sie na nim znajduje 
             nothing,// jest przyblokowany albo z innego powodu sie nie porusza 
-            die// umiera z głodu 
+            die,// umiera z głodu 
+            selfdestruction
 
         }
         public coords from;
@@ -65,7 +66,7 @@ namespace simulation
         }
         public Act(Animal fromObj, Corpse toObj, coords from, coords to, int actionsLeft,actionTaken action = actionTaken.die )//die 
         {
-            if (from.XandYequal(to))
+            if (!from.XandYequal(to))
             {
                 throw new Exception("to nie ten konstruktor ");
             }
@@ -83,6 +84,27 @@ namespace simulation
             this.eaten = toObj; // tutaj jako to co popwstanie nazwy trochę mylące więc do poprawek
             this.acted = action;
             this.moreActions = actionsLeft > 0;
+        }
+        
+        public Act(Corpse fromObj,  actionTaken action = actionTaken.selfdestruction)//die 
+        {
+
+            if (action != actionTaken.selfdestruction)
+            {
+                throw new Exception();
+            }
+            //if (!from.XandYequal(to))
+            //{
+            //    throw new Exception();
+            //}
+            //this.who = fromObj;
+            this.eaten = fromObj;
+            this.acted = action;
+            this.from = fromObj.coords;
+            this.to = fromObj.coords;
+            //this.eaten = toObj; // tutaj jako to co popwstanie nazwy trochę mylące więc do poprawek
+            //this.acted = action;
+            //this.moreActions = actionsLeft > 0;
         }
         public Act(Animal who  , coords from, coords to, actionTaken action, int actionsLeft)//move
         {
@@ -121,15 +143,19 @@ namespace simulation
    
         public bool eats()
         {
-            return acted == actionTaken.eat ? true : false;
+            return acted == actionTaken.eat;
         }
         public bool moves()
         {
-            return acted == actionTaken.move ? true : false;
+            return acted == actionTaken.move ;
         }
         public bool dies()
         {
             return acted == actionTaken.die;
+        }
+        public bool selfdestructs()
+        {
+            return acted == actionTaken.selfdestruction;
         }
 
     }

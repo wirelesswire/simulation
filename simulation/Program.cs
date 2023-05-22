@@ -6,12 +6,12 @@ using simulation;
 //sekcja inicjalizacji//
 
 int resolutionOfImage = 1000;
-int sizeOfSimulaton = 40;
+int sizeOfSimulaton = 10;
 int startRoślino = 20;
 int startMieso = 1;
 int startGory = 10;
 int startJeziora =50;
-int FrameDelayMs = 2000;
+int FrameDelayMs = 20;
 int actionDelayMs = 4;
 
 Simulation simulation = new Simulation(sizeOfSimulaton, startRoślino, startMieso, startGory, startJeziora, actionDelayMs);
@@ -110,12 +110,16 @@ while (true)
 }
 // sekcja symulacji // 
 
-
+public class epoch
+{
+    List<Act> acts = new List<Act>();
+}
 
 public class Simulation
 {
+    List <epoch > epochs = new List<epoch>();
     private Board board;
-    public static Random random = new Random();
+    //public static Random random = new Random();
     private int startingHerbivores = 1;
     private int startingCarnivores = 1;
     private int startingMountains = 1;
@@ -149,8 +153,8 @@ public class Simulation
         Carnivore.resizeMap(size, size);
         Herbivore.resizeMap(size, size);
 
-        initializeRandomly();
-        //InitializeSpecially( );
+        //initializeRandomly();
+        InitializeSpecially();
 
 
         updateClassBoards();
@@ -161,24 +165,24 @@ public class Simulation
     public void InitializeSpecially()
     {
       
-        for (int i = 0; i < board.GetSize(); i++)
-        {
+        //for (int i = 0; i < board.GetSize(); i++)
+        //{
 
-            if (i != 5)
-            {
-                makeTAtCoords<Mountain>(i, i);
-            }
-            //else
-            //{
+        //    if (i != 5)
+        //    {
+        //        makeTAtCoords<Mountain>(i, i);
+        //    }
+        //    //else
+        //    //{
 
-            //}
-        }
+        //    //}
+        //}
         makeTAtCoords<Herbivore>(5, 8);
-        makeTAtCoords<Lake>(2, 1);
-        makeTAtCoords<Lake>(1, 2);
+        //makeTAtCoords<Lake>(2, 1);
+        //makeTAtCoords<Lake>(1, 2);
 
 
-        makeTAtCoords<Carnivore>(19, 10);
+        //makeTAtCoords<Carnivore>(19, 10);
     }
     public void InitializeSpecially(bool a  = false )
     {
@@ -217,43 +221,30 @@ public class Simulation
 
     public void initializeRandomly()
     {
-        //// Tworzenie roślin na planszy
-        //for (int i = 0; i < board.GetSize(); i++)
-        //{
-        //    for (int j = 0; j < board.GetSize(); j++)
-        //    {
-        //        if (random.NextDouble() < 0.2) // losowe tworzenie roślin z 20% szansą
-        //        {
-        //            makeTAtCoords<Plant>(i, j);
-        //        }
-        //    }
-        //}
 
-
-        // Tworzenie  roślinożerców i mięsożerców na planszy
         for (int i = 0; i < startingHerbivores; i++)
         {
 
-            makeTAtCoords<Herbivore>( random.Next(board.GetSize()), random.Next(board.GetSize()));
+            makeTAtCoords<Herbivore>( helper.Next(board.GetSize()), helper.Next(board.GetSize()));
         }
 
         for (int i = 0; i < startingCarnivores; i++)
         {
 
-            makeTAtCoords<Carnivore>(random.Next(board.GetSize()), random.Next(board.GetSize()));
+            makeTAtCoords<Carnivore>(helper.Next(board.GetSize()), helper.Next(board.GetSize()));
         }
 
         for (int i = 0; i < startingMountains; i++)
         {
 
-            makeTAtCoords<Mountain>(random.Next(board.GetSize()), random.Next(board.GetSize()));
+            makeTAtCoords<Mountain>(helper.Next(board.GetSize()), helper.Next(board.GetSize()));
 
         }
 
         for (int i = 0; i < startingLakes; i++)
         {
 
-            makeTAtCoords<Lake>(random.Next(board.GetSize()), random.Next(board.GetSize()));
+            makeTAtCoords<Lake>(helper.Next(board.GetSize()), helper.Next(board.GetSize()));
 
         }
         // Tworzenie roślin na planszy
@@ -261,7 +252,7 @@ public class Simulation
         {
             for (int j = 0; j < board.GetSize(); j++)
             {
-                if (random.NextDouble() < 0.2) // losowe tworzenie roślin z 20% szansą
+                if (helper.NextDouble() < 0.2) // losowe tworzenie roślin z 20% szansą
                 {
                     makeTAtCoords<Plant>(i, j);
                 }
@@ -322,12 +313,14 @@ public class Simulation
     }
     public void RunStep()
     {
+        epoch a = new epoch();
         checkerIfOkOnBoard();
-        spawningOfFood();
+        //spawningOfFood();
         updateClassBoards();
         movingOfCreatures();
-        multiplicationOfCreatures();
-
+        //multiplicationOfCreatures();
+        plantsAndCorpsesEpoch();
+        epochs.Add(a);
     }
 
 
@@ -366,6 +359,24 @@ public class Simulation
             updateClassBoards(); //po skończonym ruchu każdego zwierzęcia bedzie odświezone bo zwierze samo sobie nie przeszkadza 
         }
 
+    }
+    public void plantsAndCorpsesEpoch()
+    {
+        List<Organism> org = new List<Organism>();
+        org.AddRange(board.plants);
+        org.AddRange(board.corpses);
+        foreach (Organism a in org)
+        {
+            a.epochPass();
+            if(a is Corpse c)
+            {
+                if(c.getNutritionalValue() <= 0)
+                {
+                    board.makeActHappen(new Act(c, Act.actionTaken.selfdestruction));
+                    //dla wszystkich wypadałoby zrobić restytucję akcji 
+                }
+            }
+        }
     }
     public void spawningOfFood()
     {
