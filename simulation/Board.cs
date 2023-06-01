@@ -6,62 +6,113 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
-    class HelperDictionry<T> where T : ObjectOnMap
+
+    public class  statList<T>:List<T>
     {
-        public  IDictionary<T, List<T>> _dataOfType;
-
-        public HelperDictionry(IDictionary<T, List<T>> dataOfType)
+        public int  allAddedEver = 0 ;
+        public new  void  Add(T a )
         {
-            this._dataOfType = dataOfType;
-            
+            base.Add(a);
+            allAddedEver++; 
         }
-        public void Add(T t , T wartosc)
+        public new void AddRange(IEnumerable<T> a )
         {
-            if (!_dataOfType.ContainsKey(t))
-            {
-                _dataOfType.Add(t,new List<T>());
-            }
-            if(_dataOfType.TryGetValue(t, out List<T> lista)){
-                lista.Add(wartosc);
-            }
+            base.AddRange(a);
+            allAddedEver += a.Count();
         }
-        public void initializeWithType(T t)
-        {
-            _dataOfType = null;
-            _dataOfType = new Dictionary<T, List<T>>();
-            
-        }
-
 
     }
 
-    public class Board
+    public class Board 
     {
-        public  List<Plant> plants;
-        public  List<Herbivore> herbivores;
-        public  List<Carnivore> carnivores;
-        public  List<Mountain> mountains;
-        public  List<Lake> lakes;
-        public  List<Corpse> corpses;
-
+        public  statList<Plant> plants;
+        public  statList<Herbivore> herbivores;
+        public  statList<Carnivore> carnivores;
+        public  statList<Mountain> mountains;
+        public  statList<Lake> lakes;
+        public  statList<Corpse> corpses;
+        public int allObjectsEverCount = 0;
 
 
         private ObjectOnMap[,] organisms;
         private int size;
-        //private HelperDictionry<ObjectOnMap> a = new HelperDictionry<ObjectOnMap>(new Dictionary<ObjectOnMap,List<ObjectOnMap>>()  );
-
-
+        public int[] getMaxEverUnitNumbers()
+        {
+            return new int[] {plants.Count,herbivores.Count,carnivores.Count,mountains.Count,lakes.Count,corpses.Count };
+        }
+        //private Board(
+        //  statList<Plant> plants, statList<Herbivore> herbivores, statList<Carnivore> carnivores, statList<Mountain> mountains, statList<Lake> lakes, statList<Corpse> corpses,int allObjectsEverCount , ObjectOnMap[,] organisms,int size)
+        //{
+        //    this.plants = plants;
+        //    this.herbivores = herbivores;
+        //    this.carnivores = carnivores;
+        //    this.mountains = mountains;
+        //    this.lakes = lakes;
+        //    this.corpses = corpses;
+        //    this.organisms = organisms;
+        //    this.size = size;
+        //    this.allObjectsEverCount = allObjectsEverCount; 
+        //}
         public Board(int size)
         {
-            plants = new List<Plant>();
-            herbivores = new List<Herbivore>();
-            carnivores = new List<Carnivore>();
-            mountains = new List<Mountain>();
-            lakes = new List<Lake>();
-            corpses = new List<Corpse>();
+            plants = new statList<Plant>();
+            herbivores = new statList<Herbivore>();
+            carnivores = new statList<Carnivore>();
+            mountains = new statList<Mountain>();
+            lakes = new statList<Lake>();
+            corpses = new  statList<Corpse>();
             this.size = size;
             organisms = new ObjectOnMap[size, size];
         }
+        public Board(string[,] objectLayout)
+        {
+            if (objectLayout.GetLength(0) != objectLayout.GetLength(1))
+            {
+                throw new Exception("nieprawidłowa mapa ");
+            }
+            plants = new statList<Plant>();
+            herbivores = new statList<Herbivore>();
+            carnivores = new statList<Carnivore>();
+            mountains = new statList<Mountain>();
+            lakes = new statList<Lake>();
+            corpses = new statList<Corpse>();
+            this.size = objectLayout.GetLength(0);
+            organisms = new ObjectOnMap[this.size, this.size];
+
+            for (int i = 0; i < objectLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < objectLayout.GetLength(1); j++)
+                {
+                    
+                    switch (objectLayout[i,j])
+                    {
+                        case "M":
+                            makeTAtCoords_notApperance<Mountain>(i, j);
+                            break;
+                        case "L":
+                            makeTAtCoords_notApperance<Lake>(i, j);
+                            break;
+                        case "C":
+                            makeTAtCoords_notApperance<Carnivore>(i, j);
+                            break;
+                        case "H":
+                            makeTAtCoords_notApperance<Herbivore>(i, j);
+                            break;
+                        case "P":
+                            makeTAtCoords_notApperance<Plant>(i, j);
+                            break;
+                        case "_":
+                            //makeTAtCoords<Plant>(i, j);
+                            break;
+                        default:
+                            throw new Exception("złe dane wejściowe ");
+                            break;
+                    }
+                }
+            }
+
+        }
+
 
         public void AddObject(ObjectOnMap obj)
         {
@@ -90,6 +141,7 @@ namespace simulation
             {
                 corpses.Add(corpse);
             }
+            allObjectsEverCount++;  
 
         }
         public int countOFTypeinRange<T>(int squareRange, int x, int y)
@@ -131,76 +183,313 @@ namespace simulation
 
         }
 
-        public void makeActHappen(Act a)
+
+
+        public void MakeActHappen(epochPass e ,bool forward)
         {
-            if (a.moves())
+            foreach (var item in returnAllOrganisms())
             {
-                if(! (GetObjectOnMap(a.to) == null) )
+                item.epochPass(forward);
+            }
+        }
+
+        public void MakeActHappen(Move a,bool forward = true)
+        {
+            if (forward)
+            {
+                if (!(GetObjectOnMap(a.to) == null))
                 {
-                    throw new Exception("pole na które stajesz musi być puste ");
+                    throw new Exception("pole na które stajesz musi  być puste ");
                 }
-                if(! (GetObjectOnMap(a.from) == a.who) ) {
+                if (!( GetObjectOnMap(a.from) == a.who ))
+                {
                     throw new Exception("no musi stać tu skąd się porusza ");
                 }
-                MoveOrganism(a);
+                MoveOrganism(a,forward);
 
-                if (! (GetObjectOnMap(a.to) == a.who))
+                if (!(GetObjectOnMap(a.to) == a.who))
                 {
                     throw new Exception(" musi go przenieść ");
                 }
-                if (GetObjectOnMap(a.from) == null && a.GetAction() !=  Act.actionTaken.nothing ){
+                if  (  !(GetObjectOnMap(a.from) == null))
+                {
                     throw new Exception("tam skąd przyszedł powinien być   null ");
                 }
-                
+
+                //return;// brak symetrii z movecost bo już został pobrany 
+            }
+            else
+            {
+                if (!(GetObjectOnMap(a.to) == a.who))
+                {
+                    throw new Exception("tam gdzie poszedł musi być  ");
+                }
+                if (!(GetObjectOnMap(a.from) == null))
+                {
+                    throw new Exception("tam skąd przyszedł musi być puste  ");
+                }
+                MoveOrganism(a,forward);
+
+
+                if (!(GetObjectOnMap(a.to) == null))
+                {
+                    throw new Exception("musi go przenieść");
+                }
+                if (!(GetObjectOnMap(a.from) == a.who))
+                {
+                    throw new Exception("no musi stać tu skąd się porusza ");
+                }
+
+
 
             }
-            else if (a.dies())
+            a.who.MoveCost(forward);
+
+        }
+        public void MakeActHappen(Die a, bool forwards)
+        {
+            if (forwards)
             {
                 if (!(GetObjectOnMap(a.from) == a.who))
                 {
                     throw new Exception("no musi stać tu dokąd umiera ");
                 }
-                if(a.from == null)
-                {
-                    throw new Exception();  
-                }
-                //kod 
+
                 removeAt(a.from);
 
-                AddObject(a.eaten);
+                AddObject(a.affected);
 
-
-                //if (!(GetObjectOnMap(a.to) == a.who))
-                //{
-                //    throw new Exception(" nie może  go przenieść ");
-                //}
-                if ( GetObjectOnMap(a.from) is not  Corpse && a.GetAction() == Act.actionTaken.die)
+                if (GetObjectOnMap(a.from) is not Corpse)
                 {
                     throw new Exception("musi się zamienić w ciało  ");
                 }
             }
-            else if (a.eats())
+            else
+            {
+                removeAt(a.affected.coords);
+                AddObject(a.who);
+
+
+            }
+            
+        }
+
+        public void MakeActHappen(Eat a, bool forwards)
+        {
+            if (forwards)
             {
                 //zjedz 
                 Organism org = (Organism)GetObjectOnMap(a.to);
-                a.who.Eat(org);
+                a.who.Eat(org,forwards);
                 removeAt(a.to);
 
                 // porusz sie 
-                MoveOrganism(a);
+                MoveOrganism(a,forwards);
             }
-            else if (a.selfdestructs())
+            else
             {
-                if(a.eaten == null)
+                MoveOrganism(a, forwards);
+                AddObject(a.dead);
+
+
+                a.who.Eat(a.dead,forwards);
+
+
+
+            }
+            a.who.MoveCost(forwards);
+
+
+
+        }
+
+        public void MakeActHappen(selfDestruct a , bool forwards)
+        {
+            if (forwards)
+            {
+                if (a.affected == null)
                 {
-                    throw new Exception();  
+                    throw new Exception();
                 }
-                if(GetObjectOnMap(a.from ) == null )
+                if (GetObjectOnMap(a.from) == null)
                 {
-                    throw new Exception() ;
+                    throw new Exception();
                 }
                 removeAt(a.to);
             }
+            else
+            {
+                if (a.affected == null)
+                {
+                    throw new Exception();
+                }
+                if (GetObjectOnMap(a.from) == null)
+                {
+                    throw new Exception();
+                }
+                AddObject(a.affected);  
+            }
+           
+        }
+        public void MakeActHappen(DraxStanding a, bool forwards)
+        {
+            if (forwards)
+            {
+
+            }
+            else
+            {
+
+            }
+            // so incredibly still 
+        }
+
+        public void MakeActHappen(Apeerance a ,bool forwards )
+        {
+            if (forwards)
+            {
+                if (!(GetObjectOnMap(a.what.coords) == null))
+                {
+                    throw new Exception();
+                }
+                AddObject(a.what);
+                if (!(GetObjectOnMap(a.what.coords) != null))
+                {
+                    throw new Exception();
+                }
+
+
+            }
+            else
+            {
+                if (!(GetObjectOnMap(a.what.coords) != null))
+                {
+                    throw new Exception();
+                }
+                removeAt(a.what.coords);
+
+                if (!(GetObjectOnMap(a.what.coords) == null))
+                {
+                    throw new Exception();
+                }
+            }
+        }
+
+
+
+
+        public void MakeActHappen(Act a,bool forwards  )
+        {
+
+
+            if (a is Move b )
+            {
+                MakeActHappen((Move)b,forwards);
+            }
+            else if (a is DraxStanding d )
+            {
+                MakeActHappen(d,forwards);
+            }
+            else if(a is Eat e)
+            {
+                MakeActHappen(e,forwards);
+            }
+            else if (a is selfDestruct f)
+            {
+                MakeActHappen(f, forwards);
+            }
+            else if (a is Die g)
+            {
+                MakeActHappen(g,forwards);
+            }
+            else if(a is epochPass h)
+            {
+                MakeActHappen(h,forwards);
+            }
+        }
+        public bool makeTAtCoords<T>(int x, int y , out Apeerance z) where T : ObjectOnMap, new()
+        {
+            z = null;
+            if (IsEmpty(x, y))
+            {
+                T a = new T();
+                a.SetXY(x, y);
+                a.SetBoard(this);
+                z = new Apeerance(a);
+                return true;
+            }
+            return false;
+        }
+        public T makeTAtCoords_notApperance<T>(int x, int y) where T : ObjectOnMap, new()
+        {
+            if (IsEmpty(x, y))
+            {
+                T a = new T();
+                a.SetXY(x, y);
+                a.SetBoard(this);
+                this.AddObject(a);
+                return a;
+            }
+            return null;
+        }
+        public List<Animal> returnAllAnimals()
+        {
+            List<Animal> animals = new List<Animal>();
+            animals.AddRange(carnivores);
+            animals.AddRange(herbivores);
+            //animals.Shuffle();
+            return animals;
+        }
+        public List<Organism> returnAllOrganisms()
+        {
+            List<Organism> organisms = new List<Organism>();
+            organisms.AddRange(carnivores);
+            organisms.AddRange(herbivores);
+            organisms.AddRange(plants);
+            organisms.AddRange(corpses);
+            return organisms;
+        }
+        public List<ObjectOnMap> returnAllObjectOnMap()
+        {
+            List<ObjectOnMap> objects = new List<ObjectOnMap>();
+            objects.AddRange(carnivores);
+            objects.AddRange(herbivores);
+            objects.AddRange(plants);
+            objects.AddRange(corpses);
+            objects.AddRange(mountains);
+            objects.AddRange(lakes);
+            return objects;
+        }
+        public List<T> returnAllT<T>() where T : ObjectOnMap
+        {
+
+
+            List<T> ret  = new List<T>();
+            if(plants is List<T> a )
+            {
+                ret.AddRange(a);
+            }
+            if (lakes is List<T> b)
+            {
+                ret.AddRange(b);
+            }
+            if (carnivores is List<T> c)
+            {
+                ret.AddRange(c);
+            }
+            if (herbivores is List<T> d)
+            {
+                ret.AddRange(d);
+            }
+            if (mountains is List<T> e)
+            {
+                ret.AddRange(e);
+            }
+            if (corpses is List<T> f)
+            {
+                ret.AddRange(f);
+            }
+            return ret;
         }
 
         public void removeAt(coords a)
@@ -262,9 +551,17 @@ namespace simulation
             organisms[organism.GetX(), organism.GetY()] = null;
             organism.MoveTo(newX, newY);
         }
-        public void MoveOrganism(Act a )
+        public void MoveOrganism(Act a,bool forwards  )
         {
-            MoveOrganism(a.who,a.to.x,a.to.y);
+            if (forwards)
+            {
+                MoveOrganism(a.who, a.to.x, a.to.y);
+
+            }
+            else
+            {
+                MoveOrganism(a.who,a.from.x,a.from.y);
+            }
         }
         public bool IsEmpty(int x, int y)
         {
@@ -302,6 +599,21 @@ namespace simulation
                 Console.WriteLine();
             }
         }
+
+       // public object Clone()
+       // {
+       //     return new Board(
+       //  plants,
+       //  herbivores,
+       //  carnivores,
+       //  mountains,
+       //  lakes,
+       //  corpses,
+       // allObjectsEverCount = 0,
+       //organisms,
+       // size
+       //     );
+       // }
     }
 
 }

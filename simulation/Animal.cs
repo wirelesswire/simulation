@@ -13,21 +13,21 @@ namespace simulation
 
         int REPRODUCTION_FOOD_LEVEL = 5;
 
-        public int age = 0;
+        public double maxAge = 100;
         public double hunger = 500;
         public double hungerperaction = 2;
         public double eatingEfficency = 0.5f;
         public double chanceForNextAction = 0.1f;
         public double chanceTOMultiply = 0.2f;
 
-
+        public double sight = 10;
+        public double actions = 1;
+        public double actionsLeft = 1;
 
 
         public stats stats;
 
-        public int sight = 10;
-        public int actions = 1;
-        public int actionsLeft = 1;
+
         protected List<Node> pathToFood;
 
         public List<Node> FindPath(bool[,] grid, coords start, coords end)
@@ -100,7 +100,8 @@ namespace simulation
         }
         public void resetActions()
         {
-            actions = actionsLeft;
+            actionsLeft = actions;
+            //actions = actionsLeft;
         }
         public abstract bool doIEatIt(Organism o);
         public abstract bool doIEatIt(ObjectOnMap o);
@@ -108,13 +109,28 @@ namespace simulation
         {
             return nutritiousness;
         }
-        public virtual void Eat(Organism o)
+        public virtual void Eat(Organism o,bool forwards )
         {
-            this.hunger += o.getNutritionalValue() * eatingEfficency;
-            o.Die();
-            if (this.hunger > nutritiousness)
+            if (forwards)
             {
-                nutritiousness = (int)this.hunger;
+
+                this.hunger += o.getNutritionalValue() * eatingEfficency;
+                o.Die(forwards);
+                if (this.hunger > nutritiousness)
+                {
+                    nutritiousness = (int)this.hunger;
+                }
+            }
+            else
+            {
+                double amount = o.getNutritionalValue() * eatingEfficency;
+                if (this.hunger > nutritiousness)
+                {
+                    nutritiousness -= (int)amount;
+                }
+                this.hunger -= amount;
+                o.Die(forwards);
+
             }
         }
         public abstract Act MoveSpecific(List<Organism> herbivores);
@@ -134,11 +150,17 @@ namespace simulation
             }
            
 
-            this.hunger = stats.startingHunger;
-            this.hungerperaction = hungerperaction;
-            this.eatingEfficency = eatingEfficency;
-            this.chanceForNextAction = stats.chanceForNextAction;
-            this.chanceTOMultiply = stats.chanceTOMultiply;
+            this.hunger = stats.startingHunger;//1
+            this.hungerperaction = stats.hungerperaction;//2
+            this.eatingEfficency = stats.eatingEfficency;//3
+            this.chanceForNextAction = stats.chanceForNextAction;//4
+
+            this.actions = stats.actionsPerturn;//5
+
+            this.chanceTOMultiply = stats.chanceTOMultiply;//6
+            this.sight = stats.sight;//7
+            this.maxAge = stats.maxAge;//8
+
             this.nutritiousness = (int)this.hunger;
 
         }
@@ -152,11 +174,11 @@ namespace simulation
         }
         public Act Corpseify()
         {
-            return new Act(this,toCorpse(),this.coords,this.coords,actionsLeft, Act.actionTaken.die);
+            return new Die(this,toCorpse(),this.coords,this.coords);
         }
         public bool CanReproduce()
         {
-            if (!(helper.Next(10) < (chanceTOMultiply * 10)))
+            if (!(helper.NextDouble() < chanceTOMultiply ))
             {
                 return false;
             }
@@ -297,7 +319,7 @@ namespace simulation
 
         }
 
-        public stats Reproduce(out coords childFutureCoords, bool asDelta = false)
+        public stats Reproduce(out coords childFutureCoords)
         {
 
             List<coords> emptyCells = possibleReproducableCells();
@@ -312,6 +334,7 @@ namespace simulation
 
 
             childFutureCoords = newCell;
+            this.hunger -= 400;//PAYMENT
             return this.stats.getRandomForChild();
 
 
@@ -345,7 +368,43 @@ namespace simulation
             return nearestFood;
         }
 
+        public override void epochPass(bool forward)
+        {
 
+            base.epochPass(forward);
+
+            resetActions();
+
+        }
+        public bool canMoveMore()
+        {
+            //return true;
+            bool val = true;
+            if (actionsLeft >= 1)
+            {
+             val=   true;
+            }
+            else if(actionsLeft <1 && actionsLeft > 0)
+            {
+                val =  helper.NextDouble() < actionsLeft;
+            }
+            else if (actionsLeft <= 0)
+            {
+                val = false;
+                
+            }
+
+            if(val == false) // gdy nie masz już więcej normalnych ruchów  masz szanse na kolejny 
+            {
+                if (helper.NextDouble() < chanceForNextAction)
+                {
+                    val = true;
+                }
+            } 
+
+            return val;
+
+        }
         protected Act moveRandomly()
         {
 
@@ -355,17 +414,32 @@ namespace simulation
             if (possibleMoves == null)
             {
                 throw new Exception("tu nie wchodzi  nie powinno przynajmniej ");
-                return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing); // nic nie robisz  i nigdy nie powinno tu wejść 
+                return new DraxStanding(this, new coords(0, 0)); // nic nie robisz  i nigdy nie powinno tu wejść 
             }
             coords a = possibleMoves[helper.Next(possibleMoves.Count)];
 
-            return new Act(this, coords, a, Act.actionTaken.move, actionsLeft);//normalny ruch 
+            return new Move(this, coords, a);//normalny ruch 
 
         }
 
+        public void MoveCost(bool forward)
+        {
+            if (forward)
+            {
+
+                actionsLeft--;///PAYMENT
+                hunger -= hungerperaction;///PAYMENT
+
+            }
+            else
+            {
+                actionsLeft++;
+                hunger += hungerperaction;
+            }
+        }
         public Act Move(List<Organism> orgs)
         {
-            if (hunger <= 0)
+            if (hunger <= 0 || age > stats.maxAge)
             {
                 return Corpseify();
             }
@@ -374,7 +448,7 @@ namespace simulation
             {
                 throw new Exception("wyszło poza ");
             }
-            else if ((!board.IsEmpty(act.to) && act.GetAction() == Act.actionTaken.move))
+            else if ((!board.IsEmpty(act.to) && act is Move))
             {
                 throw new Exception("problem z pustostanem ");
             }
@@ -382,8 +456,9 @@ namespace simulation
             {
 
             }
-            actionsLeft--;
-            hunger -= hungerperaction;
+
+            act.setMoves(canMoveMore());
+
             return act;
         }
 

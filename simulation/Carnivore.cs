@@ -69,14 +69,15 @@ namespace simulation
         }
 
 
-        public override void Eat(Organism o)
+        public override void Eat(Organism o,bool forwards)
         {
-            base.Eat(o);
             if (o == null)
             {
                 throw new Exception("no nie może być null ");
             }
-            o.Die();
+            base.Eat(o,forwards);
+
+            o.Die(forwards);
         }
 
         private void getPathToNearestFood(Organism endCoordsOrganism)
@@ -103,7 +104,7 @@ namespace simulation
             {
                 if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
                 {
-                    return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                    return new DraxStanding(this, new coords(0, 0));
                 }
                 return moveRandomly();
             }            
@@ -116,7 +117,7 @@ namespace simulation
                 {
                     if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
                     {
-                        return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                        return new DraxStanding(this, new coords(0, 0));
                     }
                     return moveRandomly();
                 }
@@ -128,14 +129,14 @@ namespace simulation
                 {                    
                     coords poleDocelowe = new coords (  pathToFood[0]);
 
-                    return new Act(this,board.GetObjectOnMap(poleDocelowe),coords, poleDocelowe, Act.actionTaken.eat, actionsLeft);
+                    return new Eat(this,board.GetObjectOnMap(poleDocelowe),coords, poleDocelowe);
                 }
 
                 if (board.IsEmpty(pathToFood[0].toCoords()))//jeżeli na pewno możesz stanąć na polu kierującym cie w stronę najbliższego jedzenia -> stań tam 
                 {
                     Node tmp = pathToFood[0];
                     coords  poleDocelowe = new coords(tmp);
-                    return new Act(this, coords, poleDocelowe, Act.actionTaken.move, actionsLeft);
+                    return new Move(this, coords, poleDocelowe);
                 }
                 else
                 {

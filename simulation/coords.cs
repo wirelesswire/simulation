@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
-    public class coords
+    public struct coords
     {
         public int x;
         public int y;
@@ -18,7 +18,7 @@ namespace simulation
         public coords(Node n)
         {
             this.x = n.x;
-            this.y += n.y;
+            this.y = n.y;
         }
         public coords asDelta(int x, int y, bool forwards = true)
         {

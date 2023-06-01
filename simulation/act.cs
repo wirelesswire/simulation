@@ -3,160 +3,139 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static simulation.Act;
 
 namespace simulation
 {
 
-    public interface IAct
-    {
-
-
-
-
-    }
     public class Act
     {
-        public enum actionTaken
+        public coords from;//skąd 
+        public coords to;//dokąd 
+        public Animal who;//kto wykonał
+        public Organism affected;//kto zjedzony 
+        public Organism dead; // kto martwy 
+        protected bool moreActions = false;
+        public void setMoves(bool a)
         {
-            move,// przesuwa sie na podane pole 
-            eat,// przesuwa sie na podane pole i zjada to co sie na nim znajduje 
-            nothing,// jest przyblokowany albo z innego powodu sie nie porusza 
-            die,// umiera z głodu 
-            selfdestruction
+            this.moreActions = a;
+        }
+        public bool gotMoreMoves()
+        {
+            return this.moreActions;
+        }
+    }
 
-        }
-        public coords from;
-        public coords to;
-        public Animal who;
-        public Organism eaten;
-        public Animal dead;
+    public class Move : Act
+    {
 
-
-        actionTaken acted;
-        bool moreActions;
-        public actionTaken GetAction()
-        {
-            return acted;
-        }
-
-        public void setAction(actionTaken action)
-        {
-            this.acted = action;
-        }
-        public Act(Animal fromObj, ObjectOnMap toObj,coords from , coords to , actionTaken action , int actionsLeft)//eat
-        {
-            if (from.XandYequal( to))
-            {
-                throw new Exception("to nie ten konstruktor ");
-            }
-            if (toObj is not Organism org )
-            {
-                throw new Exception("tu ");
-            }
-            if(action != actionTaken.eat)
-            {
-                throw new Exception();
-            }
-            this.who = fromObj;
-            this.eaten = org;
-            this.from = from;
-            this.to = to;
-            this.acted = action;
-            this.moreActions = actionsLeft > 0;
-        }
-        public Act(Animal fromObj, Corpse toObj, coords from, coords to, int actionsLeft,actionTaken action = actionTaken.die )//die 
-        {
-            if (!from.XandYequal(to))
-            {
-                throw new Exception("to nie ten konstruktor ");
-            }
-            if (action != actionTaken.die)
-            {
-                throw new Exception();
-            }
-            if (!from.XandYequal(to))
-            {
-                throw new Exception() ;
-            }
-            this.who = fromObj;
-            this.from = from;
-            this.to = to;
-            this.eaten = toObj; // tutaj jako to co popwstanie nazwy trochę mylące więc do poprawek
-            this.acted = action;
-            this.moreActions = actionsLeft > 0;
-        }
-        
-        public Act(Corpse fromObj,  actionTaken action = actionTaken.selfdestruction)//die 
-        {
-
-            if (action != actionTaken.selfdestruction)
-            {
-                throw new Exception();
-            }
-            //if (!from.XandYequal(to))
-            //{
-            //    throw new Exception();
-            //}
-            //this.who = fromObj;
-            this.eaten = fromObj;
-            this.acted = action;
-            this.from = fromObj.coords;
-            this.to = fromObj.coords;
-            //this.eaten = toObj; // tutaj jako to co popwstanie nazwy trochę mylące więc do poprawek
-            //this.acted = action;
-            //this.moreActions = actionsLeft > 0;
-        }
-        public Act(Animal who  , coords from, coords to, actionTaken action, int actionsLeft)//move
+        public Move(Animal who, coords from, coords to)//move
         {
             if (from.XandYequal(to))
             {
                 throw new Exception("to nie ten konstruktor ");
             }
-            if (action != actionTaken.move)
-            {
-                throw new Exception();
-            }
-            this.who = who ;
+
+            this.who = who;
             this.from = from;
             this.to = to;
-            this.acted = action;
-            this.moreActions = actionsLeft > 0;
+            //this.acted = action;
+            affected = null;
+            dead = null;
+            //this.moreActions = actionsLeft > 0;
         }
-        public Act(Animal who , coords fromto, int actionsLeft, actionTaken action = actionTaken.nothing )//nic
+        public void reverse()
         {
-            if(action != actionTaken.nothing)
+
+        }
+    }
+    public class Apeerance:Act
+    {
+        public ObjectOnMap what;//co się pojawiło 
+        public Apeerance(ObjectOnMap what )
+        {
+            this.what = what;
+            if(what is Animal a)
             {
-                throw new Exception("nie może tak być ");
+                this.who = a;
+
             }
+        }
+
+    }
+    public class epochPass:Act
+    {
+        public epochPass() { }
+    }
+
+    public class Eat : Act
+    {
+       
+
+        public Eat(Animal fromObj, ObjectOnMap toObj, coords from, coords to)//eat
+        {
+            if (from.XandYequal(to))
+            {
+                throw new Exception("to nie ten konstruktor ");
+            }
+            if (toObj is not Organism org)
+            {
+                throw new Exception("tu ");
+            }
+            this.from = from;
+            this.to = to;
+            this.who = fromObj;
+            this.affected = org;
+            this.dead = org;
+        }
+    }
+
+    public class DraxStanding : Act
+    {
+        //public bool moreActions;
+
+        public DraxStanding(Animal who, coords fromto)//nic
+        {
             this.who = who;
             this.from = fromto;
             this.to = fromto;
-            acted = actionTaken.nothing;
-            this.moreActions = false ;// jak raz sie nie poruszył to więcejj też się nie poruszy 
+            affected = null;
+            dead = null;
+            this.moreActions = false;// jak raz sie nie poruszył to więcejj też się nie poruszy 
         }
+    }
+    public class Die : Act
+    {
+        //public override bool 
+        public Die(Animal fromObj, Corpse toObj, coords from, coords to)//die 
+        {
+            if (!from.XandYequal(to))
+            {
+                throw new Exception("to nie ten konstruktor ");
+            }
+            if (!from.XandYequal(to))
+            {
+                throw new Exception();
+            }
+            this.from = from;
+            this.to = to;
+            this.who = fromObj;
+            this.affected = toObj; // tutaj jako to co popwstanie nazwy trochę mylące więc do poprawek
+            this.dead = fromObj;
+            this.moreActions = false;
 
+        }
+    }
+    public class selfDestruct : Act
+    {
+        public selfDestruct(Corpse fromObj)//selfdestruction
+        {
 
-        public bool gotMoreMoves()
-        {
-            return moreActions;
+            this.from = fromObj.coords;
+            this.to = fromObj.coords;
+            this.who = null;// nikt tego nie zrobił , samo się zrobiło 
+            this.affected = fromObj;
+            this.dead = null; // ciało nie może umrzeć 
         }
-   
-        public bool eats()
-        {
-            return acted == actionTaken.eat;
-        }
-        public bool moves()
-        {
-            return acted == actionTaken.move ;
-        }
-        public bool dies()
-        {
-            return acted == actionTaken.die;
-        }
-        public bool selfdestructs()
-        {
-            return acted == actionTaken.selfdestruction;
-        }
-
     }
 }

@@ -13,29 +13,24 @@ namespace simulation
         public coords coords;
         protected Board board;
 
-        //public static List<ObjectOnMap> objectInstances;
-        public abstract void epochPass();
+        public abstract void epochPass(bool forward);
         public ObjectOnMap(int x, int y,Board b )
         {
 
             this.coords = new coords(x,y);
             this.board  = b;
-            //addToInstances();
         }
         public ObjectOnMap(coords a , Board b)
         {
 
             this.coords = a;
             this.board = b;
-            //addToInstances();
         }
 
         public ObjectOnMap()
         {
-            //addToInstances();
 
         }
-        //public abstract void addToInstances();
         public void SetX(int x )
         {
             coords.x = x;
@@ -56,13 +51,13 @@ namespace simulation
         }
         public void SetXY(int x , int y )
         {
-            if (coords == null) { // setT
-                coords = new coords(x, y);
-                return; 
-            }
+            //if (coords == null) { // setT
+            //    coords = new coords(x, y);
+            //    return; 
+            //}
 
             coords.x = x;
-            coords.y=y;
+            coords.y = y;
         }
         public int GetX()
         {

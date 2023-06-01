@@ -16,7 +16,7 @@ namespace simulation
         {
             return "#" + base.toString();
         }
-        public override void epochPass()
+        public override void epochPass(bool forwards )
         {
             //throw new NotImplementedException();
         }

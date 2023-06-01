@@ -9,9 +9,21 @@ namespace simulation
     public  class Corpse:Organism
     {
         
-        public override void epochPass()
+        public override void epochPass(bool forward)
         {
-            this.nutritiousness-=1;
+            if (forward)
+            {
+
+                this.nutritiousness -= this.age;
+                base.epochPass(forward);// wiek zwiekszony 
+
+
+            }
+            else
+            {
+                base.epochPass(forward);    
+                this.nutritiousness += this.age;    
+            }
         }
 
         public override double getNutritionalValue()

@@ -12,6 +12,7 @@ namespace simulation
         public int y;
         public Node parent;
 
+
         public int[] toarr()
         {
             return new int[] { x, y };
@@ -37,12 +38,20 @@ namespace simulation
 
         protected bool isDead = false;
         protected   int nutritiousness = 0; // jest to maxymalna ilość głodu jaką dane zwierze zebrało przez całą symulację  lub roślina której wartość tego się zwiększa co epokę lub ciało gdzie zmienjsza sie co epokę 
+        protected int age = 0;
 
 
-
-        public override void epochPass()
+        public override void epochPass(bool forward )
         {
+            if (forward)
+            {
+                age++;
 
+            }
+            else 
+            { 
+                age--; 
+            } 
         }
 
         public Organism(int x, int y, Board b) : base(x, y, b) { }
@@ -56,9 +65,9 @@ namespace simulation
         {
             return isDead;
         }
-        public  void Die()
+        public  void Die(bool forwards)
         {
-            isDead = true;
+            isDead = forwards ;
         }
         public void MoveTo(int x, int y)
         {
@@ -74,7 +83,7 @@ namespace simulation
     }
     public interface Reproducable
     {
-        stats Reproduce(out coords a ,bool asdelta);
+        stats Reproduce(out coords a );
         bool CanReproduce( );
     }
 

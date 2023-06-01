@@ -37,7 +37,7 @@ namespace simulation
             stats.sight = sight;
         }
         public Herbivore() : base() {
-            hungerperaction = 100;
+            hungerperaction = 2;
             chanceTOMultiply = 0.01f;
             sight = 10;
             stats.chanceTOMultiply = chanceTOMultiply;
@@ -61,14 +61,14 @@ namespace simulation
 
 
 
-        public override void Eat(Organism o)
+        public override void Eat(Organism o, bool forwards)
         {
-            base.Eat(o);
+            base.Eat(o, forwards);
             if (o == null)
             {
                 throw new Exception("no nie może być null ");
             }
-            o.Die();
+            o.Die(forwards);
         }
 
 
@@ -88,26 +88,23 @@ namespace simulation
 
         public override Act MoveSpecific(List<Organism> plants)
         {
-
-
             Organism nearestFood = GetNearestFood(plants);
             if (nearestFood == null)// jeżeli nie ma jedzenia wokół-> poruszanie losowe 
             {
                 if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
                 {
-                    return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                    return new DraxStanding(this, new coords(0, 0));
                 }
                 return moveRandomly();
             }
             else
             {
-
                 getPathToNearestFood(nearestFood);
                 if (pathToFood == null)
                 {
                     if (emptyCellsAroundRectangle(new coords(1, 1)) == null)// jeżeli jesteś zablokowany i żadnego z blokujących nie możesz zjeść 
                     {
-                        return new Act(this, new coords(0, 0), 0, Act.actionTaken.nothing);
+                        return new DraxStanding(this, new coords(0, 0));
                     }
                     return moveRandomly();
                 }
@@ -119,23 +116,18 @@ namespace simulation
                 {
 
                     coords poleDocelowe = new coords(pathToFood[0]);
-                    return new Act(this,board.GetObjectOnMap(poleDocelowe), coords,poleDocelowe, Act.actionTaken.eat, actionsLeft);
+                    return new Eat(this,board.GetObjectOnMap(poleDocelowe), coords,poleDocelowe);
                 }
 
                 if (board.IsEmpty(pathToFood[0].toCoords()))
                 {
-                    return new Act(this,coords, pathToFood[0].toCoords(), Act.actionTaken.move, actionsLeft);
+                    return new Move(this,coords, pathToFood[0].toCoords());
                 }
                 else
                 {
                     throw new Exception("nimożność");
                 }
-
-
-
             }
-
-
         }
         public override string toString()
         {
