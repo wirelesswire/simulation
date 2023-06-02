@@ -68,7 +68,8 @@ namespace simulation
             {
                 if (currentEpoch_shown >= epochs.Count - 1)
                 {
-                    return;
+                    //return;
+                    RunStep();
                 }
 
                 if (currentAct_shown >= epochs[currentEpoch_shown].acts.Count)

@@ -35,6 +35,7 @@ while (true)
 
 }
 
+//init.consoleUI();
 init.simulate();
 
 
@@ -267,9 +268,9 @@ public class ConsoleInitializer
     /// </summary>
     public ConsoleInitializer()
     {
-        string[] nazwy = new string[] { "rozdzielczość obrazu", "wielkość symulacji", "ilość roślinożerców", "ilość mięsożerców", "ilość gór", "ilość jezior", "czas epoki ", "czas klatki" };
+        string[] nazwy = new string[] { /*"rozdzielczość obrazu",*/ "wielkość symulacji", "ilość roślinożerców", "ilość mięsożerców", "ilość gór", "ilość jezior", "czas epoki ", "czas klatki" };
         int[][] przedzialy = new int[][] {
-        new int []{200,10000},//"rozdzielczość obrazu" 
+        //new int []{200,10000},//"rozdzielczość obrazu" 
         new int []{5,10000},//"wielkość symulacji"
         new int []{0,10000},//"ilość roślinożerców"
         new int []{0,10000},//"ilość mięsożerców"
@@ -285,14 +286,14 @@ public class ConsoleInitializer
         wartosci = (int[])helper.getSomeValuesOfType("wpisz wielkość odpowiadającej wartości ( ", " ) w symulacji  w przedziale ", nazwy, przedzialy).Select(d => (int)d).ToArray();
 
 
-        this.resolutionOfImage = wartosci[0];
-        this.sizeOfSimulaton = wartosci[1];
-        this.startRoślino = wartosci[2];
-        this.startMieso = wartosci[3];
-        this.startGory = wartosci[4];
-        this.startJeziora = wartosci[5];
-        this.EpochDelayMs = wartosci[6];
-        this.actionDelayMs = wartosci[7];
+        //this.resolutionOfImage = wartosci[0];
+        this.sizeOfSimulaton = wartosci[0];
+        this.startRoślino = wartosci[1];
+        this.startMieso = wartosci[2];
+        this.startGory = wartosci[3];
+        this.startJeziora = wartosci[4];
+        this.EpochDelayMs = wartosci[5];
+        this.actionDelayMs = wartosci[6];
 
 
         makeSimulation(false);
@@ -318,10 +319,29 @@ public class ConsoleInitializer
     {
         string cmd;
         while (true){
+            Console.WriteLine("wybierz komendę :\n1-> 10 do przodu \n2-> 10 do tyłu ");
         cmd = Console.ReadLine();
             if(int.TryParse (cmd , out int a ))
             {
-                simulation.showEpoch();
+                switch (a)
+                {
+                    case 1:
+                        for (int i = 0; i < 10; i++)
+                        {
+                            simulation.showAct(true);
+                        }
+                        break;
+                    case 2:
+                        simulation.showAct(false);
+                        break;
+                    default:
+                        Console.WriteLine("nieprwidłowy numer komendy ");
+                        break;
+                }
+                simulation.PrintBoard();
+
+
+                //simulation.showEpoch();
             }
             else
             {

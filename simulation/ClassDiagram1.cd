@@ -7,11 +7,11 @@
       <FileName>act.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="affected" />
-      <Field Name="dead" />
       <Field Name="from" />
       <Field Name="to" />
       <Field Name="who" />
+      <Field Name="affected" />
+      <Field Name="dead" />
     </ShowAsAssociation>
   </Class>
   <Class Name="simulation.Move">
@@ -78,7 +78,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="simulation.statList&lt;T&gt;" Collapsed="true">
-    <Position X="22.75" Y="3.75" Width="1.5" />
+    <Position X="24.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Board.cs</FileName>
@@ -91,12 +91,12 @@
       <FileName>Board.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Field Name="carnivores" />
-      <Field Name="corpses" />
-      <Field Name="herbivores" />
-      <Field Name="lakes" />
-      <Field Name="mountains" />
       <Field Name="plants" />
+      <Field Name="herbivores" />
+      <Field Name="carnivores" />
+      <Field Name="mountains" />
+      <Field Name="lakes" />
+      <Field Name="corpses" />
       <Field Name="organisms" />
     </ShowAsCollectionAssociation>
   </Class>
@@ -108,7 +108,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="simulation.Corpse">
-    <Position X="6.25" Y="14.5" Width="2" />
+    <Position X="7" Y="14.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAABAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Corpse.cs</FileName>
@@ -125,21 +125,21 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="simulation.MyExtensions" Collapsed="true">
-    <Position X="22.75" Y="2.75" Width="1.5" />
+    <Position X="22.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>helper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="simulation.helper" Collapsed="true">
-    <Position X="24.5" Y="1.75" Width="1.5" />
+    <Position X="26.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAFAgAICBA=</HashCode>
       <FileName>helper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="simulation.distanceHelper" Collapsed="true">
-    <Position X="22.75" Y="1.75" Width="1.5" />
+    <Position X="28" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>helper.cs</FileName>
@@ -168,7 +168,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="simulation.movieMaker" Collapsed="true">
-    <Position X="21" Y="2.75" Width="1.5" />
+    <Position X="24.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAAAAABAAAAAAAABAAAAQAAAAAAAAAA=</HashCode>
       <FileName>movieMaker.cs</FileName>
@@ -181,19 +181,19 @@
       <FileName>ObjectOnMap.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="board" />
       <Field Name="coords" />
+      <Field Name="board" />
     </ShowAsAssociation>
   </Class>
   <Class Name="simulation.Node" Collapsed="true">
-    <Position X="24.5" Y="2.75" Width="1.5" />
+    <Position X="22.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAEAAABAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
       <FileName>organism.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="simulation.Organism">
-    <Position X="10.5" Y="10.25" Width="2.25" />
+    <Position X="10.75" Y="10.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAhAAAAEAAAABAIAAAAAIAAAIAAIBA=</HashCode>
       <FileName>organism.cs</FileName>
@@ -208,7 +208,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="simulation.pngmaker" Collapsed="true">
-    <Position X="21" Y="3.75" Width="1.5" />
+    <Position X="22.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>pngmaker.cs</FileName>
@@ -232,12 +232,15 @@
       <FileName>stats.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ConsoleInitializer" Collapsed="true">
-    <Position X="21" Y="1.75" Width="1.5" />
+  <Class Name="ConsoleInitializer">
+    <Position X="0.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAlEACAEQAEAIkQABEQAAFkAJQBEiAAEAARAAAAoAEQ=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="simulation" />
+    </ShowAsAssociation>
   </Class>
   <Struct Name="simulation.coords">
     <Position X="7.25" Y="7" Width="2.25" />
@@ -247,14 +250,14 @@
     </TypeIdentifier>
   </Struct>
   <Interface Name="simulation.IDieable" Collapsed="true">
-    <Position X="21" Y="5" Width="1.5" />
+    <Position X="22.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>organism.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="simulation.Reproducable" Collapsed="true">
-    <Position X="22.75" Y="5" Width="1.5" />
+    <Position X="24.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>organism.cs</FileName>

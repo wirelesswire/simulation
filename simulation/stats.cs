@@ -28,7 +28,7 @@ namespace simulation
         {
             return new string[] { "głód", "koszt głodu na akcję " , "efektywność jedzenia", "szansa na następną akcję " , "akcje na turę ", "szansa na rozmnożenie","wzrok", "maksymalny wiek ", "współczynnik mutacji "};
         }
-        public static stats statsMaker()
+        public static stats statsFactory()
         {
             double[] doubles =  helper.getSomeValuesOfType("podaj wartość odpowiadającą właściwości  ", "w statystykach wybranego osobnika " ,getNazwyWlasciwosci() );
             if(doubles.Length  != ileJestWlasciwosci)
@@ -74,6 +74,11 @@ namespace simulation
         {
             //zostawia wartości początkowe 
         }
+        //public static stats statsFactory()
+        //{
+            
+        //}
+
         public void makeSureStatsAreInBounds()
         {
             if(startingHunger < 20){ startingHunger = 20; }
