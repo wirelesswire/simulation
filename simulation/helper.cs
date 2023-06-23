@@ -11,7 +11,12 @@ namespace simulation
     /// </summary>
     public static class MyExtensions
     {
-        public static  int CountAll(this List<epoch> list){
+        /// <summary>
+        /// liczy wszystkie akcje 
+        /// </summary>
+        /// <param name="list">epoki</param>
+        /// <returns>ilosć akcji </returns>
+        public static  int CountAllActs(this List<epoch> list){
             int a = 0;
             foreach (var item in list)
             {
@@ -72,6 +77,9 @@ namespace simulation
         /// </summary>
         public static int lastShown = 0;
 
+        public static int additionaloutOfstats = 2;
+       
+
         /// <summary>
         /// liczy średnie wartości statystyk przekazywanych genetycznie dla danej grupy 
         /// </summary>
@@ -80,7 +88,7 @@ namespace simulation
         public static List<double> getAvgStats(List<Animal> animals )
         {
             List<double> avg = new List<double>();
-            for (int i = 0; i < stats.ileJestWlasciwosci; i++)
+            for (int i = 0; i < stats.ileJestWlasciwosci+additionaloutOfstats; i++)
             {
                 avg.Add(0);
             }
@@ -94,6 +102,8 @@ namespace simulation
 
 
                 }
+                avg[stats.ileJestWlasciwosci] += item.hunger;
+                avg[stats.ileJestWlasciwosci + 1] += item.actionsLeft;
             }
             for (int i = 0; i < avg.Count; i++) // liczy wartość średnią 
             {
@@ -117,6 +127,8 @@ namespace simulation
         {
             List<double> avg = getAvgStats(animals);
             string[] nazwyCech = stats.getNazwyWlasciwosci();
+            nazwyCech =  nazwyCech.Append("głód ").Append("ruchy").ToArray();
+            //nazwyCech.Append("ruchy");
             if(avg.Count != nazwyCech.Length)
             {
                 throw new Exception("nie zgadzają się ilości");
@@ -129,6 +141,7 @@ namespace simulation
 
 
             }
+            
             return ret;
 
 
@@ -258,16 +271,16 @@ namespace simulation
 
 
     }
-    public static class  distanceHelper{
-        public static int  getDistance(int x, int y, int x2, int y2)
-        {
-            return Math.Abs(x - x2) + Math.Abs(y2 - y);
-        }
-        public static double getSightDistance(int x, int y, int x2, int y2)
-        {
-            return Math.Sqrt ( ((x - x2)*(x - x2) )+ ((y - y2)*(y - y2)));
-        }
-    }
+    //public static class  distanceHelper{
+    //    public static int  getDistance(int x, int y, int x2, int y2)
+    //    {
+    //        return Math.Abs(x - x2) + Math.Abs(y2 - y);
+    //    }
+    //    public static double getSightDistance(int x, int y, int x2, int y2)
+    //    {
+    //        return Math.Sqrt ( ((x - x2)*(x - x2) )+ ((y - y2)*(y - y2)));
+    //    }
+    //}
 
 
 }

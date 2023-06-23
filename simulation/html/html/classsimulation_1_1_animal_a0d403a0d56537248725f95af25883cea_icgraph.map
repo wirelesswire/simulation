@@ -1,0 +1,5 @@
+<map id="simulation.Animal.moveRandomly" name="simulation.Animal.moveRandomly">
+<area shape="rect" id="node1" title=" " alt="" coords="225,47,441,73"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_carnivore.html#a1066ec739ddb6c8381c7cbfe09ad3d2d" title="logika poruszania się miesożercy" alt="" coords="5,5,177,48"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_herbivore.html#a6159e203f379474a0f26240cbb3e06a4" title="logika poruszania się miesożercy" alt="" coords="5,72,177,115"/>
+</map>

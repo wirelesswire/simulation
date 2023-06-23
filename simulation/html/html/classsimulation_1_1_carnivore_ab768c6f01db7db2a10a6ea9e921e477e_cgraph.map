@@ -1,0 +1,4 @@
+<map id="simulation.Carnivore.Eat" name="simulation.Carnivore.Eat">
+<area shape="rect" id="node1" title="odpowiada za przetworzenie zjadania innego orgainzmu w czasie" alt="" coords="5,5,167,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_organism.html#aae8acfb2912ddf1ad63f6c8a53d5ce8c" title="organizm staje się martwy" alt="" coords="215,5,378,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="simulation.Animal.GetNearestFood" name="simulation.Animal.GetNearestFood">
+<area shape="rect" id="node1" title="znajduje najbliże pożywienie" alt="" coords="5,35,229,61"/>
+<area shape="rect" id="node2" href="$structsimulation_1_1coords.html#a87e0bb94be255d02f2b629dd1ad88c00" title="liczy dystans na mapie (używany do wzroku )" alt="" coords="277,5,476,32"/>
+<area shape="rect" id="node3" href="$structsimulation_1_1coords.html#acbfc4f0d51037bb30e0823aaf4b63e8e" title="liczy dystans na mapie (jako iż nie można chodzić po skosie to liczy inaczej niż po prostu dzieląca i..." alt="" coords="277,56,476,99"/>
+</map>

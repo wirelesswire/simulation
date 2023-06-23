@@ -1,0 +1,5 @@
+<map id="simulation.Animal.doIEatIt" name="simulation.Animal.doIEatIt">
+<area shape="rect" id="node1" title="sprawdza czy zwierze jest w stanie zjeść inny organizm na mapie" alt="" coords="454,13,626,40"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a235fba429869a39eae606f2afdd5651f" title="zwraca wszystkie komórki obok na których jest coś co mogę zjeść" alt="" coords="230,5,406,48"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a22e5e590553a29010f0a8849f7151ab7" title="zwraca pola na które możesz sie ruszyć // jeżeli jest puste to możesz się tam poruszyć ale bez chodze..." alt="" coords="5,5,182,48"/>
+</map>

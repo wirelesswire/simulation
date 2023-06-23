@@ -7,21 +7,26 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
-
+    /// <summary>
+    /// klasa przedstawiająca zwierzę które może się poruszać po mapie 
+    /// </summary>
     public abstract class Animal : Organism, Reproducable
     {
 
         int REPRODUCTION_FOOD_LEVEL = 5;
 
-        public double maxAge = 100;
-        public double hunger = 500;
-        public double hungerperaction = 2;
-        public double eatingEfficency = 0.5f;
-        public double chanceForNextAction = 0.1f;
-        public double chanceTOMultiply = 0.2f;
+        //public double maxAge = 100;
+        //public double hungerperaction = 2;
+        //public double eatingEfficency = 0.5f;
+        //public double chanceForNextAction = 0.1f;
+        //public double chanceTOMultiply = 0.2f;
 
-        public double sight = 10;
-        public double actions = 1;
+        //public double sight = 10;
+        //public double actions = 1;
+
+
+
+        public double hunger = 500;
         public double actionsLeft = 1;
 
 
@@ -30,6 +35,14 @@ namespace simulation
 
         protected List<Node> pathToFood;
 
+
+        /// <summary>
+        /// znajduje najkrótszą możliwą drogę do celu 
+        /// </summary>
+        /// <param name="grid">mapa</param>
+        /// <param name="start">początek </param>
+        /// <param name="end">cel</param>
+        /// <returns>zwraca drogę do celu</returns>
         public List<Node> FindPath(bool[,] grid, coords start, coords end)
         {
 
@@ -94,27 +107,56 @@ namespace simulation
             // Nie znaleziono ścieżki
             return null;
         }
+        /// <summary>
+        /// ustawia statystyki na podstqawie statystyk rodzica 
+        /// </summary>
+        /// <param name="a">statystyki rodzica </param>
         public void setStats(stats a)
         {
             this.stats = a;
         }
+        /// <summary>
+        /// przywraca maksymalną liczbę akcji 
+        /// </summary>
         public void resetActions()
         {
-            actionsLeft = actions;
+            actionsLeft = stats.actionsPerturn;
             //actions = actionsLeft;
+           
         }
+
+        /// <summary>
+        /// sprawdza czy zwierze jest w stanie zjeść inny organizm na mapie
+        /// </summary>
+        /// <param name="o">organizm do potencjalnego zjedzenia</param>
+        /// <returns>zwraca czy może zjeść dany organizm </returns>
         public abstract bool doIEatIt(Organism o);
+        /// <summary>
+        /// sprawdza czy zwierze jest w stanie zjeść inny obiekt na mapie
+        /// </summary>
+        /// <param name="o">obiekt do potencjalnego zjedzenia </param>
+        /// <returns>zwraca czy może zjeść dany obiekt </returns>
         public abstract bool doIEatIt(ObjectOnMap o);
+
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns> zwraca wartość odżywczą osobnika </returns>
         public override double getNutritionalValue()
         {
             return nutritiousness;
         }
+        /// <summary>
+        /// odpowiada za przetworzenie zjadania innego orgainzmu w czasie 
+        /// </summary>
+        /// <param name="o">organizm króry został zjedzony</param>
+        /// <param name="forwards">kierunek czau </param>
         public virtual void Eat(Organism o,bool forwards )
         {
             if (forwards)
             {
-
-                this.hunger += o.getNutritionalValue() * eatingEfficency;
+                this.hunger += o.getNutritionalValue() * stats.eatingEfficency;
                 o.Die(forwards);
                 if (this.hunger > nutritiousness)
                 {
@@ -123,7 +165,7 @@ namespace simulation
             }
             else
             {
-                double amount = o.getNutritionalValue() * eatingEfficency;
+                double amount = o.getNutritionalValue() * stats.eatingEfficency;
                 if (this.hunger > nutritiousness)
                 {
                     nutritiousness -= (int)amount;
@@ -133,6 +175,11 @@ namespace simulation
 
             }
         }
+        /// <summary>
+        /// abstrakcyjna metoda pozwalająca każdej podklasie mieć osobną logikę pooruszania sie 
+        /// </summary>
+        /// <param name="herbivores">obiekty które potencjalnie może zjeść </param>
+        /// <returns></returns>
         public abstract Act MoveSpecific(List<Organism> herbivores);
 
 
@@ -141,7 +188,9 @@ namespace simulation
         public Animal(int x, int y, Board b, stats s) : base(x, y, b) { this.stats = s; applyStats(); }
         public Animal() : base() { pathToFood = null; stats = new stats(); applyStats(); }
         public Animal(coords c, Board b, stats s) : base(c, b) { this.stats = s; pathToFood = null; applyStats(); }
-
+        /// <summary>
+        /// ustawia statystyki aby współpracowały z klasą stats
+        /// </summary>      
         public void applyStats()
         {
             if (stats == null)
@@ -151,34 +200,50 @@ namespace simulation
            
 
             this.hunger = stats.startingHunger;//1
-            this.hungerperaction = stats.hungerperaction;//2
-            this.eatingEfficency = stats.eatingEfficency;//3
-            this.chanceForNextAction = stats.chanceForNextAction;//4
+            //this.hungerperaction = stats.hungerperaction;//2
+            //this.eatingEfficency = stats.eatingEfficency;//3
+            //this.chanceForNextAction = stats.chanceForNextAction;//4
 
-            this.actions = stats.actionsPerturn;//5
+            //this.actions = stats.actionsPerturn;//5
 
-            this.chanceTOMultiply = stats.chanceTOMultiply;//6
-            this.sight = stats.sight;//7
-            this.maxAge = stats.maxAge;//8
+            //this.chanceTOMultiply = stats.chanceTOMultiply;//6
+            //this.stats.sight = stats.sight;//7
+            //this.maxAge = stats.maxAge;//8
 
             this.nutritiousness = (int)this.hunger;
 
         }
+        /// <summary>
+        /// zwraca wartość odżywczą w formie inta 
+        /// </summary>
+        /// <returns></returns>
         public int getNutritiousness()
         {
             return this.nutritiousness; 
         }
+        /// <summary>
+        /// zmienia zwierzę w ciało 
+        /// </summary>
+        /// <returns>zwierzę jako ciało </returns>
         public Corpse toCorpse()
         {
             return new Corpse(this);
         }
+        /// <summary>
+        /// robi akcję umierania zwierzęcia 
+        /// </summary>
+        /// <returns>akcję umierania zwierzęcia </returns>
         public Act Corpseify()
         {
             return new Die(this,toCorpse(),this.coords,this.coords);
         }
+        /// <summary>
+        /// sprawdza czy może się rozmnożyć 
+        /// </summary>
+        /// <returns>czy może się rozmnożyć</returns>
         public bool CanReproduce()
         {
-            if (!(helper.NextDouble() < chanceTOMultiply ))
+            if (!(helper.NextDouble() < stats.chanceTOMultiply ))
             {
                 return false;
             }
@@ -195,7 +260,7 @@ namespace simulation
         /// <param name="rangeY"></param>
         /// <returns> bez tych które nie  miszczą sie w ramach planszy  </returns>
 
-
+       
         public List<coords> cellsAroundRectangle(coords range)
         {
             List<coords> cellsAround = new List<coords>();
@@ -319,6 +384,12 @@ namespace simulation
 
         }
 
+        /// <summary>
+        /// odpowiada za rozmnożenie się zwierzęcia 
+        /// </summary>
+        /// <param name="childFutureCoords">pozycja potomstwa </param>
+        /// <returns>statystki potomstwa</returns>
+        /// <exception cref="Exception">błąd przy sprawdzaniu </exception>
         public stats Reproduce(out coords childFutureCoords)
         {
 
@@ -334,11 +405,16 @@ namespace simulation
 
 
             childFutureCoords = newCell;
-            this.hunger -= 400;//PAYMENT
+            this.hunger -= 100;//PAYMENT
             return this.stats.getRandomForChild();
 
 
         }
+        /// <summary>
+        /// znajduje najbliże pożywienie 
+        /// </summary>
+        /// <param name="organisms">wszystkie możliwe do zjedzenia organizmy </param>
+        /// <returns>najbliższe pożywienie </returns>
 
         protected Organism GetNearestFood(List<Organism> organisms)
         {
@@ -367,7 +443,10 @@ namespace simulation
 
             return nearestFood;
         }
-
+        /// <summary>
+        ///  dodaje efekty upływu czasu do zwierzęcia  zgodnie z kierunkiem jego upływu -> odnawia wszystkie możliwe do wykonania akcje na następną iterację
+        /// </summary>
+        /// <param name="forward"></param>
         public override void epochPass(bool forward)
         {
 
@@ -376,6 +455,10 @@ namespace simulation
             resetActions();
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>czy może się jescze poruszyć </returns>
         public bool canMoveMore()
         {
             //return true;
@@ -396,7 +479,7 @@ namespace simulation
 
             if(val == false) // gdy nie masz już więcej normalnych ruchów  masz szanse na kolejny 
             {
-                if (helper.NextDouble() < chanceForNextAction)
+                if (helper.NextDouble() < stats.chanceForNextAction)
                 {
                     val = true;
                 }
@@ -405,6 +488,11 @@ namespace simulation
             return val;
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>akcję poruszania się losowo po mapie </returns>
+        /// <exception cref="Exception"></exception>
         protected Act moveRandomly()
         {
 
@@ -421,22 +509,31 @@ namespace simulation
             return new Move(this, coords, a);//normalny ruch 
 
         }
-
+        /// <summary>
+        /// pobiera cenę należną za poruszenie się  
+        /// </summary>
+        /// <param name="forward">kierunek upływu czasu </param>
         public void MoveCost(bool forward)
         {
             if (forward)
             {
 
                 actionsLeft--;///PAYMENT
-                hunger -= hungerperaction;///PAYMENT
+                hunger -= stats.hungerperaction;///PAYMENT
 
             }
             else
             {
                 actionsLeft++;
-                hunger += hungerperaction;
+                hunger += stats.hungerperaction;
             }
         }
+        /// <summary>
+        /// odpowiada za całościowe poruszanie się organizmu 
+        /// </summary>
+        /// <param name="orgs">możliwe do zjedzenia organizmy </param>
+        /// <returns>akcję wykonaną podczas ruchu </returns>
+        /// <exception cref="Exception"></exception>
         public Act Move(List<Organism> orgs)
         {
             if (hunger <= 0 || age > stats.maxAge)
@@ -461,8 +558,14 @@ namespace simulation
 
             return act;
         }
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>reprezentację zwierzęcia jako string </returns>
+        public override  string presentation()
+        {
+            return base.presentation() + " zwierzę : ";
+        }
 
 
     }

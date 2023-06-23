@@ -1,0 +1,7 @@
+<map id="simulation.Board.makeTAtCoords_notApperance&lt; T &gt;" name="simulation.Board.makeTAtCoords_notApperance&lt; T &gt;">
+<area shape="rect" id="node1" title="tworzy obiekt typu T na danym polu" alt="" coords="5,48,186,91"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#aa1a4214decde109de00ca658dbd912cd" title="dodaje obiekt do mapy" alt="" coords="234,31,417,57"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html#a3d124fd3e804fe8b0699076e1e363791" title="sprawdza czy dane pole jest puste" alt="" coords="240,81,411,108"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_object_on_map.html#a72033ebeae3501c226a54dd897ddd8e6" title=" " alt="" coords="466,5,662,32"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_object_on_map.html#ab3ffb9bc2c0190df68938941ad3419b5" title=" " alt="" coords="465,56,663,83"/>
+</map>

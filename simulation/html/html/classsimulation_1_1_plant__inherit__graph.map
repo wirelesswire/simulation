@@ -1,0 +1,6 @@
+<map id="simulation.Plant" name="simulation.Plant">
+<area shape="rect" id="node1" title="klasa opisująca roślinę i jej właściwości" alt="" coords="52,155,167,181"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_organism.html" title="klasa opisująca organizm znajdujący się na mapie" alt="" coords="71,80,148,107"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_object_on_map.html" title="klasa obiektu który znajduje się na mapie" alt="" coords="5,5,107,32"/>
+<area shape="rect" id="node4" href="$interfacesimulation_1_1_i_dieable.html" title="interface pozwalający określić stan danego organizmu (żywy lub martwy )" alt="" coords="130,5,198,32"/>
+</map>

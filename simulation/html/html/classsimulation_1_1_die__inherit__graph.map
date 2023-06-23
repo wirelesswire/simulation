@@ -1,0 +1,4 @@
+<map id="simulation.Die" name="simulation.Die">
+<area shape="rect" id="node1" title="akcja śmierci i zamienienia się w ciało" alt="" coords="5,80,109,107"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_act.html" title="akcja wykonywana na mapie" alt="" coords="36,5,78,32"/>
+</map>

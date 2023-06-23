@@ -1,0 +1,4 @@
+<map id="simulation.Animal.Eat" name="simulation.Animal.Eat">
+<area shape="rect" id="node1" title="odpowiada za przetworzenie zjadania innego orgainzmu w czasie" alt="" coords="228,13,376,40"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#ad9c07738f7751a7f29d46451a5b54ed3" title="wykonuje akcję na mapie" alt="" coords="5,5,180,48"/>
+</map>

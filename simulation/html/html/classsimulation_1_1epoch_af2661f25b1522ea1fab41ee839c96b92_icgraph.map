@@ -1,0 +1,11 @@
+<map id="simulation.epoch.addAct" name="simulation.epoch.addAct">
+<area shape="rect" id="node1" title="dodaje akcje do listy" alt="" coords="773,161,938,188"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_simulation.html#a4faaf2fdd2fc8e1a309ac513f60b33d9" title="inicjalizuje zgodnie z podanymi przez użytkownika wartościami" alt="" coords="7,25,203,68"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_simulation.html#a66ab36b09bff2f7c6084aedc068b0137" title="symuluje poruszanie się zwierząt" alt="" coords="518,65,707,108"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_simulation.html#ab4e63adb5d6ff8e4e58b426deffab948" title="symuluje jedną epokę symulacji" alt="" coords="253,161,452,188"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_simulation.html#ab6d409e59c850ece82cc1e56848204ae" title="sprawia, że zwierzęta się rozmnażają" alt="" coords="500,182,725,225"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_simulation.html#ad8b20403493cda4ec4ecaa1769054500" title="sprawia że na rośliny i ciała działa czas" alt="" coords="521,249,705,292"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_simulation.html#a8de25f9d1a1bb78678067d224c28e1f7" title="sprawia,że jedzenie pojawia się na planszy" alt="" coords="511,316,714,358"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_simulation.html#a249cbec9dc5d4c606522333fce78262c" title="ustawia wartości początkowe symulacji" alt="" coords="7,112,203,154"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_simulation.html#ad9393641ac19a8c08cb8bbc688a81877" title="urzeczywistnia skutki następnej akcji" alt="" coords="5,202,205,229"/>
+</map>

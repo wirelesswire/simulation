@@ -1,0 +1,4 @@
+<map id="simulation.stats.getRandomForChild" name="simulation.stats.getRandomForChild">
+<area shape="rect" id="node1" title="tworzy nowe statysktyki dla potomstwa bazując na statykach rodzica" alt="" coords="244,5,427,48"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a62afb60c1dc71d2ba64069328a138a59" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="5,13,196,40"/>
+</map>

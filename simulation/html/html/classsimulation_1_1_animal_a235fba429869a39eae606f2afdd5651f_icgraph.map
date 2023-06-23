@@ -1,0 +1,4 @@
+<map id="simulation.Animal.possibleEdibleCells" name="simulation.Animal.possibleEdibleCells">
+<area shape="rect" id="node1" title="zwraca wszystkie komórki obok na których jest coś co mogę zjeść" alt="" coords="230,5,406,48"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a22e5e590553a29010f0a8849f7151ab7" title="zwraca pola na które możesz sie ruszyć // jeżeli jest puste to możesz się tam poruszyć ale bez chodze..." alt="" coords="5,5,182,48"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="simulation.Board.AddObject" name="simulation.Board.AddObject">
+<area shape="rect" id="node1" title="dodaje obiekt do mapy" alt="" coords="5,31,189,57"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_object_on_map.html#a72033ebeae3501c226a54dd897ddd8e6" title=" " alt="" coords="238,5,434,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_object_on_map.html#ab3ffb9bc2c0190df68938941ad3419b5" title=" " alt="" coords="237,56,435,83"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="simulation.Animal.Move" name="simulation.Animal.Move">
+<area shape="rect" id="node1" title="odpowiada za całościowe poruszanie się organizmu" alt="" coords="5,157,164,184"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#afcbb78569f3b63e511169dd1ea2ce31a" title=" " alt="" coords="212,5,420,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a29aaa89e912264cd24591b7575214396" title="robi akcję umierania zwierzęcia" alt="" coords="225,56,407,83"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html#a2e72c83271bd34c460d011ee9dbb0dc4" title="zwraca wielkośc planszy" alt="" coords="231,107,401,133"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_board.html#a3d124fd3e804fe8b0699076e1e363791" title="sprawdza czy dane pole jest puste" alt="" coords="231,157,401,184"/>
+<area shape="rect" id="node7" href="$structsimulation_1_1coords.html#ad4ec62d7c90e26dd1639b95c5276f731" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="220,208,412,235"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_animal.html#ad4642ea81822e5ff1958c4d36b1b7610" title="abstrakcyjna metoda pozwalająca każdej podklasie mieć osobną logikę pooruszania sie" alt="" coords="214,259,418,285"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_act.html#a6ce3fff692c71b241448d14269caf753" title="ustawia czy może się jeszcze poruszyć" alt="" coords="234,309,398,336"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_animal.html#a28eecea30f2dba21d5b03a813fe9e0e6" title="zmienia zwierzę w ciało" alt="" coords="468,56,648,83"/>
+</map>

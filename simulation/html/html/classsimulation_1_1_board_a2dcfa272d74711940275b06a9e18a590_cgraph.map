@@ -1,0 +1,10 @@
+<map id="simulation.Board.MakeActHappen" name="simulation.Board.MakeActHappen">
+<area shape="rect" id="node1" title="wykonuje akcję na mapie" alt="" coords="5,113,180,156"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a009332863278db013de4d19b97151b6a" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="241,29,423,72"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a1a164ad946e3cf18e7c7e95fb311b568" title="pobiera cenę należną za poruszenie się" alt="" coords="239,96,425,123"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#a2e42dcd4d00d8ced4d65fdc5ec3e701a" title="przesuwa organizm na nową pozycją" alt="" coords="228,147,436,173"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_object_on_map.html#a7eb15d85cfd44a03093e2a433ebbae0b" title=" " alt="" coords="242,197,422,240"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_object_on_map.html#a72033ebeae3501c226a54dd897ddd8e6" title=" " alt="" coords="485,96,681,123"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_object_on_map.html#ab3ffb9bc2c0190df68938941ad3419b5" title=" " alt="" coords="484,147,682,173"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_organism.html#a6b3dc8681f7260df403060300e9fe739" title="przemieszcza organizm do podanej pozycji" alt="" coords="489,197,677,224"/>
+</map>

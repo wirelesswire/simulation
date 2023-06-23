@@ -1,0 +1,6 @@
+<map id="simulation.Reproducable" name="simulation.Reproducable">
+<area shape="rect" id="node1" title="interface opisujący organizmy które mogą mieć potomstwo" alt="" coords="72,5,236,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html" title="klasa przedstawiająca zwierzę które może się poruszać po mapie" alt="" coords="92,80,216,107"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_carnivore.html" title="klasa reprezentująca mięsożercę &#45;&gt; zwierzę które je tylko roślinożerców" alt="" coords="5,155,143,181"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_herbivore.html" title="klasa reprezentująca roślinożerce &#45;&gt; zwierzę które je tylko rośliny" alt="" coords="167,155,304,181"/>
+</map>

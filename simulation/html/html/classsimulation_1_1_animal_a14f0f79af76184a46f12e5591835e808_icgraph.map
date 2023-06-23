@@ -1,0 +1,4 @@
+<map id="simulation.Animal.resetActions" name="simulation.Animal.resetActions">
+<area shape="rect" id="node1" title="przywraca maksymalną liczbę akcji" alt="" coords="247,5,448,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a5d351fbc523c9ad932db5fe446c84b36" title="dodaje efekty upływu czasu do zwierzęcia zgodnie z kierunkiem jego upływu &#45;&gt; odnawia wszystkie możliw..." alt="" coords="5,5,199,32"/>
+</map>

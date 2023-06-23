@@ -1,0 +1,6 @@
+<map id="simulation.Simulation.PrintBoard" name="simulation.Simulation.PrintBoard">
+<area shape="rect" id="node1" title="printuje mapę do konsoli" alt="" coords="5,35,182,77"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a01de96d2771cc7cbb9af0de837dc81ed" title="printuje mapę do konsoli" alt="" coords="230,13,413,40"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_simulation.html#ace683ddd4dd15cae61300a876f30946b" title="zwraca informacje dodatkowe o symulacjii" alt="" coords="233,64,410,107"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_object_on_map.html#a7eb15d85cfd44a03093e2a433ebbae0b" title=" " alt="" coords="461,5,640,48"/>
+</map>

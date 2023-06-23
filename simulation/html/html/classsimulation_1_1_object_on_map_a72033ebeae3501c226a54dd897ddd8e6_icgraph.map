@@ -1,0 +1,9 @@
+<map id="simulation.ObjectOnMap.GetX" name="simulation.ObjectOnMap.GetX">
+<area shape="rect" id="node1" title=" " alt="" coords="518,113,714,140"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#aa1a4214decde109de00ca658dbd912cd" title="dodaje obiekt do mapy" alt="" coords="274,80,458,107"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html#a2e42dcd4d00d8ced4d65fdc5ec3e701a" title="przesuwa organizm na nową pozycją" alt="" coords="262,147,470,173"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#a9f5abaabc5dea17e0bd42130dd290eb0" title="wykonuje akcję na mapie" alt="" coords="22,5,197,48"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#afc88ceb0c22ae5277943196485ea5db2" title="tworzy obiekt typu T na danym polu" alt="" coords="19,72,200,115"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_board.html#a2dcfa272d74711940275b06a9e18a590" title="wykonuje akcję na mapie" alt="" coords="22,139,197,181"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_board.html#a405fcb6ef306a7a29a96b8d4f984ecaf" title="wykonuje akcję przeunięcia na nowa pozycję" alt="" coords="5,205,214,232"/>
+</map>

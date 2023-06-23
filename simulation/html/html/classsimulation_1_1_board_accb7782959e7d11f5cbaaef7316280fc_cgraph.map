@@ -1,0 +1,4 @@
+<map id="simulation.Board.MakeActHappen" name="simulation.Board.MakeActHappen">
+<area shape="rect" id="node1" title="wykonuje akcję na mapie" alt="" coords="5,5,180,48"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a1a164ad946e3cf18e7c7e95fb311b568" title="pobiera cenę należną za poruszenie się" alt="" coords="228,13,413,40"/>
+</map>

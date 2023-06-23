@@ -1,0 +1,11 @@
+<map id="simulation.ObjectOnMap" name="simulation.ObjectOnMap">
+<area shape="rect" id="node1" title="klasa obiektu który znajduje się na mapie" alt="" coords="129,5,293,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_lake.html" title="klasa opisująca jezioro na mapie" alt="" coords="5,80,118,107"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_mountain.html" title="klasa opisująca góre na mapie" alt="" coords="142,80,280,107"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_organism.html" title="klasa opisująca organizm znajdujący się na mapie" alt="" coords="303,80,444,107"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_animal.html" title="klasa przedstawiająca zwierzę które może się poruszać po mapie" alt="" coords="162,155,286,181"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_corpse.html" title="klasa opisująca ciało organizmu po jego śmierci" alt="" coords="311,155,436,181"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_plant.html" title="klasa opisująca roślinę i jej właściwości" alt="" coords="460,155,575,181"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_carnivore.html" title="klasa reprezentująca mięsożercę &#45;&gt; zwierzę które je tylko roślinożerców" alt="" coords="76,229,213,256"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_herbivore.html" title="klasa reprezentująca roślinożerce &#45;&gt; zwierzę które je tylko rośliny" alt="" coords="237,229,374,256"/>
+</map>

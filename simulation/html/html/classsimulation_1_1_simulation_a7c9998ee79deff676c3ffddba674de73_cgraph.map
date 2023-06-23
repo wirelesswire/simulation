@@ -1,0 +1,8 @@
+<map id="simulation.Simulation.updateClassBoards" name="simulation.Simulation.updateClassBoards">
+<area shape="rect" id="node1" title="uaktualnia stan wiedzy o otoczeniu dla wszystkich klas zwierząt" alt="" coords="5,99,194,141"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_carnivore.html#a21b29c22d01e1c42cb2d9ca38f048671" title="ustawia wszystkie pola na mapie na możliwe do przejścia" alt="" coords="242,5,437,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_carnivore.html#a9f675c78b7312aacf003812538685530" title="ustawia konkretne pole na mapie na możliwe lub niemożliwe do przejścia" alt="" coords="485,44,671,71"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_herbivore.html#ab5d91285b73c919c04dbc7d15c5be308" title="ustawia wszystkie pola na mapie na możliwe do przejścia" alt="" coords="242,107,437,133"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_herbivore.html#a66ec4158dd15d2bb7893e958b8abf017" title="ustawia konkretne pole na mapie na możliwe lub niemożliwe do przejścia" alt="" coords="485,120,671,147"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_board.html#ab44ec7244ef164063c005fd3c6f639cf" title="zwraca wszystkie obiekty znajdujące się na mapie" alt="" coords="254,208,425,251"/>
+</map>

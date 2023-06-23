@@ -1,0 +1,14 @@
+<map id="simulation.Board.GetObjectOnMap" name="simulation.Board.GetObjectOnMap">
+<area shape="rect" id="node1" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="758,239,940,281"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_simulation.html#a7705d60a1fbf810aac80a6d7e8c068e9" title="sprawdza czy wszystko jest na swoim miejscu na planszy" alt="" coords="508,72,703,115"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_board.html#aad7211df95b4a428610511b780d462d1" title="liczy ilośc danego typu obiektów w zasięgu kwadratu" alt="" coords="500,139,710,181"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_board.html#a2dcfa272d74711940275b06a9e18a590" title="wykonuje akcję na mapie" alt="" coords="518,205,692,248"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_carnivore.html#a1066ec739ddb6c8381c7cbfe09ad3d2d" title="logika poruszania się miesożercy" alt="" coords="520,272,691,315"/>
+<area shape="rect" id="node10" href="$classsimulation_1_1_herbivore.html#a6159e203f379474a0f26240cbb3e06a4" title="logika poruszania się miesożercy" alt="" coords="520,339,691,381"/>
+<area shape="rect" id="node11" href="$classsimulation_1_1_animal.html#a235fba429869a39eae606f2afdd5651f" title="zwraca wszystkie komórki obok na których jest coś co mogę zjeść" alt="" coords="517,405,693,448"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_simulation.html#ab4e63adb5d6ff8e4e58b426deffab948" title="symuluje jedną epokę symulacji" alt="" coords="253,80,452,107"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_simulation.html#a4faaf2fdd2fc8e1a309ac513f60b33d9" title="inicjalizuje zgodnie z podanymi przez użytkownika wartościami" alt="" coords="7,5,203,48"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_simulation.html#a249cbec9dc5d4c606522333fce78262c" title="ustawia wartości początkowe symulacji" alt="" coords="7,72,203,115"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_simulation.html#ad9393641ac19a8c08cb8bbc688a81877" title="urzeczywistnia skutki następnej akcji" alt="" coords="5,163,205,189"/>
+<area shape="rect" id="node12" href="$classsimulation_1_1_animal.html#a22e5e590553a29010f0a8849f7151ab7" title="zwraca pola na które możesz sie ruszyć // jeżeli jest puste to możesz się tam poruszyć ale bez chodze..." alt="" coords="264,405,441,448"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="simulation.coords.isInBounds" name="simulation.coords.isInBounds">
+<area shape="rect" id="node1" title="sprawdza czy dodanie pozycji x spowoduje wykroczenie poza obrzerza mapy" alt="" coords="5,31,197,57"/>
+<area shape="rect" id="node2" href="$structsimulation_1_1coords.html#a31754c76b30a3a617de8b41f189106d3" title="suma dwóch pozycji stosowana do dodawamia pozycji i przemieszczenia" alt="" coords="266,5,415,32"/>
+<area shape="rect" id="node3" href="$structsimulation_1_1coords.html#ad4ec62d7c90e26dd1639b95c5276f731" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="245,56,436,83"/>
+</map>

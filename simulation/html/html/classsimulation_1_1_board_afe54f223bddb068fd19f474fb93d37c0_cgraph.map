@@ -1,0 +1,4 @@
+<map id="simulation.Board.MakeActHappen" name="simulation.Board.MakeActHappen">
+<area shape="rect" id="node1" title="wykonuje akcję na mapie" alt="" coords="5,5,180,48"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#ac5acec0b3da9ad3298b8cc9e892577bc" title="zwraca wszystkie obiekty typu organism znajdujące się na mapie" alt="" coords="228,5,398,48"/>
+</map>

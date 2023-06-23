@@ -1,0 +1,4 @@
+<map id="simulation.Lake" name="simulation.Lake">
+<area shape="rect" id="node1" title="klasa opisująca jezioro na mapie" alt="" coords="5,80,118,107"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_object_on_map.html" title="klasa obiektu który znajduje się na mapie" alt="" coords="11,5,112,32"/>
+</map>

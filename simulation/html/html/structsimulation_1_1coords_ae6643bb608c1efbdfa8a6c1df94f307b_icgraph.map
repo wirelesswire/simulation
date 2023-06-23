@@ -1,0 +1,6 @@
+<map id="simulation.coords.XandYequal" name="simulation.coords.XandYequal">
+<area shape="rect" id="node1" title="sprawdza czy pozycje są takie same" alt="" coords="202,56,397,83"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_die.html#abf5a6436822bdffc876c1a76c748ca72" title=" " alt="" coords="16,5,143,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_eat.html#aab0c32b9e9844a8d249d04cc6b29ce75" title=" " alt="" coords="15,56,144,83"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_move.html#a20bbd9d91bffe71ce79496b15592b034" title=" " alt="" coords="5,107,154,133"/>
+</map>

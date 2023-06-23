@@ -1,0 +1,13 @@
+<map id="simulation.Animal.Reproduce" name="simulation.Animal.Reproduce">
+<area shape="rect" id="node1" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="5,85,196,112"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1stats.html#a8b617cd486d22c5b3002e03b01729ec4" title="tworzy nowe statysktyki dla potomstwa bazując na statykach rodzica" alt="" coords="244,44,427,87"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_animal.html#a868ba049daf629de4e17884f365a4687" title="zwraca pola na które może zająć potomstwo" alt="" coords="247,111,424,153"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1stats.html#a4cebe73c560b1ea4fc9d30319a054b35" title=" " alt="" coords="499,5,645,32"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1stats.html#a44b04122bb6a63a72fc7a25140e5d799" title="zwraca wartości w formie listy" alt="" coords="489,56,654,83"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_animal.html#a655e02c7f9c0a565744c6a8d2e45d2c6" title="zwraca puste pola w prostokącie" alt="" coords="475,111,668,153"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_animal.html#af326ddee3210a5faf30c3337f896d5e5" title="zwraca potencjalne koordynaty w prostokącie w obszarze x na y z każdej strony" alt="" coords="716,81,913,124"/>
+<area shape="rect" id="node11" href="$classsimulation_1_1_board.html#a3d124fd3e804fe8b0699076e1e363791" title="sprawdza czy dane pole jest puste" alt="" coords="729,148,900,175"/>
+<area shape="rect" id="node8" href="$structsimulation_1_1coords.html#a31754c76b30a3a617de8b41f189106d3" title="suma dwóch pozycji stosowana do dodawamia pozycji i przemieszczenia" alt="" coords="982,39,1131,65"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_board.html#a2e72c83271bd34c460d011ee9dbb0dc4" title="zwraca wielkośc planszy" alt="" coords="972,89,1141,116"/>
+<area shape="rect" id="node10" href="$structsimulation_1_1coords.html#ad4ec62d7c90e26dd1639b95c5276f731" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="961,140,1152,167"/>
+</map>

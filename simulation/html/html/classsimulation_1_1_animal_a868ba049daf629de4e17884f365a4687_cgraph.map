@@ -1,0 +1,9 @@
+<map id="simulation.Animal.possibleReproducableCells" name="simulation.Animal.possibleReproducableCells">
+<area shape="rect" id="node1" title="zwraca pola na które może zająć potomstwo" alt="" coords="5,77,182,120"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a655e02c7f9c0a565744c6a8d2e45d2c6" title="zwraca puste pola w prostokącie" alt="" coords="230,77,423,120"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#af326ddee3210a5faf30c3337f896d5e5" title="zwraca potencjalne koordynaty w prostokącie w obszarze x na y z każdej strony" alt="" coords="471,48,667,91"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_board.html#a3d124fd3e804fe8b0699076e1e363791" title="sprawdza czy dane pole jest puste" alt="" coords="484,115,654,141"/>
+<area shape="rect" id="node4" href="$structsimulation_1_1coords.html#a31754c76b30a3a617de8b41f189106d3" title="suma dwóch pozycji stosowana do dodawamia pozycji i przemieszczenia" alt="" coords="737,5,885,32"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html#a2e72c83271bd34c460d011ee9dbb0dc4" title="zwraca wielkośc planszy" alt="" coords="726,56,896,83"/>
+<area shape="rect" id="node6" href="$structsimulation_1_1coords.html#ad4ec62d7c90e26dd1639b95c5276f731" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="715,107,907,133"/>
+</map>

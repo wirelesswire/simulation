@@ -1,0 +1,8 @@
+<map id="simulation.Simulation.spawningOfFood" name="simulation.Simulation.spawningOfFood">
+<area shape="rect" id="node1" title="sprawia,że jedzenie pojawia się na planszy" alt="" coords="5,73,209,116"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1epoch.html#af2661f25b1522ea1fab41ee839c96b92" title="dodaje akcje do listy" alt="" coords="262,5,426,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#a2e72c83271bd34c460d011ee9dbb0dc4" title="zwraca wielkośc planszy" alt="" coords="259,56,429,83"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#a3d124fd3e804fe8b0699076e1e363791" title="sprawdza czy dane pole jest puste" alt="" coords="259,107,429,133"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html#afe54f223bddb068fd19f474fb93d37c0" title="wykonuje akcję na mapie" alt="" coords="257,157,431,200"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_board.html#ac5acec0b3da9ad3298b8cc9e892577bc" title="zwraca wszystkie obiekty typu organism znajdujące się na mapie" alt="" coords="479,157,649,200"/>
+</map>

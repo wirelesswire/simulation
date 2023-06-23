@@ -1,0 +1,5 @@
+<map id="simulation.Simulation.checkerIfOkOnBoard" name="simulation.Simulation.checkerIfOkOnBoard">
+<area shape="rect" id="node1" title="sprawdza czy wszystko jest na swoim miejscu na planszy" alt="" coords="5,63,201,105"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a009332863278db013de4d19b97151b6a" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="249,29,430,72"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#ab44ec7244ef164063c005fd3c6f639cf" title="zwraca wszystkie obiekty znajdujące się na mapie" alt="" coords="254,96,425,139"/>
+</map>

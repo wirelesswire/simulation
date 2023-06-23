@@ -1,0 +1,20 @@
+<map id="simulation.coords.isInBounds" name="simulation.coords.isInBounds">
+<area shape="rect" id="node1" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="1017,273,1208,300"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#af326ddee3210a5faf30c3337f896d5e5" title="zwraca potencjalne koordynaty w prostokącie w obszarze x na y z każdej strony" alt="" coords="772,207,969,249"/>
+<area shape="rect" id="node12" href="$structsimulation_1_1coords.html#aeb6d9aa06b33dfcc45506b3fb9c97f4f" title="sprawdza czy dodanie pozycji x spowoduje wykroczenie poza obrzerza mapy" alt="" coords="775,273,966,300"/>
+<area shape="rect" id="node13" href="$classsimulation_1_1_animal.html#aca6d931dce8b247802659aa1ac741c31" title="odpowiada za całościowe poruszanie się organizmu" alt="" coords="791,324,950,351"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a655e02c7f9c0a565744c6a8d2e45d2c6" title="zwraca puste pola w prostokącie" alt="" coords="531,112,724,155"/>
+<area shape="rect" id="node11" href="$classsimulation_1_1_animal.html#a235fba429869a39eae606f2afdd5651f" title="zwraca wszystkie komórki obok na których jest coś co mogę zjeść" alt="" coords="540,208,716,251"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_animal.html#a0d403a0d56537248725f95af25883cea" title=" " alt="" coords="267,55,483,81"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_carnivore.html#a1066ec739ddb6c8381c7cbfe09ad3d2d" title="logika poruszania się miesożercy" alt="" coords="26,5,198,48"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_herbivore.html#a6159e203f379474a0f26240cbb3e06a4" title="logika poruszania się miesożercy" alt="" coords="26,73,198,116"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_animal.html#a868ba049daf629de4e17884f365a4687" title="zwraca pola na które może zająć potomstwo" alt="" coords="287,156,463,199"/>
+<area shape="rect" id="node10" href="$classsimulation_1_1_animal.html#a22e5e590553a29010f0a8849f7151ab7" title="zwraca pola na które możesz sie ruszyć // jeżeli jest puste to możesz się tam poruszyć ale bez chodze..." alt="" coords="287,223,463,265"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_animal.html#afadae2007022c553f5d5b27dcac4a848" title="sprawdza czy może się rozmnożyć" alt="" coords="5,143,219,169"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_animal.html#a62afb60c1dc71d2ba64069328a138a59" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="17,193,207,220"/>
+<area shape="rect" id="node14" href="$classsimulation_1_1_simulation.html#a66ab36b09bff2f7c6084aedc068b0137" title="symuluje poruszanie się zwierząt" alt="" coords="533,316,722,359"/>
+<area shape="rect" id="node15" href="$classsimulation_1_1_simulation.html#ab4e63adb5d6ff8e4e58b426deffab948" title="symuluje jedną epokę symulacji" alt="" coords="275,324,475,351"/>
+<area shape="rect" id="node16" href="$classsimulation_1_1_simulation.html#a4faaf2fdd2fc8e1a309ac513f60b33d9" title="inicjalizuje zgodnie z podanymi przez użytkownika wartościami" alt="" coords="14,249,210,292"/>
+<area shape="rect" id="node17" href="$classsimulation_1_1_simulation.html#a249cbec9dc5d4c606522333fce78262c" title="ustawia wartości początkowe symulacji" alt="" coords="14,316,210,359"/>
+<area shape="rect" id="node18" href="$classsimulation_1_1_simulation.html#ad9393641ac19a8c08cb8bbc688a81877" title="urzeczywistnia skutki następnej akcji" alt="" coords="12,407,212,433"/>
+</map>

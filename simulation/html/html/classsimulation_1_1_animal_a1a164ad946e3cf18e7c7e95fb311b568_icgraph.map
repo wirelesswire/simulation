@@ -1,0 +1,4 @@
+<map id="simulation.Animal.MoveCost" name="simulation.Animal.MoveCost">
+<area shape="rect" id="node1" title="pobiera cenę należną za poruszenie się" alt="" coords="228,13,413,40"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a2dcfa272d74711940275b06a9e18a590" title="wykonuje akcję na mapie" alt="" coords="5,5,180,48"/>
+</map>

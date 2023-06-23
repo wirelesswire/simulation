@@ -1,0 +1,5 @@
+<map id="simulation.Animal.possibleReproducableCells" name="simulation.Animal.possibleReproducableCells">
+<area shape="rect" id="node1" title="zwraca pola na które może zająć potomstwo" alt="" coords="267,23,443,65"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#afadae2007022c553f5d5b27dcac4a848" title="sprawdza czy może się rozmnożyć" alt="" coords="5,5,219,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a62afb60c1dc71d2ba64069328a138a59" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="17,56,207,83"/>
+</map>

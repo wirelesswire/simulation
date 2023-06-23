@@ -1,0 +1,6 @@
+<map id="simulation.Organism.MoveTo" name="simulation.Organism.MoveTo">
+<area shape="rect" id="node1" title="przemieszcza organizm do podanej pozycji" alt="" coords="518,43,706,69"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a2e42dcd4d00d8ced4d65fdc5ec3e701a" title="przesuwa organizm na nową pozycją" alt="" coords="262,43,470,69"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#a2dcfa272d74711940275b06a9e18a590" title="wykonuje akcję na mapie" alt="" coords="22,5,197,48"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#a405fcb6ef306a7a29a96b8d4f984ecaf" title="wykonuje akcję przeunięcia na nowa pozycję" alt="" coords="5,72,214,99"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="simulation.ObjectOnMap.toString" name="simulation.ObjectOnMap.toString">
+<area shape="rect" id="node1" title=" " alt="" coords="461,35,640,77"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a2dcfa272d74711940275b06a9e18a590" title="wykonuje akcję na mapie" alt="" coords="234,5,409,48"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#a01de96d2771cc7cbb9af0de837dc81ed" title="printuje mapę do konsoli" alt="" coords="230,72,413,99"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_simulation.html#ac8d8e5d8c7cad109f2e5224b81f34b8a" title="printuje mapę do konsoli" alt="" coords="5,64,182,107"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="simulation.Herbivore.resetMap" name="simulation.Herbivore.resetMap">
+<area shape="rect" id="node1" title="ustawia wszystkie pola na mapie na możliwe do przejścia" alt="" coords="5,5,201,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_herbivore.html#a66ec4158dd15d2bb7893e958b8abf017" title="ustawia konkretne pole na mapie na możliwe lub niemożliwe do przejścia" alt="" coords="249,5,435,32"/>
+</map>

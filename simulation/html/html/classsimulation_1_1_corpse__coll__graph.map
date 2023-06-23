@@ -1,0 +1,8 @@
+<map id="simulation.Corpse" name="simulation.Corpse">
+<area shape="rect" id="node1" title="klasa opisująca ciało organizmu po jego śmierci" alt="" coords="130,248,255,275"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_organism.html" title="klasa opisująca organizm znajdujący się na mapie" alt="" coords="154,172,231,199"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_object_on_map.html" title="klasa obiektu który znajduje się na mapie" alt="" coords="88,96,190,123"/>
+<area shape="rect" id="node4" href="$structsimulation_1_1coords.html" title="klasa pomocnicza zarządzająca pozycjami" alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html" title="mapa i wszyskie obiekty na niej" alt="" coords="153,5,272,32"/>
+<area shape="rect" id="node6" href="$interfacesimulation_1_1_i_dieable.html" title="interface pozwalający określić stan danego organizmu (żywy lub martwy )" alt="" coords="213,96,281,123"/>
+</map>

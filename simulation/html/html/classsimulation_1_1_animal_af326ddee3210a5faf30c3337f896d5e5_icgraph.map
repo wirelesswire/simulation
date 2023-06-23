@@ -1,0 +1,12 @@
+<map id="simulation.Animal.cellsAroundRectangle" name="simulation.Animal.cellsAroundRectangle">
+<area shape="rect" id="node1" title="zwraca potencjalne koordynaty w prostokącie w obszarze x na y z każdej strony" alt="" coords="772,160,969,203"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a655e02c7f9c0a565744c6a8d2e45d2c6" title="zwraca puste pola w prostokącie" alt="" coords="531,112,724,155"/>
+<area shape="rect" id="node10" href="$classsimulation_1_1_animal.html#a235fba429869a39eae606f2afdd5651f" title="zwraca wszystkie komórki obok na których jest coś co mogę zjeść" alt="" coords="540,193,716,236"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a0d403a0d56537248725f95af25883cea" title=" " alt="" coords="267,55,483,81"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_carnivore.html#a1066ec739ddb6c8381c7cbfe09ad3d2d" title="logika poruszania się miesożercy" alt="" coords="26,5,198,48"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_herbivore.html#a6159e203f379474a0f26240cbb3e06a4" title="logika poruszania się miesożercy" alt="" coords="26,89,198,132"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_animal.html#a868ba049daf629de4e17884f365a4687" title="zwraca pola na które może zająć potomstwo" alt="" coords="287,156,463,199"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_animal.html#a22e5e590553a29010f0a8849f7151ab7" title="zwraca pola na które możesz sie ruszyć // jeżeli jest puste to możesz się tam poruszyć ale bez chodze..." alt="" coords="287,223,463,265"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_animal.html#afadae2007022c553f5d5b27dcac4a848" title="sprawdza czy może się rozmnożyć" alt="" coords="5,164,219,191"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_animal.html#a62afb60c1dc71d2ba64069328a138a59" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="17,215,207,241"/>
+</map>

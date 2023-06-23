@@ -1,0 +1,9 @@
+<map id="simulation.Simulation.multiplicationOfCreatures" name="simulation.Simulation.multiplicationOfCreatures">
+<area shape="rect" id="node1" title="sprawia, że zwierzęta się rozmnażają" alt="" coords="5,123,231,165"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1epoch.html#af2661f25b1522ea1fab41ee839c96b92" title="dodaje akcje do listy" alt="" coords="291,5,455,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#afe54f223bddb068fd19f474fb93d37c0" title="wykonuje akcję na mapie" alt="" coords="286,56,460,99"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_board.html#a2eb4f01d84ad4c12a1c5a320aa6039da" title="zwraca wszystkie obiekty typu animal znajdujące się na mapie" alt="" coords="288,123,458,165"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_object_on_map.html#a5f7fd167bca712e6a980f2824b1c63e7" title="ustawia mapę na której obiekt się znajduje" alt="" coords="279,189,467,232"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_animal.html#af53c19ba3305cbbe3308649cf4c84568" title="ustawia statystyki na podstqawie statystyk rodzica" alt="" coords="284,256,462,283"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#ac5acec0b3da9ad3298b8cc9e892577bc" title="zwraca wszystkie obiekty typu organism znajdujące się na mapie" alt="" coords="515,56,685,99"/>
+</map>

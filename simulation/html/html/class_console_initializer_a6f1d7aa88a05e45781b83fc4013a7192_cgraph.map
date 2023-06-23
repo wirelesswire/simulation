@@ -1,0 +1,6 @@
+<map id="ConsoleInitializer.ConsoleInitializer" name="ConsoleInitializer.ConsoleInitializer">
+<area shape="rect" id="node1" title="tworzy nową symulację, na podstawie odpowiedzi użytkownika decyduje czy bierze pod uwagę losowo ułożo..." alt="" coords="5,48,176,91"/>
+<area shape="rect" id="node2" href="$class_console_initializer.html#a1dc079eefddc6d4274f232d647f98f2b" title="zwraca jedną z przygotowanych map" alt="" coords="242,5,422,32"/>
+<area shape="rect" id="node3" href="$class_console_initializer.html#a269224596991a950dc022d227f8bd769" title="tworzy obiekt symulacji na podstawie parametrów przekształconych przez konstruktor" alt="" coords="224,56,440,83"/>
+<area shape="rect" id="node4" href="$class_console_initializer.html#a91f7b856ef04eafba13d6fac8ff1bef6" title=" " alt="" coords="234,107,430,133"/>
+</map>

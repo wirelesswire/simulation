@@ -1,0 +1,4 @@
+<map id="simulation.Board.GetObjectOnMap" name="simulation.Board.GetObjectOnMap">
+<area shape="rect" id="node1" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="5,29,187,72"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#a009332863278db013de4d19b97151b6a" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="235,29,416,72"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="simulation.Animal.cellsAroundRectangle" name="simulation.Animal.cellsAroundRectangle">
+<area shape="rect" id="node1" title="zwraca potencjalne koordynaty w prostokącie w obszarze x na y z każdej strony" alt="" coords="5,48,202,91"/>
+<area shape="rect" id="node2" href="$structsimulation_1_1coords.html#a31754c76b30a3a617de8b41f189106d3" title="suma dwóch pozycji stosowana do dodawamia pozycji i przemieszczenia" alt="" coords="271,5,420,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#a2e72c83271bd34c460d011ee9dbb0dc4" title="zwraca wielkośc planszy" alt="" coords="261,56,430,83"/>
+<area shape="rect" id="node4" href="$structsimulation_1_1coords.html#ad4ec62d7c90e26dd1639b95c5276f731" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="250,107,441,133"/>
+</map>

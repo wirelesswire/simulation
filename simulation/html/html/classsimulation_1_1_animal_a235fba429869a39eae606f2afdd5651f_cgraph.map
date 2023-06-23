@@ -1,0 +1,9 @@
+<map id="simulation.Animal.possibleEdibleCells" name="simulation.Animal.possibleEdibleCells">
+<area shape="rect" id="node1" title="zwraca wszystkie komórki obok na których jest coś co mogę zjeść" alt="" coords="5,107,182,149"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#af326ddee3210a5faf30c3337f896d5e5" title="zwraca potencjalne koordynaty w prostokącie w obszarze x na y z każdej strony" alt="" coords="230,48,426,91"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_animal.html#a215080d7c875b7e895a06ae4c9835ed2" title="sprawdza czy zwierze jest w stanie zjeść inny organizm na mapie" alt="" coords="242,115,414,141"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_board.html#a009332863278db013de4d19b97151b6a" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="237,189,419,232"/>
+<area shape="rect" id="node3" href="$structsimulation_1_1coords.html#a31754c76b30a3a617de8b41f189106d3" title="suma dwóch pozycji stosowana do dodawamia pozycji i przemieszczenia" alt="" coords="496,5,644,32"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#a2e72c83271bd34c460d011ee9dbb0dc4" title="zwraca wielkośc planszy" alt="" coords="485,56,654,83"/>
+<area shape="rect" id="node5" href="$structsimulation_1_1coords.html#ad4ec62d7c90e26dd1639b95c5276f731" title="sprawdza czy pozycja znajduje się w obrzerzach mapy" alt="" coords="474,107,665,133"/>
+</map>

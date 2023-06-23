@@ -1,0 +1,6 @@
+<map id="simulation.coords.absDistance" name="simulation.coords.absDistance">
+<area shape="rect" id="node1" title="liczy dystans na mapie (używany do wzroku )" alt="" coords="496,47,695,73"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a68ab6b09d2b72de17b3bcf2c45ce384b" title="znajduje najbliże pożywienie" alt="" coords="225,47,448,73"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_carnivore.html#a1066ec739ddb6c8381c7cbfe09ad3d2d" title="logika poruszania się miesożercy" alt="" coords="5,5,177,48"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_herbivore.html#a6159e203f379474a0f26240cbb3e06a4" title="logika poruszania się miesożercy" alt="" coords="5,72,177,115"/>
+</map>

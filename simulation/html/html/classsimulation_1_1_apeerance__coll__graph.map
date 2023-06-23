@@ -1,0 +1,15 @@
+<map id="simulation.Apeerance" name="simulation.Apeerance">
+<area shape="rect" id="node1" title="akcja pojawienia się na mapie" alt="" coords="5,455,152,481"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_act.html" title="akcja wykonywana na mapie" alt="" coords="402,379,443,405"/>
+<area shape="rect" id="node3" href="$structsimulation_1_1coords.html" title="klasa pomocnicza zarządzająca pozycjami" alt="" coords="448,5,571,32"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_object_on_map.html" title="klasa obiektu który znajduje się na mapie" alt="" coords="459,96,560,123"/>
+<area shape="rect" id="node13" href="$classsimulation_1_1_object_on_map.html" title="klasa obiektu który znajduje się na mapie" alt="" coords="16,96,181,123"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_animal.html" title="klasa przedstawiająca zwierzę które może się poruszać po mapie" alt="" coords="235,285,359,312"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_organism.html" title="klasa opisująca organizm znajdujący się na mapie" alt="" coords="363,189,440,216"/>
+<area shape="rect" id="node12" href="$classsimulation_1_1_organism.html" title="klasa opisująca organizm znajdujący się na mapie" alt="" coords="464,189,605,216"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_board.html" title="mapa i wszyskie obiekty na niej" alt="" coords="274,5,392,32"/>
+<area shape="rect" id="node8" href="$interfacesimulation_1_1_i_dieable.html" title="interface pozwalający określić stan danego organizmu (żywy lub martwy )" alt="" coords="368,96,435,123"/>
+<area shape="rect" id="node9" href="$interfacesimulation_1_1_reproducable.html" title="interface opisujący organizmy które mogą mieć potomstwo" alt="" coords="238,189,338,216"/>
+<area shape="rect" id="node10" href="$classsimulation_1_1stats.html" title="klasa zajmująca się statystkykami organizmu żyjącego w symulacji" alt="" coords="101,189,214,216"/>
+<area shape="rect" id="node11" title=" " alt="" coords="205,96,259,123"/>
+</map>

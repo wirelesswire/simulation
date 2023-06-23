@@ -1,5 +1,5 @@
 ﻿
-//using ImageMagick;
+////using ImageMagick;
 using simulation;
 
 ConsoleInitializer init;
@@ -21,9 +21,9 @@ while (true)
     {
         init = new ConsoleInitializer(false);
     }
-    else if (cmd=="4")
+    else if (cmd == "4")
     {
-        init=new ConsoleInitializer(4);
+        init = new ConsoleInitializer(4);
     }
 
     else
@@ -35,10 +35,12 @@ while (true)
 
 }
 
-//init.consoleUI();
-init.simulate();
+init.consoleUI();
+//init.simulate();
 
-
+/// <summary>
+/// klasa zarządzająca konsolowym interface-em użytkownika 
+/// </summary>
 public class ConsoleInitializer
 {
 
@@ -47,7 +49,7 @@ public class ConsoleInitializer
     int resolutionOfImage = 1000;
     int sizeOfSimulaton = 30;
     int startRoślino = 20;
-    int startMieso = 10;
+    int startMieso = 1;
     int startGory = 10;
     int startJeziora = 50;
     int EpochDelayMs = 100;//cała epoka 
@@ -56,27 +58,32 @@ public class ConsoleInitializer
 
 
     //sekcja tworzenia gifów//
-    Rgba32 emptyColor = Rgba32.ParseHex("000");
-    Rgba32 plantColor = Rgba32.ParseHex("0f0");
-    Rgba32 herbivoreColor = Rgba32.ParseHex("fa00bc");
-    Rgba32 carnivoreColor = Rgba32.ParseHex("ff9910");
-    Rgba32 mountainColor = Rgba32.ParseHex("fafafa");
-    Rgba32 lakeColor = Rgba32.ParseHex("0000ff");
-    int iter = 0;
-    int smallGIFiter = 0;
-    int fullGIFiter = 0;
-    string videofDirectioryName = "mp4";
-    string pngDirectoryName = "png";
-    string gifName = "anim";
-    string longGifName = "final";
-    int smallGIFLength = 10;
-    int numberOfshortGifsMergedIntoLongOne = 5;
+    //Rgba32 emptyColor = Rgba32.ParseHex("000");
+    //Rgba32 plantColor = Rgba32.ParseHex("0f0");
+    //Rgba32 herbivoreColor = Rgba32.ParseHex("fa00bc");
+    //Rgba32 carnivoreColor = Rgba32.ParseHex("ff9910");
+    //Rgba32 mountainColor = Rgba32.ParseHex("fafafa");
+    //Rgba32 lakeColor = Rgba32.ParseHex("0000ff");
+    //int iter = 0;
+    //int smallGIFiter = 0;
+    //int fullGIFiter = 0;
+    //string videofDirectioryName = "mp4";
+    //string pngDirectoryName = "png";
+    //string gifName = "anim";
+    //string longGifName = "final";
+    //int smallGIFLength = 10;
+    //int numberOfshortGifsMergedIntoLongOne = 5;
     //sekcja tworzenia gifów//
 
 
 
     Simulation simulation;
-    pngmaker pngmaker;
+    //pngmaker pngmaker;
+    /// <summary>
+    /// zwraca jedną z przygotowanych map 
+    /// </summary>
+    /// <param name="num">numer mapy </param>
+    /// <returns>mapa w formie string[,]</returns>
     public string[,] makeMap(int num = 0)
     {
 
@@ -162,6 +169,12 @@ public class ConsoleInitializer
 
         return a;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="a">mapa</param>
+    /// <returns>zwraca mapę w formie stringa do wypisania w konsoli </returns>
     public string mapStringify(string[,] a)
     {
         string ret = "";
@@ -206,7 +219,7 @@ public class ConsoleInitializer
 
         makeSimulation(false);
 
-        gifInit();
+        //gifInit();
 
 
     }
@@ -252,14 +265,14 @@ public class ConsoleInitializer
         }
 
 
-        gifInit();
+        //gifInit();
 
     }
     public ConsoleInitializer(int mapNumber) {
 
         makeSimulation(makeMap( mapNumber));
 
-        gifInit();
+        //gifInit();
     }
 
 
@@ -299,7 +312,7 @@ public class ConsoleInitializer
         makeSimulation(false);
 
 
-        gifInit();
+        //gifInit();
 
     }
     /// <summary>
@@ -310,19 +323,28 @@ public class ConsoleInitializer
     {
         simulation = new Simulation(sizeOfSimulaton, startRoślino, startMieso, startGory, startJeziora, actionDelayMs);
     }
+    /// <summary>
+    /// tworzy nawoą symulację na podstawie przygotwanej wcześniej mapy 
+    /// </summary>
+    /// <param name="a">mapa </param>
     public void makeSimulation(string[,] a)
     {
         simulation = new Simulation(a, actionDelayMs);
     }
-
+    /// <summary>
+    /// wyświetla mapę i pozwala użytkownikowi na interakcję z symulacją 
+    /// </summary>
     public void consoleUI()
     {
+        simulation.PrintBoard();
         string cmd;
         while (true){
-            Console.WriteLine("wybierz komendę :\n1-> 10 do przodu \n2-> 10 do tyłu ");
+            Console.WriteLine("wybierz komendę :\n1-> 10 do przodu \n2-> 10 do tyłu \n3-> 1 do przodu \n4-> 1 do tyłu\n5-> 100 do przodu \n6-> 100 do tyłu");
         cmd = Console.ReadLine();
             if(int.TryParse (cmd , out int a ))
             {
+                Console.Clear();
+
                 switch (a)
                 {
                     case 1:
@@ -332,9 +354,36 @@ public class ConsoleInitializer
                         }
                         break;
                     case 2:
+                        for (int i = 0; i < 10; i++)
+                        {
+                            simulation.showAct(false);
+                        }
+                        //simulation.showAct(false);
+                        break;
+                    case 3:
+                        simulation.showAct(true);
+                        break; 
+                    case 4:
                         simulation.showAct(false);
                         break;
+                    case 5:
+                        for (int i = 0; i < 100; i++)
+                        {
+                            simulation.showAct(true);
+                        }
+                        break;
+                    case 6:
+                        for (int i = 0; i < 100; i++)
+                        {
+                            simulation.showAct(false);
+                        }
+                        //simulation.showAct(false);
+                        break;
                     default:
+                        for(int i = 0;i < Math.Abs( a); i++)
+                        {
+                            simulation.showAct(a > 0 ? true : false);
+                        }
                         Console.WriteLine("nieprwidłowy numer komendy ");
                         break;
                 }
@@ -389,57 +438,57 @@ public class ConsoleInitializer
     /// <summary>
     /// inicjalizuje sekcję odpowiedzialną za tworzeni gifów z symulacjii -> tworzy potrzebne foldery i ustawia potrzebne wartości 
     /// </summary>
-    void gifInit()
-    {
-        Directory.CreateDirectory(pngDirectoryName);
-        Directory.CreateDirectory(videofDirectioryName);
-        Directory.CreateDirectory("finals");
-        //MagickReadSettings gifSettings = new MagickReadSettings
-        //{
-        //    Format = MagickFormat.Png,
-        //    Height = resolutionOfImage,
-        //    Width = resolutionOfImage
-        //};
-        pngmaker = new pngmaker(resolutionOfImage / sizeOfSimulaton);
-    }
-    /// <summary>
-    /// tworzy przedstaweinie graficzne obecnego stanu symulacjii w postaci obrazu png 
-    /// </summary>
-    void makePNG()
-    {
+    //void gifInit()
+    //{
+    //    Directory.CreateDirectory(pngDirectoryName);
+    //    Directory.CreateDirectory(videofDirectioryName);
+    //    Directory.CreateDirectory("finals");
+    //    //MagickReadSettings gifSettings = new MagickReadSettings
+    //    //{
+    //    //    Format = MagickFormat.Png,
+    //    //    Height = resolutionOfImage,
+    //    //    Width = resolutionOfImage
+    //    //};
+    //    pngmaker = new pngmaker(resolutionOfImage / sizeOfSimulaton);
+    //}
+    ///// <summary>
+    ///// tworzy przedstaweinie graficzne obecnego stanu symulacjii w postaci obrazu png 
+    ///// </summary>
+    //void makePNG()
+    //{
 
 
-        pngmaker.GeneratePNG(simulation.getOrganismsBoard(), pngDirectoryName + "/" + iter.ToString() + ".png", emptyColor, plantColor, herbivoreColor, carnivoreColor, mountainColor, lakeColor);
+    //    pngmaker.GeneratePNG(simulation.getOrganismsBoard(), pngDirectoryName + "/" + iter.ToString() + ".png", emptyColor, plantColor, herbivoreColor, carnivoreColor, mountainColor, lakeColor);
 
-        if (iter >= 1 && iter % smallGIFLength == 0)
-        {
-            makegif();
-        }
+    //    if (iter >= 1 && iter % smallGIFLength == 0)
+    //    {
+    //        makegif();
+    //    }
 
 
-    }
+    //}
 
     /// <summary>
     /// tworzy przedstawienie części symulacji w formie gifa 
     /// </summary>
-    void makegif()
-    {
-        List<string> list = new List<string>();
-        for (int i = iter - smallGIFLength; i < iter; i++)
-        {
-            list.Add(i + ".png");
-        }
-        Console.WriteLine("From : " + (iter - smallGIFLength) + " to " + iter);
+    //void makegif()
+    //{
+    //    List<string> list = new List<string>();
+    //    for (int i = iter - smallGIFLength; i < iter; i++)
+    //    {
+    //        list.Add(i + ".png");
+    //    }
+    //    Console.WriteLine("From : " + (iter - smallGIFLength) + " to " + iter);
 
-        movieMaker a = new movieMaker(pngDirectoryName + "/", videofDirectioryName + "/" + gifName + smallGIFiter + ".mp4", list.ToArray());
-        a.makeGIF();
-        smallGIFiter++;
-        if (smallGIFiter % numberOfshortGifsMergedIntoLongOne == 0)
-        {
-            //mergeGif();
-        }
+    //    movieMaker a = new movieMaker(pngDirectoryName + "/", videofDirectioryName + "/" + gifName + smallGIFiter + ".mp4", list.ToArray());
+    //    a.makeGIF();
+    //    smallGIFiter++;
+    //    if (smallGIFiter % numberOfshortGifsMergedIntoLongOne == 0)
+    //    {
+    //        //mergeGif();
+    //    }
 
-    }
+    //}
 }
 
 

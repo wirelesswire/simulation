@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
+    /// <summary>
+    /// klasa opisująca góre na mapie 
+    /// </summary>
     public class Mountain : ObjectOnMap
     {
         public Mountain(int x, int y,Board b ) : base(x, y,b) { }
@@ -15,9 +18,17 @@ namespace simulation
         {
             return "^" +base.toString();
         }
+        /// <summary>
+        /// góra nie zmienia się w czasie 
+        /// </summary>
+        /// <param name="forwards"></param>
         public override void epochPass(bool forwards)
         {
             //throw new NotImplementedException();
+        }
+        public virtual string presentation()
+        {
+            return base.presentation() + " góra";
         }
 
     }

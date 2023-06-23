@@ -1,0 +1,8 @@
+<map id="simulation.Herbivore" name="simulation.Herbivore">
+<area shape="rect" id="node1" title="klasa reprezentująca roślinożerce &#45;&gt; zwierzę które je tylko rośliny" alt="" coords="97,229,234,256"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html" title="klasa przedstawiająca zwierzę które może się poruszać po mapie" alt="" coords="135,155,196,181"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_organism.html" title="klasa opisująca organizm znajdujący się na mapie" alt="" coords="71,80,148,107"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_object_on_map.html" title="klasa obiektu który znajduje się na mapie" alt="" coords="5,5,107,32"/>
+<area shape="rect" id="node5" href="$interfacesimulation_1_1_i_dieable.html" title="interface pozwalający określić stan danego organizmu (żywy lub martwy )" alt="" coords="130,5,198,32"/>
+<area shape="rect" id="node6" href="$interfacesimulation_1_1_reproducable.html" title="interface opisujący organizmy które mogą mieć potomstwo" alt="" coords="173,80,273,107"/>
+</map>

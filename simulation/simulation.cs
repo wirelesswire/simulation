@@ -6,70 +6,51 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
-
+    /// <summary>
+    /// klasa odpowiedzialna za działanie symulacji 
+    /// </summary>
     public class Simulation
     {
 
         List<epoch> epochs = new List<epoch>();
-        //int currentEpochSimulated = 0;
-        int currentEpoch_shown = 0;
-        int currentAct_shown = 0;
+
+
+        private int currentEpoch_shown = 0;
+        private int currentAct_shown = 0;
         private Board board;
         private int startingHerbivores = 1;
         private int startingCarnivores = 1;
         private int startingMountains = 1;
         private int startingLakes = 1;
-        int timebetweensupdatesOfOneCreature = 20;
-        int rangeOfEffenctiveFoodWatering = 5;
+        private int timebetweensupdatesOfOneCreature = 20;
+        private int rangeOfEffenctiveFoodWatering = 5;
 
-        public epoch currentEpoch = null;
-
-
-
-        public void showEpoch(bool forwards = true)
-        {
-            if (currentEpoch_shown >= epochs.Count)
-            {
-                return;
-            }
-            for (int i = currentAct_shown; i < epochs[currentEpoch_shown].acts.Count; i++)
-            {
-                board.MakeActHappen(epochs[currentEpoch_shown].acts[i], forwards);
-            }
+         epoch currentEpoch = null;
 
 
 
+     
 
-            if (forwards)
-            {
-                currentEpoch_shown++;
-                currentAct_shown++;
-
-            }
-            else
-            {
-                try
-                {
-                    currentAct_shown = epochs[currentEpoch_shown - 1].acts.Count - 1;
-
-                }
-                catch
-                {
-                    currentAct_shown = 0;
-                }
-                currentEpoch_shown--;
-            }
-            board.MakeActHappen(epochs[currentAct_shown].acts[currentAct_shown], forwards);
-
-        }
+        /// <summary>
+        /// urzeczywistnia skutki następnej akcji 
+        /// </summary>
+        /// <param name="forwards">kierunek upływu czasu </param>
         public void showAct(bool forwards = true)
         {
             if (forwards)
             {
-                if (currentEpoch_shown >= epochs.Count - 1)
+                currentAct_shown++;
+
+                if (currentEpoch_shown == epochs.Count - 1 && currentAct_shown >= epochs[currentEpoch_shown].acts.Count-1)
                 {
                     //return;
                     RunStep();
+                    for (int i = 0; i < currentAct_shown; i++)
+                    {
+                        showAct(false);
+                    }
+                    //Console.WriteLine("epoch run ");
+                    return;
                 }
 
                 if (currentAct_shown >= epochs[currentEpoch_shown].acts.Count)
@@ -77,22 +58,22 @@ namespace simulation
                     currentAct_shown = 0;
                     currentEpoch_shown++;
                 }
-                if (currentEpoch_shown == 0 && currentAct_shown == -1)
+                if (currentEpoch_shown == 0 && currentAct_shown == -1)//x
                 {
                     currentAct_shown = 0;
                 }
 
-                Console.WriteLine("wywołane  epoka " + currentEpoch_shown + " act " + currentAct_shown);
 
                 board.MakeActHappen(epochs[currentEpoch_shown].acts[currentAct_shown], forwards);
-                currentAct_shown++;
+                //Console.WriteLine("wywołane  epoka " + currentEpoch_shown + " act " + currentAct_shown);
+
             }
             else
             {
                 if (currentAct_shown == 0 && currentEpoch_shown == 0)
                 {
                 }
-                else if (currentEpoch_shown == 0 && currentAct_shown == -1)
+                else if (currentEpoch_shown == 0 && currentAct_shown == -1)//x
                 {
                     return;
                 }
@@ -106,7 +87,7 @@ namespace simulation
                     currentEpoch_shown--;
                     if (currentEpoch_shown < 0)
                     {
-                        currentEpoch_shown = 0; currentAct_shown = -1;
+                        currentEpoch_shown = 0; currentAct_shown = -1;//x
                         return;
                     }
                     currentAct_shown = epochs[currentEpoch_shown].acts.Count - 1;
@@ -117,20 +98,22 @@ namespace simulation
                 }
 
 
-                Console.WriteLine("wywołane  epoka " + currentEpoch_shown + " act " + currentAct_shown);
 
                 board.MakeActHappen(epochs[currentEpoch_shown].acts[currentAct_shown], forwards);
 
-
-
                 currentAct_shown--;
+                //Console.WriteLine("wywołane  epoka " + currentEpoch_shown + " act " + currentAct_shown);
+
 
 
             }
 
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>zwraca mapę </returns>
         public ObjectOnMap[,] getOrganismsBoard()
         {
             return board.getAllOrganisms();
@@ -156,9 +139,12 @@ namespace simulation
             //this.boardShown = new Board(map);
 
             this.timebetweensupdatesOfOneCreature = timeBetweenmovesofcreature;
-            Initialize(false);
+            Initialize(true);
         }
-
+        /// <summary>
+        /// ustawia wartości początkowe symulacji w zależności od wybranego trybu 
+        /// </summary>
+        /// <param name="special">tryb inicjalizacji </param>
         private void Initialize(bool special)
         {
 
@@ -168,36 +154,32 @@ namespace simulation
 
             if (special) { InitializeSpecially(); }
             else { initializeRandomly(); }
-            //boardShown =(Board) board.Clone();
-            //initializeRandomly();
-            //InitializeSpecially();
+
 
 
             updateClassBoards();
 
         }
 
-
+        /// <summary>
+        /// ustawia wartości początkowe symulacji
+        /// </summary>
         public void InitializeSpecially()
         {
-
-            //board.makeTAtCoords<Herbivore>(5, 8);
+            RunStep();
         }
+        /// <summary>
+        /// ustawia wartości początkowe symulacji
+        /// </summary>
         public void InitializeSpecially(bool a = false)
         {
-            //for (int i = 0; i < board.GetSize(); i++)
-            //{
-            //    //makeTAtCoords<Herbivore>(0, i);
-            //    for (int j = 0; j < board.GetSize(); j++)
-            //    {
-            //        board.makeTAtCoords<Herbivore>(i, j);
-            //    }
-            //}
-            //board.removeAt(new coords(10, 10));
-            //board.makeTAtCoords<Carnivore>(10, 10);
+            RunStep();
+
 
         }
-
+        /// <summary>
+        /// inicjalizuje zgodnie z podanymi przez użytkownika wartościami 
+        /// </summary>
         public void initializeRandomly()
         {
             currentEpoch = new epoch();
@@ -299,41 +281,50 @@ namespace simulation
             //}
             currentEpoch_shown = epochs.Count - 1;
             currentAct_shown = currentEpoch.acts.Count - 1;
+            RunStep();
 
         }
-
+        /// <summary>
+        /// zwraca informacje dodatkowe o symulacjii 
+        /// </summary>
         public void PrintDebug()
         {
-            Console.WriteLine("mięsożerców " + board.carnivores.Count);
-            Console.WriteLine("roślinożerców " + board.herbivores.Count);
-            Console.WriteLine("roślin " + board.plants.Count);
-            Console.WriteLine("iterecja " +epochs.Count());
-            Console.WriteLine("wszystkich zdarzeń " + epochs.CountAll());
-            Console.WriteLine("użycie randoma od ostatniego razy " + (helper.nextCount - helper.lastShown));
+            string a = " ";
 
-            Console.WriteLine("uzycie randoma " + helper.getNextCount());
+            a += "mięsożerców " + board.carnivores.Count + "\n"
+                + "roślinożerców " + board.herbivores.Count + "\n"
+                + "roślin " + board.plants.Count + "\n"
+                + "iterecja " + epochs.Count() + "\n"
+                + "wszystkich zdarzeń " + epochs.CountAllActs() + "\n"
+                + "użycie randoma od ostatniego razu " + (helper.nextCount - helper.lastShown) + "\n"
+                + "uzycie randoma " + helper.getNextCount() + "\n";
 
-            Console.Write(helper.avgStatsAsString(board.carnivores.Cast<Animal>().ToList(), "mięsożercy ") + "\n");
+            a+=helper.avgStatsAsString(board.carnivores.Cast<Animal>().ToList(), "mięsożercy ") + "\n";
 
-            Console.Write(helper.avgStatsAsString(board.herbivores.Cast<Animal>().ToList(), "roślinożercy ") + "\n");
+            a+=helper.avgStatsAsString(board.herbivores.Cast<Animal>().ToList(), "roślinożercy ") + "\n";
+
+            Console.Write(a);
+
         }
+        /// <summary>
+        /// printuje mapę do konsoli 
+        /// </summary>
         public void PrintBoard()
         {
             board.PrintBoard();
-            //boardShown.PrintBoard();
             PrintDebug();
 
 
         }
+        /// <summary>
+        /// sprawdza czy wszystko jest na swoim miejscu na planszy 
+        /// </summary>
+        /// <exception cref="Exception">błąd w umiejscowieniu na mapie </exception>
         public void checkerIfOkOnBoard()
         {
             List<ObjectOnMap> allObjects = new List<ObjectOnMap>();
-            allObjects.AddRange(board.carnivores);
-            allObjects.AddRange(board.herbivores);
-            allObjects.AddRange(board.plants);
-            allObjects.AddRange(board.mountains);
-            allObjects.AddRange(board.lakes);
 
+            allObjects = board.returnAllObjectOnMap();
             foreach (var item in allObjects)
             {
                 if (board.GetObjectOnMap(item.GetX(), item.GetY()) == item)
@@ -356,6 +347,10 @@ namespace simulation
             }
 
         }
+
+        /// <summary>
+        /// symuluje jedną epokę symulacji 
+        /// </summary>
         public void RunStep()
         {
             currentEpoch = new epoch();
@@ -371,6 +366,9 @@ namespace simulation
             currentEpoch_shown = epochs.Count - 1;
             currentAct_shown = currentEpoch.acts.Count - 1;
         }
+        /// <summary>
+        /// symuluje poruszanie się zwierząt 
+        /// </summary>
         public void movingOfCreatures()
         {
 
@@ -392,7 +390,7 @@ namespace simulation
                         currentEpoch.addAct(a);
 
 
-                        if (a.gotMoreMoves())
+                        if (a.gotMoreMoves()&&  a is not DraxStanding)
                         {
                             a = ani.Move((ani is Carnivore) ? board.herbivores.Cast<Organism>().ToList() : board.plants.Cast<Organism>().ToList());
                         }
@@ -400,7 +398,7 @@ namespace simulation
                         {
                             break;
                         }
-                        Thread.Sleep(timebetweensupdatesOfOneCreature);
+                        //Thread.Sleep(timebetweensupdatesOfOneCreature);
                         //updateClassBoards();
                     }
                 }
@@ -408,6 +406,9 @@ namespace simulation
             }
 
         }
+        /// <summary>
+        /// sprawia że na rośliny i ciała działa czas 
+        /// </summary>
         public void plantsAndCorpsesEpoch()
         {
             List<Organism> org = new List<Organism>();
@@ -428,6 +429,9 @@ namespace simulation
                 }
             }
         }
+        /// <summary>
+        /// sprawia,że jedzenie pojawia się na planszy 
+        /// </summary>
         public void spawningOfFood()
         {
             for (int i = 0; i < board.GetSize(); i++)
@@ -441,10 +445,10 @@ namespace simulation
 
                         if (chance > helper.Next(1000))
                         {
-                            if (board.makeTAtCoords<Plant>(i, j, out Apeerance a))
+                            if (board.makeTAtCoords<Plant>(i, j, out Apeerance apper))
                             {
-                                board.MakeActHappen(a, true);
-                                currentEpoch.addAct(a);
+                                board.MakeActHappen(apper, true);
+                                currentEpoch.addAct(apper);
                             }
 
                         }
@@ -452,7 +456,9 @@ namespace simulation
                 }
             }
         }
-
+        /// <summary>
+        /// sprawia, że zwierzęta się rozmnażają 
+        /// </summary>
         public void multiplicationOfCreatures()
         {
             List<Animal> animals = board.returnAllAnimals();
@@ -487,18 +493,14 @@ namespace simulation
                 }
             }
         }
-
+        /// <summary>
+        /// uaktualnia stan wiedzy o otoczeniu dla wszystkich klas zwierząt 
+        /// </summary>
         public void updateClassBoards()
         {
             Herbivore.resetMap();
             Carnivore.resetMap();
-            //List<ObjectOnMap> allObjects = new List<ObjectOnMap>();
-            //allObjects.AddRange(board.carnivores);
-            //allObjects.AddRange(board.herbivores);
-            //allObjects.AddRange(board.plants);
-            //allObjects.AddRange(board.mountains);
-            //allObjects.AddRange(board.lakes);
-            //allObjects.AddRange(board.corpses);
+
             List<ObjectOnMap> allObjects = board.returnAllObjectOnMap();
             foreach (var item in allObjects)
             {

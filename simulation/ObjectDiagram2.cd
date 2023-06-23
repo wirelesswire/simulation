@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="simulation.Animal">
+    <Position X="8.25" Y="20.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgUAAAQEogAMBAFBAAAAQggAAQAAIgAgIEFEBAAAkA=</HashCode>
+      <FileName>Animal.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="stats" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="simulation.Board">
+    <Position X="6.25" Y="5.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AgBAAEAUAAAAIECACoAEAAUABoAAgiIEAgAAABABEAA=</HashCode>
+      <FileName>Board.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="organisms" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="simulation.ObjectOnMap">
+    <Position X="6" Y="12.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAIAAABAAAABAAAAABAACAA4AAAAAAAAAA=</HashCode>
+      <FileName>ObjectOnMap.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="coords" />
+      <Field Name="board" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="simulation.Organism">
+    <Position X="7.75" Y="15.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAhAAAAEAAAABAIAAAAAIAAAIAAAAA=</HashCode>
+      <FileName>organism.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="simulation.Plant">
+    <Position X="4.5" Y="20.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIBAAAABAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="simulation.Simulation">
+    <Position X="11.25" Y="1" Width="4.5" />
+    <AssociationLine Name="board" Type="simulation.Board" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.25" Y="3.838" />
+        <Point X="7.938" Y="3.838" />
+        <Point X="7.938" Y="5.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BAAACMKAAEAAAQQAAAAAAAAAAABAAAAFIEACMSowAAA=</HashCode>
+      <FileName>simulation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="board" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="simulation.stats">
+    <Position X="14.5" Y="19.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABkwAQAAACAAAEFAAwAAAAAAgAAAAAAAABAAAAgAAA=</HashCode>
+      <FileName>stats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="simulation.coords">
+    <Position X="12.25" Y="13" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgIAAAAAAAAAAAARAAAAABABgAAASAAA=</HashCode>
+      <FileName>coords.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

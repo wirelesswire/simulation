@@ -1,0 +1,4 @@
+<map id="simulation.epochPass" name="simulation.epochPass">
+<area shape="rect" id="node1" title="akcja upływu czasu" alt="" coords="5,80,155,107"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_act.html" title="akcja wykonywana na mapie" alt="" coords="59,5,101,32"/>
+</map>

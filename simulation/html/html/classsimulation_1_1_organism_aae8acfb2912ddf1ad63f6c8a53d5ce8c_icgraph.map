@@ -1,0 +1,7 @@
+<map id="simulation.Organism.Die" name="simulation.Organism.Die">
+<area shape="rect" id="node1" title="organizm staje się martwy" alt="" coords="437,64,600,91"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a9bc38f0a9d207d93dde8282fa9c69fb5" title="odpowiada za przetworzenie zjadania innego orgainzmu w czasie" alt="" coords="234,13,383,40"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_carnivore.html#ab768c6f01db7db2a10a6ea9e921e477e" title="odpowiada za przetworzenie zjadania innego orgainzmu w czasie" alt="" coords="228,64,389,91"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_herbivore.html#ad7935bf851a73cfc9b3738aac3126755" title="odpowiada za przetworzenie zjadania innego orgainzmu w czasie" alt="" coords="228,115,389,141"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#ad9c07738f7751a7f29d46451a5b54ed3" title="wykonuje akcję na mapie" alt="" coords="5,5,180,48"/>
+</map>

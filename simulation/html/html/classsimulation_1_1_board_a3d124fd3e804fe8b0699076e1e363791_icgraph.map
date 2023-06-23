@@ -1,0 +1,20 @@
+<map id="simulation.Board.IsEmpty" name="simulation.Board.IsEmpty">
+<area shape="rect" id="node1" title="sprawdza czy dane pole jest puste" alt="" coords="1020,375,1190,401"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a655e02c7f9c0a565744c6a8d2e45d2c6" title="zwraca puste pola w prostokącie" alt="" coords="778,140,972,183"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_carnivore.html#a1066ec739ddb6c8381c7cbfe09ad3d2d" title="logika poruszania się miesożercy" alt="" coords="274,5,445,48"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_herbivore.html#a6159e203f379474a0f26240cbb3e06a4" title="logika poruszania się miesożercy" alt="" coords="274,173,445,216"/>
+<area shape="rect" id="node10" href="$classsimulation_1_1_simulation.html#a4faaf2fdd2fc8e1a309ac513f60b33d9" title="inicjalizuje zgodnie z podanymi przez użytkownika wartościami" alt="" coords="7,341,203,384"/>
+<area shape="rect" id="node11" href="$classsimulation_1_1_board.html#a2b832d697a98f7a8b0f76faa9c497dd3" title="tworzy obiekt typu T na danym polu" alt="" coords="788,501,962,544"/>
+<area shape="rect" id="node12" href="$classsimulation_1_1_board.html#afc88ceb0c22ae5277943196485ea5db2" title="tworzy obiekt typu T na danym polu" alt="" coords="785,568,965,611"/>
+<area shape="rect" id="node13" href="$classsimulation_1_1_animal.html#aca6d931dce8b247802659aa1ac741c31" title="odpowiada za całościowe poruszanie się organizmu" alt="" coords="796,400,954,427"/>
+<area shape="rect" id="node18" href="$classsimulation_1_1_simulation.html#a8de25f9d1a1bb78678067d224c28e1f7" title="sprawia,że jedzenie pojawia się na planszy" alt="" coords="521,467,724,509"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a0d403a0d56537248725f95af25883cea" title=" " alt="" coords="514,64,730,91"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_animal.html#a868ba049daf629de4e17884f365a4687" title="zwraca pola na które może zająć potomstwo" alt="" coords="534,283,710,325"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_animal.html#a22e5e590553a29010f0a8849f7151ab7" title="zwraca pola na które możesz sie ruszyć // jeżeli jest puste to możesz się tam poruszyć ale bez chodze..." alt="" coords="534,115,710,157"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_animal.html#afadae2007022c553f5d5b27dcac4a848" title="sprawdza czy może się rozmnożyć" alt="" coords="253,244,466,271"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_animal.html#a62afb60c1dc71d2ba64069328a138a59" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="264,295,455,321"/>
+<area shape="rect" id="node14" href="$classsimulation_1_1_simulation.html#a66ab36b09bff2f7c6084aedc068b0137" title="symuluje poruszanie się zwierząt" alt="" coords="528,400,717,443"/>
+<area shape="rect" id="node15" href="$classsimulation_1_1_simulation.html#ab4e63adb5d6ff8e4e58b426deffab948" title="symuluje jedną epokę symulacji" alt="" coords="260,432,459,459"/>
+<area shape="rect" id="node16" href="$classsimulation_1_1_simulation.html#a249cbec9dc5d4c606522333fce78262c" title="ustawia wartości początkowe symulacji" alt="" coords="7,483,203,525"/>
+<area shape="rect" id="node17" href="$classsimulation_1_1_simulation.html#ad9393641ac19a8c08cb8bbc688a81877" title="urzeczywistnia skutki następnej akcji" alt="" coords="5,432,205,459"/>
+</map>

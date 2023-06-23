@@ -1,0 +1,14 @@
+<map id="simulation.Board.MakeActHappen" name="simulation.Board.MakeActHappen">
+<area shape="rect" id="node1" title="wykonuje akcję na mapie" alt="" coords="5,195,180,237"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_board.html#aa1a4214decde109de00ca658dbd912cd" title="dodaje obiekt do mapy" alt="" coords="240,56,424,83"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_animal.html#a9bc38f0a9d207d93dde8282fa9c69fb5" title="odpowiada za przetworzenie zjadania innego orgainzmu w czasie" alt="" coords="258,161,406,188"/>
+<area shape="rect" id="node8" href="$classsimulation_1_1_board.html#a009332863278db013de4d19b97151b6a" title="zwraca obiekt znajdujący się na danej pozycji na mapie" alt="" coords="241,236,423,279"/>
+<area shape="rect" id="node9" href="$classsimulation_1_1_animal.html#a1a164ad946e3cf18e7c7e95fb311b568" title="pobiera cenę należną za poruszenie się" alt="" coords="239,303,425,329"/>
+<area shape="rect" id="node10" href="$classsimulation_1_1_board.html#a2e42dcd4d00d8ced4d65fdc5ec3e701a" title="przesuwa organizm na nową pozycją" alt="" coords="228,107,436,133"/>
+<area shape="rect" id="node12" href="$classsimulation_1_1_board.html#a085716c928d5b709c78565e163aa176d" title="usuwa obiekt na podanej pozycji" alt="" coords="244,353,420,380"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_object_on_map.html#a72033ebeae3501c226a54dd897ddd8e6" title=" " alt="" coords="496,56,692,83"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_object_on_map.html#ab3ffb9bc2c0190df68938941ad3419b5" title=" " alt="" coords="495,5,693,32"/>
+<area shape="rect" id="node6" href="$classsimulation_1_1_organism.html#aae8acfb2912ddf1ad63f6c8a53d5ce8c" title="organizm staje się martwy" alt="" coords="513,224,676,251"/>
+<area shape="rect" id="node7" href="$classsimulation_1_1_organism.html#aebb7aa03a8766285c65567514feb33ef" title=" " alt="" coords="484,157,704,200"/>
+<area shape="rect" id="node11" href="$classsimulation_1_1_organism.html#a6b3dc8681f7260df403060300e9fe739" title="przemieszcza organizm do podanej pozycji" alt="" coords="500,107,688,133"/>
+</map>

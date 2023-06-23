@@ -1,0 +1,5 @@
+<map id="simulation.ObjectOnMap" name="simulation.ObjectOnMap">
+<area shape="rect" id="node1" title="klasa obiektu który znajduje się na mapie" alt="" coords="57,96,221,123"/>
+<area shape="rect" id="node2" href="$structsimulation_1_1coords.html" title="klasa pomocnicza zarządzająca pozycjami" alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html" title="mapa i wszyskie obiekty na niej" alt="" coords="153,5,272,32"/>
+</map>

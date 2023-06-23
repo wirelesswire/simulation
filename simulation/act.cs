@@ -7,7 +7,9 @@ using static simulation.Act;
 
 namespace simulation
 {
-
+    /// <summary>
+    /// akcja wykonywana na mapie 
+    /// </summary>
     public class Act
     {
         public coords from;//skąd 
@@ -16,16 +18,26 @@ namespace simulation
         public Organism affected;//kto zjedzony 
         public Organism dead; // kto martwy 
         protected bool moreActions = false;
+        /// <summary>
+        /// ustawia czy może się jeszcze poruszyć 
+        /// </summary>
+        /// <param name="a">czy ma więcej ruchów </param>
         public void setMoves(bool a)
         {
             this.moreActions = a;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>czy może się jeszcze poruszyć</returns>
         public bool gotMoreMoves()
         {
             return this.moreActions;
         }
     }
-
+    /// <summary>
+    /// akcja przemieszczenia się z miejsca na miejsce 
+    /// </summary>
     public class Move : Act
     {
 
@@ -49,6 +61,9 @@ namespace simulation
 
         }
     }
+    /// <summary>
+    /// akcja pojawienia się na mapie 
+    /// </summary>
     public class Apeerance:Act
     {
         public ObjectOnMap what;//co się pojawiło 
@@ -63,11 +78,17 @@ namespace simulation
         }
 
     }
+    /// <summary>
+    /// akcja upływu czasu 
+    /// </summary>
     public class epochPass:Act
     {
         public epochPass() { }
     }
 
+    /// <summary>
+    /// akcja zjedzenia innego organizmu 
+    /// </summary>
     public class Eat : Act
     {
        
@@ -89,7 +110,9 @@ namespace simulation
             this.dead = org;
         }
     }
-
+    /// <summary>
+    /// akcja braku poruszenia się 
+    /// </summary>
     public class DraxStanding : Act
     {
         //public bool moreActions;
@@ -104,6 +127,9 @@ namespace simulation
             this.moreActions = false;// jak raz sie nie poruszył to więcejj też się nie poruszy 
         }
     }
+    /// <summary>
+    /// akcja śmierci i zamienienia się w ciało 
+    /// </summary>
     public class Die : Act
     {
         //public override bool 
@@ -126,6 +152,9 @@ namespace simulation
 
         }
     }
+    /// <summary>
+    /// akcja samounicestwienia się ciała
+    /// </summary>
     public class selfDestruct : Act
     {
         public selfDestruct(Corpse fromObj)//selfdestruction

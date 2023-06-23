@@ -6,28 +6,41 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
+    /// <summary>
+    /// klasa zajmująca się statystkykami organizmu żyjącego w symulacji 
+    /// </summary>
     public class stats
     {
-        public double startingHunger = 500;         //1 0-20
-        public double hungerperaction = 10;         //2 0.5-inf
-        public double eatingEfficency = 0.5f;       //3  0-1
-        public double chanceForNextAction = 0.1f;   //4 0-1
-        public double actionsPerturn = 2;           //5 1-inf możesz się ruszyć 2 razy na ture i póżniej masz 10 % szans za każdym razem na kolejne , jeżwli to jest np 1.9 to jest 1 ruch i 90% na kolejny(ale tylko raz ) i póżniej 10 % tak długo jak się ruszasz (teoretycznie może być nieskończone )
-        public double chanceTOMultiply = 0.1f;      //6 0.001 -1 
-        public double sight = 5;                    //7 1.5  - inf 
-        public double maxAge = 100;                 //8 1-inf
+        public double startingHunger {get;set;}= 500;         //1 0-20
+        public double hungerperaction {get;set;}= 10;         //2 0.5-inf
+        public double eatingEfficency {get;set;}= 0.7f;       //3  0-1
+        public double chanceForNextAction {get;set;}= 0.2f;   //4 0-1
+        public double actionsPerturn {get;set;}= 2;           //5 1-inf możesz się ruszyć 2 razy na ture i póżniej masz 10 % szans za każdym razem na kolejne , jeżwli to jest np 1.9 to jest 1 ruch i 90% na kolejny(ale tylko raz ) i póżniej 10 % tak długo jak się ruszasz (teoretycznie może być nieskończone )
+        public double chanceTOMultiply {get;set;}= 0.1f;      //6 0.001 -1 
+        public double sight {get;set;}= 5;                    //7 1.5  - inf 
+        public double maxAge {get;set;}= 100;                 //8 1-inf
+        public double reproductionCost { get; set; } = 100;       //9 1-inf
 
-        public double currentHunger;//PAYMENTS
-        public double currentAge;
+        //public double currentHunger;//PAYMENTS
+        //public double currentAge;
 
         public int mutationMultiplier = 1;          //9 1-inf
 
 
-        public static int ileJestWlasciwosci = 9;
+        public static int ileJestWlasciwosci = 10;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>nazwy właściwości do pokazania użytkownikowi</returns>
         public  static string[] getNazwyWlasciwosci()
         {
-            return new string[] { "głód", "koszt głodu na akcję " , "efektywność jedzenia", "szansa na następną akcję " , "akcje na turę ", "szansa na rozmnożenie","wzrok", "maksymalny wiek ", "współczynnik mutacji "};
+            return new string[] { "głód", "koszt głodu na akcję " , "efektywność jedzenia", "szansa na następną akcję " , "akcje na turę ", "szansa na rozmnożenie","wzrok", "maksymalny wiek ","koszt rozmnożenia", "współczynnik mutacji "};
         }
+        /// <summary>
+        /// tworzy nowy obiekt na podstawie pytania użytkownika o cechy 
+        /// </summary>
+        /// <returns>obiekt stats </returns>
+        /// <exception cref="Exception">błąd wprowadzania</exception>
         public static stats statsFactory()
         {
             double[] doubles =  helper.getSomeValuesOfType("podaj wartość odpowiadającą właściwości  ", "w statystykach wybranego osobnika " ,getNazwyWlasciwosci() );
@@ -36,14 +49,19 @@ namespace simulation
                 throw new Exception("błąd przy wprowadzaniu danych ");
             }
 
-            return new stats(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5], doubles[6], doubles[7], (int )doubles[8]);
+            return new stats(doubles[0], doubles[1], doubles[2], doubles[3], doubles[4], doubles[5], doubles[6], doubles[7], doubles[8], (int )doubles[9]);
         }
+
+        /// <summary>
+        /// zwraca wartości w formie listy 
+        /// </summary>
+        /// <returns></returns>
         public List<double> wartosci()
         {
 
-            return new List<double>() { startingHunger, hungerperaction, eatingEfficency, chanceForNextAction, actionsPerturn, chanceTOMultiply, sight, maxAge  ,mutationMultiplier };
+            return new List<double>() { startingHunger, hungerperaction, eatingEfficency, chanceForNextAction, actionsPerturn, chanceTOMultiply, sight, maxAge,reproductionCost  ,mutationMultiplier };
         }
-        public stats(double hunger, double costOfAction, double efficiency, double chanceFornextAction,double actionsperturn ,  double chanceToMultiply,double sight,double maxAge , int mutationMultiplier)
+        public stats(double hunger, double costOfAction, double efficiency, double chanceFornextAction,double actionsperturn ,  double chanceToMultiply,double sight,double maxAge,double reproductionCost , int mutationMultiplier)
         {
 
             this.startingHunger = hunger;
@@ -54,6 +72,7 @@ namespace simulation
             this.chanceTOMultiply = chanceToMultiply;
             this.sight = sight;
             this.maxAge = maxAge;
+            this.reproductionCost = reproductionCost;   
             this.mutationMultiplier = mutationMultiplier;
             makeSureStatsAreInBounds();
         }
@@ -78,7 +97,9 @@ namespace simulation
         //{
             
         //}
-
+        /// <summary>
+        /// upewnia się że wartości są w odpowiednich dla siebie przedziałach 
+        /// </summary>
         public void makeSureStatsAreInBounds()
         {
             if(startingHunger < 20){ startingHunger = 20; }
@@ -99,30 +120,35 @@ namespace simulation
             if(sight < 1.5) { sight = 1.5; }
             if (maxAge < 1) { maxAge = 1; }
 
-
+            if(reproductionCost < 1) {  reproductionCost = 1;}
+            
             if (mutationMultiplier<1) { mutationMultiplier = 1;}
 
 
 
         }
 
-        
 
+        /// <summary>
+        /// tworzy nowe statysktyki dla potomstwa bazując na statykach rodzica 
+        /// </summary>
+        /// <returns>statystki dla dziecka </returns>
+        /// <exception cref="Exception">błąd ilości wartości </exception>
         public stats getRandomForChild()
         {
-            if(ileJestWlasciwosci != wartosci().Count)
+            if (ileJestWlasciwosci != wartosci().Count)
             {
                 throw new Exception();
             }
             List<double> a = new List<double> { };
-            List<int> b = new List<int>() {  };
+            List<int> b = new List<int>() { };
             List<int> signs = new List<int>();
 
             for (int i = 1; i <= ileJestWlasciwosci; i++)//<1-x> włącznie 
             {
-                a.Add(Math.Pow(10,-i));
-                b.Add(i);            
-                signs.Add(Math.Sign( helper.Next(-1, 2) ));
+                a.Add(Math.Pow(10, - ((i%3)+1)));
+                b.Add(i);
+                signs.Add(Math.Sign(helper.Next(-1, 2)));
             }
 
 
@@ -132,6 +158,25 @@ namespace simulation
             signs.Shuffle();
             return new stats(wartosci(), a, b, signs);
 
+
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>statystyki w formie stringa </returns>
+        public override string ToString()
+        {
+            string a = "";
+            string[] b = getNazwyWlasciwosci();
+            double[] c = wartosci().ToArray();
+
+            for (int i = 0; i < b.Length; i++)
+            {
+                a += b[i] + " : " + c[i] +"\n";
+            }
+
+            return a;
 
 
         }

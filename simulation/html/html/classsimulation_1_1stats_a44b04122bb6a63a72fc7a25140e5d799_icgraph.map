@@ -1,0 +1,6 @@
+<map id="simulation.stats.wartosci" name="simulation.stats.wartosci">
+<area shape="rect" id="node1" title="zwraca wartości w formie listy" alt="" coords="475,43,640,69"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1stats.html#a8b617cd486d22c5b3002e03b01729ec4" title="tworzy nowe statysktyki dla potomstwa bazując na statykach rodzica" alt="" coords="244,5,427,48"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1stats.html#a84f28e96e73e3b0a731ba9a91354cc35" title=" " alt="" coords="253,72,418,99"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_animal.html#a62afb60c1dc71d2ba64069328a138a59" title="odpowiada za rozmnożenie się zwierzęcia" alt="" coords="5,13,196,40"/>
+</map>

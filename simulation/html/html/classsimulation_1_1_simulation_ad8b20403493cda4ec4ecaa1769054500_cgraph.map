@@ -1,0 +1,6 @@
+<map id="simulation.Simulation.plantsAndCorpsesEpoch" name="simulation.Simulation.plantsAndCorpsesEpoch">
+<area shape="rect" id="node1" title="sprawia że na rośliny i ciała działa czas" alt="" coords="5,27,190,69"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1epoch.html#af2661f25b1522ea1fab41ee839c96b92" title="dodaje akcje do listy" alt="" coords="243,5,407,32"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_board.html#afe54f223bddb068fd19f474fb93d37c0" title="wykonuje akcję na mapie" alt="" coords="238,56,412,99"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_board.html#ac5acec0b3da9ad3298b8cc9e892577bc" title="zwraca wszystkie obiekty typu organism znajdujące się na mapie" alt="" coords="460,56,630,99"/>
+</map>

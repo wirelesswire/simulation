@@ -6,20 +6,35 @@ using System.Threading.Tasks;
 
 namespace simulation
 {
-
+    /// <summary>
+    /// klasa reprezentująca roślinożerce -> zwierzę które je tylko rośliny 
+    /// </summary>
     public class Herbivore : Animal, Reproducable
     {
 
         static bool[,] map = new bool[10, 10];
-
+        /// <summary>
+        /// zmienia rozmiar mapy pól na których jest w statnie stanąć
+        /// </summary>
+        /// <param name="x">rozmiar x </param>
+        /// <param name="y">rozmiar y </param>
         public static void resizeMap(int x, int y)
         {
             map = new bool[x, y];
         }
+        /// <summary>
+        /// ustawia konkretne pole na mapie na możliwe lub niemożliwe do przejścia 
+        /// </summary>
+        /// <param name="x">pozycja x </param>
+        /// <param name="y">pozycja y </param>
+        /// <param name="c">wartość</param>
         public static void SetMap(int x, int y, bool c)
         {
             map[x, y] = c;
         }
+        /// <summary>
+        /// ustawia wszystkie pola na mapie na możliwe do przejścia 
+        /// </summary>
         public static void resetMap()
         {
             for (int i = 0; i <= map.GetUpperBound(0); i++)
@@ -31,23 +46,23 @@ namespace simulation
             }
         }
         public Herbivore(int x, int y,Board b ,stats s ) : base(x, y,  b,s) { 
-            chanceTOMultiply = 0.01f;
-            sight = 10;
-            stats.chanceTOMultiply = chanceTOMultiply;
-            stats.sight = sight;
+            stats.chanceTOMultiply = 0.01f;
+            this.stats.sight = 10;
+            //stats.chanceTOMultiply = chanceTOMultiply;
+            //stats.sight = sight;
         }
         public Herbivore() : base() {
-            hungerperaction = 2;
-            chanceTOMultiply = 0.01f;
-            sight = 10;
-            stats.chanceTOMultiply = chanceTOMultiply;
-            stats.sight = sight;
+            stats.hungerperaction = 2;
+            stats.chanceTOMultiply = 0.01f;
+            this.stats.sight = 10;
+            //stats.chanceTOMultiply = chanceTOMultiply;
+            //stats.sight = sight;
         }
         public Herbivore(coords c, Board b,stats s) : base(c, b,s) {
-            chanceTOMultiply = 0.01f;
-            sight = 10;
-            stats.chanceTOMultiply = chanceTOMultiply;
-            stats.sight = sight;
+            stats.chanceTOMultiply = 0.01f;
+            this.stats.sight = 10;
+            //stats.chanceTOMultiply = chanceTOMultiply;
+            //stats.sight = sight;
         }
         public override bool doIEatIt(Organism o)
         {
@@ -72,7 +87,10 @@ namespace simulation
         }
 
 
-
+        /// <summary>
+        /// sprawdza drogę do najbliższego jedzenia i uzdatnia ją 
+        /// </summary>
+        /// <param name="endCoordsOrganism">najbliższe jedzenie </param>
         private void getPathToNearestFood(Organism endCoordsOrganism)
         {
 
@@ -85,7 +103,12 @@ namespace simulation
                 }
             }
         }
-
+        /// <summary>
+        /// logika poruszania się miesożercy 
+        /// </summary>
+        /// <param name="herbivores">roślinożercy </param>
+        /// <returns>akcję mięsożercy </returns>
+        /// <exception cref="Exception">błąd w sprawdzaniu </exception>
         public override Act MoveSpecific(List<Organism> plants)
         {
             Organism nearestFood = GetNearestFood(plants);
@@ -128,6 +151,15 @@ namespace simulation
                     throw new Exception("nimożność");
                 }
             }
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>reprezectację roślinożercy jako string </returns>
+        public virtual string presentation()
+        {
+            return base.presentation() + " roślinożerca";
         }
         public override string toString()
         {

@@ -1,0 +1,4 @@
+<map id="simulation.Animal.Corpseify" name="simulation.Animal.Corpseify">
+<area shape="rect" id="node1" title="robi akcję umierania zwierzęcia" alt="" coords="5,5,188,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a28eecea30f2dba21d5b03a813fe9e0e6" title="zmienia zwierzę w ciało" alt="" coords="236,5,416,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="simulation.Animal.epochPass" name="simulation.Animal.epochPass">
+<area shape="rect" id="node1" title="dodaje efekty upływu czasu do zwierzęcia zgodnie z kierunkiem jego upływu &#45;&gt; odnawia wszystkie możliw..." alt="" coords="5,5,199,32"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_animal.html#a14f0f79af76184a46f12e5591835e808" title="przywraca maksymalną liczbę akcji" alt="" coords="247,5,448,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="simulation.Simulation.movingOfCreatures" name="simulation.Simulation.movingOfCreatures">
+<area shape="rect" id="node1" title="symuluje poruszanie się zwierząt" alt="" coords="500,72,689,115"/>
+<area shape="rect" id="node2" href="$classsimulation_1_1_simulation.html#ab4e63adb5d6ff8e4e58b426deffab948" title="symuluje jedną epokę symulacji" alt="" coords="253,80,452,107"/>
+<area shape="rect" id="node3" href="$classsimulation_1_1_simulation.html#a4faaf2fdd2fc8e1a309ac513f60b33d9" title="inicjalizuje zgodnie z podanymi przez użytkownika wartościami" alt="" coords="7,5,203,48"/>
+<area shape="rect" id="node4" href="$classsimulation_1_1_simulation.html#a249cbec9dc5d4c606522333fce78262c" title="ustawia wartości początkowe symulacji" alt="" coords="7,72,203,115"/>
+<area shape="rect" id="node5" href="$classsimulation_1_1_simulation.html#ad9393641ac19a8c08cb8bbc688a81877" title="urzeczywistnia skutki następnej akcji" alt="" coords="5,163,205,189"/>
+</map>
